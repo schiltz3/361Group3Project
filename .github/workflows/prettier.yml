@@ -18,25 +18,15 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-        
-        # Set up node
-        with:
-          ref: ${{ github.head_ref }}
-      - uses: actions/setup-node@v2
-        with:
-          node-version: "14.x"
-          
-        # run node format
-      - run: npm ci
-      - run: npm run format
-      
-      # Commit changes
-      - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: Apply formatting changes
-          branch: ${{ github.head_ref }}
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        # Make sure the actual branch is checked out when running on pull requests
+        ref: ${{ github.head_ref }}
+
+    - name: Prettify code
+      uses: creyD/prettier_action@v4.0
+      with:
+        # This part is also where you can pass other options, for example:
+         prettier_options: --write **/*.{js,md,html,json,yaml}
