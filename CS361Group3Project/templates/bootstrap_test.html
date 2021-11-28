@@ -1,5 +1,10 @@
-{% extends 'bar_base.html' %} {% comment %} Context: (The context fields) POST
-Variables: {% endcomment %} {% block application_pane %}
+{% extends 'bar_base.html' %}
+{% comment %}
+Context: (The context fields) POST
+Variables:
+{% endcomment %}
+
+{% block application_pane %}
 <div class="row">
   <form action="/bootstrap/" method="post" class="form">
     {% csrf_token %}
@@ -18,8 +23,7 @@ Variables: {% endcomment %} {% block application_pane %}
         </div>
         <div class="input-group mb-3">
           <span class="input-group-text" id="Description">Description:</span>
-          <input type="text" class="form-control" placeholder="Description of
-          class" aria-label="Description" aria-describedby=Description">
+          <input type="text" class="form-control" placeholder="Description of class" aria-label="Description" aria-describedby=Description">
         </div>
         <div class="input-group mb-2">
           <span class="input-group-text id=Instructor">Instructor</span>
