@@ -1,0 +1,35 @@
+{% extends 'bar_base.html' %}
+
+{% comment %}
+Context: (The context fields)
+
+POST Variables:
+
+{% endcomment %}
+
+{% block application_pane %}
+<div class="row">
+    <form action="/bootstrap/" method="post" class="form">
+        {% csrf_token %}
+
+        Name:
+        <input name="name" type="text">
+        <br>
+
+        Description:
+        <input name="description" type="text">
+        <br>
+
+        Instructor:
+        <select name="instructor">
+            {% for i in instructors %}
+            <option value="{{ i.user }}">{{ i.user.first_name }} {{ i.user.last_name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <br>
+        {{ message }}
+    </form>
+</div>
+{% endblock application_pane %}

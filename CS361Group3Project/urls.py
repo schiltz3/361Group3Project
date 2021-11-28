@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from TA_Scheduler.views.bootstrap import BootstrapTest
+
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("bootstrapTest/", BootstrapTest.as_view(), name='bootstrap-test')
 ]
