@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Create New User Account</h1>
+<form action="/" method="post">
+    {% csrf_token %}
+    <table>
+        <tr><td>Username: </td><td><input type="text" name="username" required></td></tr>
+        <tr><td>Password: </td><td><input type="password" name="password" required></td></tr>
+        <tr><td>Name: </td><td><input type="text" name="firstname"></td><td><input type="text" name="lastname"></td></td></tr>
+
+        <!--
+        yet unimplemented fields
+        <tr><td>Address: </td><td><input type="text" name="address"></td></tr>
+        <tr><td>Phone Number: </td><td><input type="text" name="number" pattern="[0-9]{10}"></td></tr>
+        ^unsure if regex is right^
+        <tr><td>Email: </td><td><input type="text" name="email"></td></tr>
+        <tr><td>User Type: </td><td><select name="type">
+                                        <option value="Supervisor">Supervisor</option>
+                                        <option value="Teacher">Teacher</option>
+                                        <option value="TA">TA</option></td></tr>
+        -->
+    </table>
+    <input type="submit">
+</form>
+{{ message }}
+</body>
+</html>
