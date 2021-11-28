@@ -20,5 +20,5 @@ from TA_Scheduler.views.bootstrap import BootstrapTest
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("bootstrapTest/", BootstrapTest.as_view(), name='bootstrap-test')
+    path("bootstrapTest/", BootstrapTest.as_view(), name="bootstrap-test"),
 ]
