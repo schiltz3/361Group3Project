@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, User
 
+
 class Account(models.Model):
     """
     Represents a row in the Account database.
@@ -21,11 +22,7 @@ class Account(models.Model):
 
     # TODO: how should we prepresent authorities?? I'm using this
     # but it looks bad..
-    AUTHORITY = (
-        (1, 'TA'),
-        (2, 'instructor'),
-        (3, 'administrator')
-    )
+    AUTHORITY = ((1, "TA"), (2, "instructor"), (3, "administrator"))
 
     # unique database primary key
     id = models.AutoField(verbose_name="Account ID", primary_key=True)
@@ -47,9 +44,8 @@ class Course(models.Model):
     instructor - the account of the instructor
     """
 
-
     id = models.AutoField("Course ID", primary_key=True)
-    name = models.CharField("Course Name" ,max_length=200, blank=False)
+    name = models.CharField("Course Name", max_length=200, blank=False)
     description = models.CharField("Course Description", max_length=5000)
 
     # SET_NULL --> when an instructor is deleted, set this thing to null
