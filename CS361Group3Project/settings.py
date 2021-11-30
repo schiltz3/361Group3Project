@@ -55,7 +55,7 @@ ROOT_URLCONF = "CS361Group3Project.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "templates"],
+        "DIRS": [BASE_DIR / "CS361Group3Project/templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
