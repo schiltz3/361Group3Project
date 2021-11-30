@@ -29,4 +29,4 @@ jobs:
       uses: creyD/prettier_action@v4.0
       with:
         # This part is also where you can pass other options, for example:
-         prettier_options: --write **/*.{js,md,html,json,yaml}
+         prettier_options: --write **/*.{js,md,json,yaml} --print-width 600 --range-end 26
