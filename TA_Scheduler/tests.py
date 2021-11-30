@@ -1,11 +1,12 @@
 from django.test import TestCase, Client
 from .models import Account
+from django.contrib.auth.models import User
 
 
 class NewAccountTest(TestCase):
     def setUp(self):
         self.client = Client()
-        m = Account(user=User(username="user", password="pass", first_name="first", last_name="last"), authority=3)
+        m = Account(user=User(username="user", password="pass", first_name="first", last_name="last"))
         m.save()
         # do I have to navigate to createaccounts page or can I just start there??
         # self.client.post("/login.html", {"name": "user", "password": "pass"})
@@ -17,7 +18,7 @@ class NewAccountTest(TestCase):
 
     def test_inDatabase(self):
         self.client.post("/createaccounts.html", {"username": "new", "password": "password"})
-        self.assertEqual(Account(username="new", password="password"), Account.objects.get(username="new"))
+        self.assertEqual("password", (Account.objects.get(username="new")).password)
 
     def test_noUsername(self):
         self.client.post("/createaccounts.html", {"username": "", "password": "password"})
