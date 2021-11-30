@@ -4,7 +4,7 @@ from django.db.models.query import QuerySet
 
 from TA_Scheduler.models import Account
 
-# Note to teammate: 
+# Note to teammate:
 # This is a utility class to access the Account database.
 # Use the methods below to get accounts:
 
@@ -12,13 +12,14 @@ from TA_Scheduler.models import Account
 # getAccountByID(id)
 # getAllAccounts()
 # getInstructors()
-class AccountUtil: 
-
+class AccountUtil:
     @staticmethod
-    def createAccount(username: str, password: str, authority: int =0) -> Union[int, TypeError]:
-        if username == '' or password == '':
-            raise TypeError('Username, password, and authority cannot be empty.')
-        
+    def createAccount(
+        username: str, password: str, authority: int = 0
+    ) -> Union[int, TypeError]:
+        if username == "" or password == "":
+            raise TypeError("Username, password, and authority cannot be empty.")
+
         user = User.objects.create(username=username, password=password)
         account = Account.objects.create(user=user, authority=authority)
         return account.id

@@ -22,5 +22,5 @@ from TA_Scheduler.views.course.create import CreateCourse
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("bootstrapTest/", BootstrapTest.as_view(), name="bootstrap-test"),
-    path("course/create/", CreateCourse.as_view(), name='create-course')
+    path("course/create/", CreateCourse.as_view(), name="create-course"),
 ]
