@@ -12,18 +12,16 @@
         <tr><td>Username: </td><td><input type="text" name="username" required></td></tr>
         <tr><td>Password: </td><td><input type="password" name="password" required></td></tr>
         <tr><td>Name: </td><td><input type="text" name="firstname"></td><td><input type="text" name="lastname"></td></td></tr>
-
-        <!--
-        yet unimplemented fields
+        <tr><td>User Type: </td><td><select name="authority">
+            {% for i in authorities%}
+                <option value={{ i.0 }}>{{ i.1 }}</option>
+            {% endfor %}
+        </select></td></tr>
+        <!-- unimplemented (they don't actually do anything yet) -->
         <tr><td>Address: </td><td><input type="text" name="address"></td></tr>
         <tr><td>Phone Number: </td><td><input type="text" name="number" pattern="[0-9]{10}"></td></tr>
         ^unsure if regex is right^
         <tr><td>Email: </td><td><input type="text" name="email"></td></tr>
-        <tr><td>User Type: </td><td><select name="type">
-                                        <option value="Supervisor">Supervisor</option>
-                                        <option value="Teacher">Teacher</option>
-                                        <option value="TA">TA</option></td></tr>
-        -->
     </table>
     <input type="submit">
 </form>

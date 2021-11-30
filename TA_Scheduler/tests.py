@@ -5,7 +5,7 @@ from .models import Account
 class NewAccountTest(TestCase):
     def setUp(self):
         self.client = Client()
-        m = Account(username="user", password="pass")
+        m = Account(user=User(username="user", password="pass", first_name="first", last_name="last"), authority=3)
         m.save()
         # do I have to navigate to createaccounts page or can I just start there??
         # self.client.post("/login.html", {"name": "user", "password": "pass"})
@@ -19,7 +19,13 @@ class NewAccountTest(TestCase):
         self.client.post("/createaccounts.html", {"username": "new", "password": "password"})
         self.assertEqual(Account(username="new", password="password"), Account.objects.get(username="new"))
 
-    # how would i test for when there's no username/password? (they're required in the html)
+    def test_noUsername(self):
+        self.client.post("/createaccounts.html", {"username": "", "password": "password"})
+        self.assertEqual(1, Account.objects.all().count(), "new user created even though no username entered")
+
+    def test_noPassword(self):
+        self.client.post("/createaccounts.html", {"username": "new", "password": ""})
+        self.assertEqual(1, Account.objects.all().count(), "new user created even though no password entered")
 
     def test_usernameTaken(self):
         response = self.client.post("/createaccounts.html", {"username": "user", "password": "password"})
@@ -27,6 +33,5 @@ class NewAccountTest(TestCase):
 
     def test_noNewDuplicate(self):
         self.client.post("/createaccounts.html", {"username": "user", "password": "password"})
-        #make sure casting to dict and getting length is correct
-        self.assertEqual(1, dict(Account.objects.filter(username="user")).length, "duplicate user created")
+        self.assertEqual(1, Account.objects.filter(username="user").count(), "duplicate user created")
 
