@@ -12,3 +12,17 @@ class TestLogin(TestCase):
     def test_get_user_and_validate(self):
 
     def test_validate_input(self):
+        
+ # -----------------------------------------       
+    def test_blankLogin(self):
+        resp = self.client.post("/login/", {"username" : "", "password" : ""}, follow=True)
+        self.assertEqual("Fields are blank.", resp.context["message"], msg="failed to detect blank fields.")
+        
+    def test_successfulLogin(self):
+        account = AccountUtil.getAllAccounts()
+        if account:
+            resp = self.client.post("/login/", {"username" : account[0].username, "password" : account[0].password}, follow=True)
+            self.assertEqual("Login successful.", resp.context["message"], msg="failed to detect successful login")
+
+
+
