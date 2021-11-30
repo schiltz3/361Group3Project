@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Create Course</title>
+    </head>
+    <body>
+        <form action="/course/create/" method="post">
+        {% csrf_token %}
+
+        Name:
+        <input name="name" type="text">
+        <br>
+
+        Description:
+        <input name="description" type="text">
+        <br>
+
+        Instructor:
+        <select name="instuctor">
+            {% for i in instructors %}
+                <option value="{{ i.user }}">{{ i.user.first_name }} {{ i.user.last_name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+
+        <input type="submit">
+        <br>
+        {{ message }}
+    </body>
+</html>
