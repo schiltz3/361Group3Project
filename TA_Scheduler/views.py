@@ -16,11 +16,11 @@ class CreateAccounts(View):
         except:
             userExists = False
         if userExists:
-            return render(request, "createaccounts.html", {"message": "username '"+username+"' is already in use",
+            return render(request, "createaccounts.html", {"message": "username '" + username + "' is already in use",
                                                            "authorities": Account.AUTHORITY})
         else:
             m = AccountUtil.createAccount(username, request.POST['password'], request.POST['authority'])
             m.save()
             # should I stay here or go somewhere else?
-            return render(request, "createaccounts.html", {"message": "account '"+username+"' created",
+            return render(request, "createaccounts.html", {"message": "account '" + username + "' created",
                                                            "authorities": Account.AUTHORITY})
