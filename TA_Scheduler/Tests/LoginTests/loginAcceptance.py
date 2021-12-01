@@ -1,4 +1,6 @@
 from django.test import TestCase, Client
+from django.views import View
+from TA_Scheduler.utilities.AccountUtil import AccountUtil
 
 # Create your tests here.
 
@@ -6,7 +8,7 @@ from django.test import TestCase, Client
 class LoginTests(TestCase):
     def setup(self):
         self.client = Client()
-        self.user1 = Account(username="admin", password="pass123")
+        self.user1 = AccountUtil.createAccount(username="admin", password="pass123", authority="3")
         self.user1.save()
 
     def test_Redirect(self):
