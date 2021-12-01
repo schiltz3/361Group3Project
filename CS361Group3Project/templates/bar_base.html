@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% comment %}
+This template is intended to be extended by each page in the application which uses a bar.
+You will need to define the following block to extend this:
+
+application_pane
+
+{% endcomment %}
+
+{% block content %}
+<div id="application" class="row gx-5">
+  <div class="col-xs-12 col-lg-4 order-lg-2">{% include 'elements/bar.html' %}</div>
+  <div class="col-xs-12 col-lg-8 order-lg-1">
+    <div id="application-content" class="container-fluid">
+      {% block application_pane %}
+      <h1>bar_base is not intended to be rendered directly</h1>
+      <p>
+        In the extension template you must define the block
+        <code>application_pane</code>
+      </p>
+      {% endblock %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}
