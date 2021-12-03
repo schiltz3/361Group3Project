@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1>COURSE</h1>
+    <h1> <a href="{% url 'create-course' %}"> Create Course </a></h1>
+    <h1> <a href="{% url 'delete-course' %}"> Delete Course </a></h1>
+    <h1> <a href="{% url 'edit-course' %}"> Edit Course </a></h1>
+    <h1> <a href="{% url 'list-course' %}"> List Course </a></h1>
+    <br>
+    <h1> ACCOUNT </h1>
+    <h1> <a href="{% url 'create-account' %}"> Create Account </a></h1>
+    <h1> <a href="{% url 'delete-account' %}"> Delete Account </a></h1>
+    <h1> <a href="{% url 'edit-account' %}"> Edit Account </a></h1>
+    <h1> <a href="{% url 'list-account' %}"> List Account </a></h1>
+    <br>
+    <h1> LAB </h1>
+    <h1> <a href="{% url 'create-lab' %}"> Create Lab </a></h1>
+    <h1> <a href="{% url 'delete-lab' %}"> Delete Lab </a></h1>
+    <h1> <a href="{% url 'edit-lab' %}"> Edit Lab </a></h1>
+    <h1> <a href="{% url 'list-lab' %}"> List Lab </a></h1>
+    <br>
+    <h1> DASHBOARD </h1>
+    <h1> <a href="{% url 'admin-dashboard' %}"> Admin Dashboard </a></h1>
+    <h1> <a href="{% url 'instructor-dashboard' %}"> Instructor Dashboard </a></h1>
+    <h1> <a href="{% url 'ta-dashboard' %}"> TA Dashboard </a></h1>
+
+{% endblock content %}
