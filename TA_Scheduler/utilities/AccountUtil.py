@@ -14,15 +14,14 @@ from TA_Scheduler.models import Account
 # getAllAccounts()
 # getInstructors()
 class AccountUtil:
-
     @staticmethod
     def createTAAccount(username: str, password: str) -> Union[int, TypeError]:
         if username == "" or password == "":
             raise TypeError("Username, password, and authority cannot be empty.")
-    
+
         user = User.objects.create(username=username, password=password)
 
-        ta_group = Group.objects.get(name='TA') 
+        ta_group = Group.objects.get(name="TA")
         ta_group.user_set.add(user)
 
         account = Account.objects.create(user=user)
@@ -32,10 +31,10 @@ class AccountUtil:
     def createInstructorAccount(username: str, password: str) -> Union[int, TypeError]:
         if username == "" or password == "":
             raise TypeError("Username, password, and authority cannot be empty.")
-    
+
         user = User.objects.create(username=username, password=password)
 
-        instructor_group = Group.objects.get(name='instructor') 
+        instructor_group = Group.objects.get(name="instructor")
         instructor_group.user_set.add(user)
 
         account = Account.objects.create(user=user)
@@ -45,10 +44,10 @@ class AccountUtil:
     def createAdminAccount(username: str, password: str) -> Union[int, TypeError]:
         if username == "" or password == "":
             raise TypeError("Username, password, and authority cannot be empty.")
-    
+
         user = User.objects.create(username=username, password=password)
 
-        admin_group = Group.objects.get(name='admin') 
+        admin_group = Group.objects.get(name="admin")
         admin_group.user_set.add(user)
 
         account = Account.objects.create(user=user)
@@ -69,7 +68,7 @@ class AccountUtil:
 
     @staticmethod
     def getInstructors() -> Optional[Iterable[Account]]:
-        set: QuerySet = User.objects.filter(groups__name='instructor')
+        set: QuerySet = User.objects.filter(groups__name="instructor")
         result = []
         try:
             for user in set:
@@ -93,20 +92,20 @@ class AccountUtil:
 
         except Account.DoesNotExist:
             return None
-        
+
         return None
 
     @staticmethod
     def getAccountByUsername(username: str) -> Optional[Account]:
         try:
             user = User.objects.filter(username=username)[0]
-            account = Account.objects.filter(user = user.id)[0]
+            account = Account.objects.filter(user=user.id)[0]
             return account
-        
+
         except User.DoesNotExist:
             return None
 
         except Account.DoesNotExist:
             return None
-        
+
         return None

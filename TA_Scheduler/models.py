@@ -29,6 +29,7 @@ class Account(models.Model):
     def __str__(self):
         return self.user.username
 
+
 class Course(models.Model):
     """
     Represents a row in the course database.

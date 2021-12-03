@@ -45,31 +45,29 @@ from TA_Scheduler.views.tester import TestHomePage
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-
     # course
     path("course/create/", CreateCourse.as_view(), name="create-course"),
     path("course/edit/", EditCourse.as_view(), name="edit-course"),
     path("course/list/", ListCourse.as_view(), name="list-course"),
     path("course/edit/", DeleteCourse.as_view(), name="delete-course"),
-
     # account
     path("account/create/", CreateAccount.as_view(), name="create-account"),
     path("account/edit/", EditAccount.as_view(), name="edit-account"),
     path("account/list/", ListAccount.as_view(), name="list-account"),
     path("account/edit/", DeleteAccount.as_view(), name="delete-account"),
-
     # dashboards
     path("dashboard/admin/", AdminDashboard.as_view(), name="admin-dashboard"),
-    path("dashboard/instructor/", InstructorDashboard.as_view(), name="instructor-dashboard"),
+    path(
+        "dashboard/instructor/",
+        InstructorDashboard.as_view(),
+        name="instructor-dashboard",
+    ),
     path("dashboard/ta/", TADashboard.as_view(), name="ta-dashboard"),
-
     # lab
     path("lab/create/", CreateLab.as_view(), name="create-lab"),
     path("lab/edit/", EditLab.as_view(), name="edit-lab"),
     path("lab/list/", ListLab.as_view(), name="list-lab"),
     path("lab/edit/", DeleteLab.as_view(), name="delete-lab"),
-
     path("bootstrapTest/", BootstrapTest.as_view(), name="bootstrap-test"),
-
     path("", TestHomePage.as_view(), name="test-home"),
 ]
