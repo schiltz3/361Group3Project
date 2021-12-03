@@ -16,11 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from TA_Scheduler.views.Login.loginViews import Login
 from TA_Scheduler.views.course.create import CreateCourse
 from TA_Scheduler.views.bootstrap import BootstrapTest
+from TA_Scheduler.views.homepage.home import Home
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("course/create/", CreateCourse.as_view(), name="create-course"),
     path("bootstrapTest/", BootstrapTest.as_view(), name="bootstrap-test"),
+    path("", Login.as_view(), name="login"),
+    path("home/", Home.as_view(), name="home"),
+
 ]
