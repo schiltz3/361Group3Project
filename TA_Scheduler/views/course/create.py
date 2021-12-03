@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from TA_Scheduler.models import Account
 from django.views import View
 from TA_Scheduler.utilities.AccountUtil import AccountUtil
@@ -17,18 +17,14 @@ class CreateCourse(View):
 
     # this is called when the user clicks submit.
     def post(self, request):
-        # if user is anonymous or not admin, show error
+         #if user is anonymous or not admin, show error
 
-        #        if request.user.is_anonymous or request.user.account.authority == 0:
-        #            return render(
-        #                request,
-        #                "course/create.html",
-        #                {
-        #     replace this with a redirect to the login page with a warning
-        #                    "error": "User is not authorized to create the course.",
-        #                    "instructors": AccountUtil.getInstructors(),
-        #                },
-        #            )
+        if request.user.is_anonymous or request.user.account.authority == 0:
+            return redirect(
+                to="home.html",
+                permanent=True,
+                kwargs={"error": "User is not authorized to create the course."}
+            )
 
         name = request.POST["name"]
         description = request.POST["description"]
