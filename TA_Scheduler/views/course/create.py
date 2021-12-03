@@ -19,15 +19,17 @@ class CreateCourse(View):
     def post(self, request):
 
         # if user is anonymous or not admin, show error
-        if request.user.is_anonymous or request.user.account.authority == 0:
-            return render(
-                request,
-                "course/create.html",
-                {
-                    "message": "User is not authorized to create the course.",
-                    "instructors": AccountUtil.getInstructors(),
+
+        #        if request.user.is_anonymous or request.user.account.authority == 0:
+        #            return render(
+        #                request,
+        #                "course/create.html",
+        #                {
+        #     replace this with a redirect to the login page with a warning
                 },
-            )
+        #                    "instructors": AccountUtil.getInstructors(),
+        #                },
+        #            )
 
         name = request.POST["name"]
         description = request.POST["description"]
@@ -47,6 +49,6 @@ class CreateCourse(View):
 
         # adds course to database
         # TODO need to confirm this works when users can be created
-        CourseUtil.createCourse(name, description, instructor)
+        # CourseUtil.createCourse(name, description, instructor)
 
         return render(request, "course/create.html", {"message": "Course created."})
