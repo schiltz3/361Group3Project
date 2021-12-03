@@ -9,10 +9,11 @@
                 <h1>Create Class</h1>
                 <div class="input-group mb-2">
                     <span class="input-group-text" id="Name">Name:</span>
-                    <input type="text" name="name" class="form-control" placeholder="Name of class" aria-label="Name"
+                    <input type="text" name="name" class="form-control" placeholder="Name of class"
+                           aria-label="Name"
                            aria-describedby="Name"/>
                 </div>
-                <div class="input-group mb-3">
+                <div class="input-group mb-2">
                     <span class="input-group-text" id="Description">Description:</span>
                     <input type="text" name="description" class="form-control" placeholder="Description of class"
                            aria-label="Description"
@@ -20,7 +21,8 @@
                 </div>
                 <div class="input-group mb-2">
                     <span class="input-group-text" id="Instructor">Instructor</span>
-                    <select name="instructor" class="form-select" aria-label="Instructor" aria-describedby="Instructor">
+                    <select name="instructor" class="form-select" aria-label="Instructor"
+                            aria-describedby="Instructor">
                         <option selected>Select Instructor</option>
                         {% for i in instructors %}
                             <option value="{{ i.user }}">{{ i.user.first_name }} {{ i.user.last_name }}</option>
@@ -32,16 +34,15 @@
 
             <div class="col-7">
                 {% if message %}
-                    <div class="alert alert-primary" role="alert"> {{ message }} </div>
+                    <div class="alert alert-primary mt-2" role="alert"> {{ message }} </div>
                 {% endif %}
                 {% if warning %}
-                    <div class="alert alert-warning" role="alert"> {{ warning }}</div>
+                    <div class="alert alert-warning mt-2" role="alert"> {{ warning }}</div>
                 {% endif %}
                 {% if error %}
-                    <div class="alert alert-danger" role="alert"> {{ error }} </div>
+                    <div class="alert alert-danger mt-2" role="alert"> {{ error }} </div>
                 {% endif %}
             </div>
-
 
         </form>
     </div>
