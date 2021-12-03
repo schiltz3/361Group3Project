@@ -30,9 +30,19 @@
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
 
-        {{ message }}
-    </form>
-</div>
+            <div class="col-7">
+                {% if message %}
+                    <div class="alert alert-primary" role="alert"> {{ message }} </div>
+                {% endif %}
+                {% if warning %}
+                    <div class="alert alert-warning" role="alert"> {{ warning }}</div>
+                {% endif %}
+                {% if error %}
+                    <div class="alert alert-danger" role="alert"> {{ error }} </div>
+                {% endif %}
+            </div>
+
+
         </form>
     </div>
 {% endblock application_pane %}}
