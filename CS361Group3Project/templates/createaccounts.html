@@ -7,9 +7,7 @@
     <title>Title</title>
 </head>
 <body>
-    <!-- should I have both? -->
-    {% block content %}
-    {% block application pane %}
+    {% block application_pane %}
     <h1>Create New User Account</h1>
     <form action="/" method="post">
         {% csrf_token %}
@@ -19,7 +17,7 @@
             <tr><td>Name: </td><td><input type="text" name="firstname"></td><td><input type="text" name="lastname"></td></td></tr>
             <tr><td>User Type: </td><td><select name="authority">
                 {% for i in authorities%}
-                    <option value={{ i.0 }}>{{ i.1 }}</option>
+                    <option value="{{ i.0 }}">{{ i.1 }}</option>
                 {% endfor %}
             </select></td></tr>
             <!-- below fields are unimplemented (they don't actually do anything yet) -->
@@ -31,7 +29,6 @@
         <input type="submit">
     </form>
     {{ message }}
-    {% end block %}
-    {% end block %}
+    {% endblock application_pane %}
     </body>
 </html>
