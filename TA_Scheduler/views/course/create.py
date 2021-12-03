@@ -32,6 +32,7 @@ class CreateCourse(View):
 
         name = request.POST["name"]
         description = request.POST["description"]
+        instructor = request.POST["instructor"]
 
         # if name is blank show error
         if not name:
@@ -39,13 +40,29 @@ class CreateCourse(View):
                 request,
                 "course/create.html",
                 {
-                    "warning": "Course name must not be blank.",
+                    "warning": "Class name must not be blank.",
                     "instructors": AccountUtil.getInstructors(),
                 },
             )
-
-        instructor = request.POST["instructor"]
-
+        # TODO Check here if class already exists
+        elif not description:
+            return render(
+                request,
+                "course/create.html",
+                {
+                    "warning": "Class description must not be blank.",
+                    "instructors": AccountUtil.getInstructors(),
+                },
+            )
+        elif instructor == "Select Instructor":
+            return render(
+                request,
+                "course/create.html",
+                {
+                    "warning": "Must select course instructor",
+                    "instructors": AccountUtil.getInstructors(),
+                },
+            )
         # adds course to database
         # TODO need to confirm this works when users can be created
         # CourseUtil.createCourse(name, description, instructor)
