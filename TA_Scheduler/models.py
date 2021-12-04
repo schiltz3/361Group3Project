@@ -20,18 +20,14 @@ class Account(models.Model):
     account.authority --> authority of user (currently 1,2,3)
     """
 
-    # TODO: how should we prepresent authorities?? I'm using this
-    # but it looks bad..
-    AUTHORITY = ((1, "TA"), (2, "instructor"), (3, "administrator"))
-
     # unique database primary key
     id = models.AutoField(verbose_name="Account ID", primary_key=True)
 
     # the one-to-one mapping with the built-in User
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
-    # authority
-    authority = models.PositiveSmallIntegerField(choices=AUTHORITY)
+    def __str__(self):
+        return self.user.username
 
 
 class Course(models.Model):
@@ -51,3 +47,6 @@ class Course(models.Model):
     # SET_NULL --> when an instructor is deleted, set this thing to null
     # ForeignKey is many-to-one relation (an instructor can have many courses)
     instructor = models.ForeignKey(Account, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return self.name

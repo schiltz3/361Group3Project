@@ -1,6 +1,7 @@
 from typing import Iterable, Optional, Union
-from django.contrib.auth.models import User
+from django.contrib.auth.models import Group, User
 from django.db.models.query import QuerySet
+from django.contrib.auth import authenticate
 
 from TA_Scheduler.models import Account
 
@@ -14,14 +15,42 @@ from TA_Scheduler.models import Account
 # getInstructors()
 class AccountUtil:
     @staticmethod
-    def createAccount(
-        username: str, password: str, authority: int = 0
-    ) -> Union[int, TypeError]:
+    def createTAAccount(username: str, password: str) -> Union[int, TypeError]:
         if username == "" or password == "":
             raise TypeError("Username, password, and authority cannot be empty.")
 
         user = User.objects.create(username=username, password=password)
-        account = Account.objects.create(user=user, authority=authority)
+
+        ta_group = Group.objects.get(name="TA")
+        ta_group.user_set.add(user)
+
+        account = Account.objects.create(user=user)
+        return account.id
+
+    @staticmethod
+    def createInstructorAccount(username: str, password: str) -> Union[int, TypeError]:
+        if username == "" or password == "":
+            raise TypeError("Username, password, and authority cannot be empty.")
+
+        user = User.objects.create(username=username, password=password)
+
+        instructor_group = Group.objects.get(name="instructor")
+        instructor_group.user_set.add(user)
+
+        account = Account.objects.create(user=user)
+        return account.id
+
+    @staticmethod
+    def createAdminAccount(username: str, password: str) -> Union[int, TypeError]:
+        if username == "" or password == "":
+            raise TypeError("Username, password, and authority cannot be empty.")
+
+        user = User.objects.create(username=username, password=password)
+
+        admin_group = Group.objects.get(name="admin")
+        admin_group.user_set.add(user)
+
+        account = Account.objects.create(user=user)
         return account.id
 
     @staticmethod
@@ -52,5 +81,44 @@ class AccountUtil:
 
     @staticmethod
     def getInstructors() -> Optional[Iterable[Account]]:
-        set: QuerySet = Account.objects.filter(authority=1)
-        return set if set.exists() else None
+        set: QuerySet = User.objects.filter(groups__name="instructor")
+        result = []
+        try:
+            for user in set:
+                result.append(Account.objects.get(user=user.id))
+
+        except Account.DoesNotExist:
+            return None
+
+        return result if result else None
+
+    @staticmethod
+    def getAccountByCredentials(username: str, password: str) -> Optional[Account]:
+        try:
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                account = Account.objects.get(user=user.id)
+                return account
+
+        except User.DoesNotExist:
+            return None
+
+        except Account.DoesNotExist:
+            return None
+
+        return None
+
+    @staticmethod
+    def getAccountByUsername(username: str) -> Optional[Account]:
+        try:
+            user = User.objects.filter(username=username)[0]
+            account = Account.objects.filter(user=user.id)[0]
+            return account
+
+        except User.DoesNotExist:
+            return None
+
+        except Account.DoesNotExist:
+            return None
+
+        return None
