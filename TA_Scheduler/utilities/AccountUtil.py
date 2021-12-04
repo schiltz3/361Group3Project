@@ -108,17 +108,3 @@ class AccountUtil:
 
         return None
 
-    @staticmethod
-    def getAccountByUsername(username: str) -> Optional[Account]:
-        try:
-            user = User.objects.filter(username=username)[0]
-            account = Account.objects.filter(user=user.id)[0]
-            return account
-
-        except User.DoesNotExist:
-            return None
-
-        except Account.DoesNotExist:
-            return None
-
-        return None

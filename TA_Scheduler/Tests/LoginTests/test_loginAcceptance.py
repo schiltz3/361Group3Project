@@ -1,5 +1,6 @@
 from django.test import TestCase, Client
 from TA_Scheduler.utilities.AccountUtil import AccountUtil
+from django.contrib.auth.models import Group
 
 # Create your tests here.
 
@@ -7,24 +8,39 @@ from TA_Scheduler.utilities.AccountUtil import AccountUtil
 class LoginTests(TestCase):
     def setUp(self):
         self.client = Client()
-        AccountUtil.createAccount(username="admin", password="pass123", authority=3)
+        Group.objects.create(name="instructor")
+        Group.objects.create(name="TA")
+        Group.objects.create(name="admin")
+        AccountUtil.createAdminAccount(username="admin", password="pass123")
+        AccountUtil.createInstructorAccount(username="instructor", password="pass123word")
+        AccountUtil.createTAAccount(username="ta", password="password")
 
-    def test_Redirect(self):
+    def test_RedirectAdmin(self):
         resp = self.client.post("/", {"username": "admin", "password": "pass123"},
                                 follow=True)
-        self.assertRedirects(resp, "/home/")
+        self.assertRedirects(resp, "/dashboard/admin/")
+
+    def test_RedirectInstructor(self):
+        resp = self.client.post("/", {"username": "instructor", "password": "pass123word"},
+                                follow=True)
+        self.assertRedirects(resp, "/dashboard/instructor/")
+
+    def test_RedirectTA(self):
+        resp = self.client.post("/", {"username": "ta", "password": "password"},
+                                follow=True)
+        self.assertRedirects(resp, "/dashboard/ta/")
 
     def test_InvalidUser(self):
         resp = self.client.post("/", {"username": "someone", "password": "abc123"},
                                 follow=True)
-        self.assertEqual("invalid username", resp.context["error"], "Login failed, user not found")
+        self.assertEqual("Invalid username", resp.context["error"], "Login failed, user not found")
 
     def test_badPassword(self):
         resp = self.client.post("/", {"username": "admin", "password": "abc123"},
                                 follow=True)
-        self.assertEqual("invalid password", resp.context["error"], "Failed login, password incorrect")
+        self.assertEqual("Invalid password", resp.context["error"], "Failed login, password incorrect")
 
     def test_blankPassword(self):
         resp = self.client.post("/", {"username": "admin", "password": ""}, follow=True)
-        self.assertEqual("invalid password", resp.context["error"], "Must input password")
+        self.assertEqual("Invalid password", resp.context["error"], "Must input password")
 
