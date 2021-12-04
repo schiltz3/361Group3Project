@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "TA_Scheduler.apps.TaSchedulerConfig",
+    "django_extensions",
 ]
 
 MIDDLEWARE = [
