@@ -13,8 +13,8 @@ class CreateCourse(View):
     def get(self, request: HttpRequest) -> Union[HttpResponse, HttpResponseRedirect]:
         """
         Called when the user opens the page, course/create.html
-        :param request: Request from course/create.html
-        :return: Response with "instructors"
+        @param request: Request from course/create.html
+        @return: Response with "instructors"
         """
         return render(
             request,
@@ -25,8 +25,8 @@ class CreateCourse(View):
     def post(self, request: HttpRequest) -> Union[HttpResponse, HttpResponseRedirect]:
         """
         Called when the user clicks submit.
-        :param request: Request from course/create.html
-        :return: Response with "instructors", "message", "warning" and "error" or redirect
+        @param request: Request from course/create.html
+        @return: Response with "instructors", "message", "warning" and "error" or redirect
         """
         # if user is anonymous or not admin, show error
 
