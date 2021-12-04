@@ -1,5 +1,18 @@
 {% extends 'bar_base.html' %}
 
+{% comment %}
+Create course objects
+
+Context:
+
+POST Vars:
+- message: String (should make message iterable type w/ color)
+- warning: String
+- error: String
+
+- instructors: Optional[Iterable[Account]]
+
+{% endcomment%}
 {% block application_pane %}
     <div class="row">
         <form action="/course/create/" method="post">
