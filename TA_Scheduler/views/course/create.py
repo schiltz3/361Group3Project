@@ -1,23 +1,34 @@
 from django.shortcuts import render, redirect
 from TA_Scheduler.models import Account
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.views import View
+from django.shortcuts import render, redirect, reverse
 from TA_Scheduler.utilities.AccountUtil import AccountUtil
 from TA_Scheduler.utilities.CourseUtil import CourseUtil
+from typing import Union
 
 
 class CreateCourse(View):
 
-    # this is called when the user opens the page, the course/create.html
-    def get(self, request):
+    def get(self, request: HttpRequest) -> Union[HttpResponse, HttpResponseRedirect]:
+        """
+        Called when the user opens the page, course/create.html
+        :param request: Request from course/create.html
+        :return: Response with "instructors"
+        """
         return render(
             request,
             "course/create.html",
             {"message": "", "instructors": AccountUtil.getInstructors()},
         )
 
-    # this is called when the user clicks submit.
-    def post(self, request):
-         #if user is anonymous or not admin, show error
+    def post(self, request: HttpRequest) -> Union[HttpResponse, HttpResponseRedirect]:
+        """
+        Called when the user clicks submit.
+        :param request: Request from course/create.html
+        :return: Response with "instructors", "message", "warning" and "error" or redirect
+        """
+        # if user is anonymous or not admin, show error
 
         if request.user.is_anonymous or request.user.account.authority == 0:
             return redirect(
@@ -59,8 +70,9 @@ class CreateCourse(View):
                     "instructors": AccountUtil.getInstructors(),
                 },
             )
+
         # adds course to database
         # TODO need to confirm this works when users can be created
-        # CourseUtil.createCourse(name, description, instructor)
+        CourseUtil.createCourse(name, description, instructor)
 
         return render(request, "course/create.html", {"message": "Course created."})
