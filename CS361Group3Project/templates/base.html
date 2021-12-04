@@ -14,12 +14,9 @@
 
   <body>
     <div id="content" class="container-lg">
-      {% block content %}
-      <h1>base should not be rendered</h1>
-
-      <p>You may have forgotten to wrap your extension block</p>
-
-      {% endblock %}
+      <h3><a href="{% url 'test-home' %}">GO TO TEST HOMEPAGE</a></h3>
+      <br>
+      {% block content %}{% endblock %}
     </div>
   </body>
 </html>
