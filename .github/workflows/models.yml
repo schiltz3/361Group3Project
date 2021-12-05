@@ -42,7 +42,7 @@ jobs:
           python manage.py graph_models -a -o docs\models\CS361Group3Project.svg
 
       - name: sanity check
-        run: ls docs\models
+        run: ls docs/models
 
       - name: Check for modified files
         id: git-check
