@@ -41,38 +41,64 @@ class CreateCourse(View):
         description: Optional[str] = str(request.POST["description"])
         instructor: Optional[str] = str(request.POST["instructor"])
 
-        # if name is blank show error
-        if not name:
+        if name:
+            if name.isalnum():
+                for course in CourseUtil.getAllCourses():
+                    if course.name.casefold() == name.casefold() and course.instructor.user.username.casefold() == instructor.casefold():
+                        return render(
+                            request,
+                            "course/create.html",
+                            {
+                                "error": "Class already exists with this instructor.",
+                                "instructors": AccountUtil.getInstructors(),
+                            }
+                        )
+        else:
             return render(
                 request,
                 "course/create.html",
                 {
-                    "warning": "Class name must not be blank.",
+                    "warning": "Name must not be blank.",
                     "instructors": AccountUtil.getInstructors(),
                 },
             )
-        # TODO Check here if class already exists
-        elif not description:
+        if description:
+            if not all(x.isalpha() or x.isspace() for x in description):
+                return render(
+                    request,
+                    "course/create.html",
+                    {
+                        "error": "Description must only consist of Number and/or Letters",
+                        "instructors": AccountUtil.getInstructors(),
+                    }
+                )
+        else:
             return render(
                 request,
                 "course/create.html",
                 {
-                    "warning": "Class description must not be blank.",
+                    "warning": "Description must not be blank.",
                     "instructors": AccountUtil.getInstructors(),
                 },
             )
-        elif instructor == "Select Instructor":
+
+        if instructor:
+            try:
+                instructor_account = AccountUtil.getAccountByUsername(instructor)
+            except IndexError:
+                instructor_account = None
+        else:
             return render(
                 request,
                 "course/create.html",
                 {
-                    "warning": "Must select course instructor",
+                    "warning": "Instructor must not be blank.",
                     "instructors": AccountUtil.getInstructors(),
                 },
             )
 
         # adds course to database if instructor, name and description are not none
         if instructor_account and name and description:
-        CourseUtil.createCourse(name, description, instructor)
+            CourseUtil.createCourse(name, description, instructor_account)
 
         return render(request, "course/create.html", {"message": "Course created."})
