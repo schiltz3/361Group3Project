@@ -1,12 +1,12 @@
 from django.shortcuts import render
 from django.views import View
 from TA_Scheduler.models import Account
-from TA_Scheduler.utilities import AccountUtil
+from TA_Scheduler.utilities.AccountUtil import AccountUtil
 
 
-class CreateAccounts(View):
+class CreateAccount(View):
     def get(self, request):
-        return render(request, "account/create.html", {"message": "", "authorities": Account.AUTHORITY})
+        return render(request, "account/create.html", {"message": " "})
 
     def post(self, request):
         preexisting = True
@@ -16,11 +16,17 @@ class CreateAccounts(View):
         except:
             preexisting = False
         if preexisting:
-            return render(request, "account/create.html", {"message": "username '" + username + "' is already in use",
-                                                           "authorities": Account.AUTHORITY})
+            return render(request, "account/create.html", {"message": "username '" + username + "' is already in use"})
         else:
-            m = AccountUtil.createAccount(username, request.POST['password'], request.POST['authority'])
-            m.save()
-            # should I stay here or go somewhere else?
-            return render(request, "account/create.html", {"message": "account '" + username + "' created",
-                                                           "authorities": Account.AUTHORITY})
+            usertype = int(request.POST['authority'])
+            if usertype == 1:
+                AccountUtil.createAdminAccount(username, request.POST['password'])
+                return render(request, "account/create.html", {"message": "account '" + username + "' created"})
+            elif usertype == 2:
+                AccountUtil.createInstructorAccount(username, request.POST['password'])
+                return render(request, "account/create.html", {"message": "account '" + username + "' created"})
+            elif usertype == 3:
+                AccountUtil.createTAAccount(username, request.POST['password'])
+                return render(request, "account/create.html", {"message": "account '" + username + "' created"})
+            else:
+                return render(request, "account/create.html", {"message": "enter user type"})

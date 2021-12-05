@@ -16,9 +16,9 @@
             <tr><td>Password: </td><td><input type="password" name="password" required></td></tr>
             <tr><td>Name: </td><td><input type="text" name="firstname"></td><td><input type="text" name="lastname"></td></td></tr>
             <tr><td>User Type: </td><td><select name="authority">
-                {% for i in authorities%}
-                    <option value="{{ i.0 }}">{{ i.1 }}</option>
-                {% endfor %}
+                <option value="1">Administrator</option>
+                <option value="2">Instructor</option>
+                <option value="3">TA</option>
             </select></td></tr>
             <!-- below fields are unimplemented (they don't actually do anything yet) -->
             <tr><td>Address: </td><td><input type="text" name="address"></td></tr>
