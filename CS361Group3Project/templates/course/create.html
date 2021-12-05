@@ -1,27 +1,69 @@
-{% extends "base.html" %}
+{% extends 'bar_base.html' %}
 
-{% block content %}
+{% comment %}
+Create course objects
+
+Context:
+
+POST Vars:
+- message: String (should make message iterable type w/ color)
+- warning: String
+- error: String
+
+- instructors: Optional[Iterable[Account]]
+
+{% endcomment%}
+
+{% block application_pane %}
+<div class="row">
     <form action="/course/create/" method="post">
         {% csrf_token %}
+        <div class="col-7">
+            <h1>Create Class</h1>
+            <div class="input-group mb-2">
+                <span class="input-group-text" id="Name">Name:</span>
+                <input type="text" name="name" class="form-control"
+                       placeholder="Name of class"
+                       required="True"
+                       aria-label="Name"
+                       aria-describedby="Name"/>
+            </div>
+            <div class="input-group mb-2">
+                <span class="input-group-text" id="Description">Description:</span>
+                <input type="text" name="description" class="form-control"
+                       placeholder="Description of class"
+                       required="True"
+                       aria-label="Description"
+                       aria-describedby=Description">
+            </div>
+            <div class="input-group mb-2">
+                <span class="input-group-text" id="Instructor">Instructor</span>
+                <select name="instructor" class="form-select"
+                        required="True"
+                        aria-label="Instructor"
+                        aria-describedby="Instructor">
+                    required="True"
+                    <option disabled selected value>Select Instructor</option>
+                    {% for i in instructors %}
+                    <option value="{{ i.user }}">{{ i.user.first_name }} {{ i.user.last_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
 
-        Name:
-        <input name="name" type="text">
-        <br>
+        <div class="col-7">
+            {% if message %}
+            <div class="alert alert-primary mt-2" role="alert"> {{ message }}</div>
+            {% endif %}
+            {% if warning %}
+            <div class="alert alert-warning mt-2" role="alert"> {{ warning }}</div>
+            {% endif %}
+            {% if error %}
+            <div class="alert alert-danger mt-2" role="alert"> {{ error }}</div>
+            {% endif %}
+        </div>
 
-        Description:
-        <input name="description" type="text">
-        <br>
-
-        Instructor:
-        <select name="instructor">
-            {% for i in instructors %}
-                <option value="{{ i.user }}">{{ i.user.first_name }} {{ i.user.last_name }}</option>
-            {% endfor %}
-        </select>
-        <br>
-
-        <input type="submit">
-        <br>
-        {{ message }}
     </form>
-{% endblock content %}
+</div>
+{% endblock application_pane %}}
