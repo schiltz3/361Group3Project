@@ -48,9 +48,9 @@ class CreateCourse(View):
         @par: Side effect: Create a new class object
         """
 
-        name: Optional[str] = str(request.POST["name"])
-        description: Optional[str] = str(request.POST["description"])
-        instructor: Optional[str] = str(request.POST["instructor"])
+        name: Optional[str] = str(request.POST.get("name", None))
+        description: Optional[str] = str(request.POST.get("description", None))
+        instructor: Optional[str] = str(request.POST.get("instructor", None))
 
         if name:
             if name.isalnum():
@@ -133,4 +133,11 @@ class CreateCourse(View):
                 },
             )
 
-        return render(request, "course/create.html", {"message": "Course created."})
+        return render(
+            request,
+            "course/create.html",
+            {
+                "message": "Course created.",
+                "instructors": AccountUtil.getInstructors()
+            },
+        )
