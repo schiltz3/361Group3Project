@@ -14,6 +14,9 @@ class CreateCourse(View):
         Called when the user opens the page, course/create.html
         @param request: Request from course/create.html
         @return: Response with "instructors"
+        @pre: User is not anonymous, instructor, or ta
+        @post: None
+        @par: Side effect: Redirects you to login or dashboard depending on your group
         """
         # TODO: should be pulled out to a utis class
         # if user is anonymous or not admin, redirect to correct page
@@ -35,6 +38,9 @@ class CreateCourse(View):
         Called when the user clicks submit.
         @param request: Request from course/create.html
         @return: Response with "instructors", "message", "warning" and "error" or redirect
+        @pre: None
+        @post: Correct return or new class object
+        @par: Side effect: Create a new class object
         """
 
         name: Optional[str] = str(request.POST["name"])
