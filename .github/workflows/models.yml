@@ -33,7 +33,7 @@ jobs:
 
       - name: Migrate DB
         run: |
-          python manage.py makemigrations --merge
+          yes | python manage.py makemigrations --merge
           python manage.py migrate
 
       - name: Confirm Path
