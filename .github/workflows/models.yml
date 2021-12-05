@@ -41,11 +41,13 @@ jobs:
           python manage.py graph_models -a -o docs\models\CS361Group3Project.pdf
           python manage.py graph_models -a -o docs\models\CS361Group3Project.svg
 
+      - name: sanity check
+        run: ls docs\models
+
       - name: Check for modified files
         id: git-check
         run: |
           echo ::set-output name=modified::$(if git diff-index --quiet HEAD --; then echo "false"; else echo "true"; fi)
-          echo ls docs\models
 
       - name: Push changes
         if: steps.git-check.outputs.modified == 'true'
