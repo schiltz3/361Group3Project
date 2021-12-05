@@ -10,8 +10,7 @@ jobs:
   # This workflow contains a single job called "generate-docs"
   generate-docs:
     # Check if the PR is not from a fork
-    if: github.event.pull_request.head.repo.full_name == github.repository
-
+    #if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -44,7 +43,9 @@ jobs:
 
       - name: Check for modified files
         id: git-check
-        run: echo ::set-output name=modified::$(if git diff-index --quiet HEAD --; then echo "false"; else echo "true"; fi)
+        run: |
+          echo ::set-output name=modified::$(if git diff-index --quiet HEAD --; then echo "false"; else echo "true"; fi)
+          echo ls docs\models
 
       - name: Push changes
         if: steps.git-check.outputs.modified == 'true'
