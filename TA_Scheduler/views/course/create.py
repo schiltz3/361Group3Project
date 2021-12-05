@@ -5,10 +5,16 @@ from django.views import View
 from django.shortcuts import render, redirect, reverse
 from TA_Scheduler.utilities.AccountUtil import AccountUtil
 from TA_Scheduler.utilities.CourseUtil import CourseUtil
-from typing import Union, Optional
+from typing import Any, List, Mapping, Union, Optional
 
 
 class CreateCourse(View):
+
+    TEMPLATE = "course/create.html"
+    MESSAGE = "message"
+    ERROR = "error"
+    WARNING = "warning"
+
     def get(self, request: HttpRequest) -> Union[HttpResponse, HttpResponseRedirect]:
         """
         Called when the user opens the page, course/create.html
@@ -32,11 +38,8 @@ class CreateCourse(View):
                 "/dashboard/ta/", {"error": "TAs are not authorized to create courses"}
             )
 
-        return render(
-            request,
-            "course/create.html",
-            {"message": "", "instructors": AccountUtil.getInstructors()},
-        )
+        return self.respond(request, {self.MESSAGE, ""})
+
 
     def post(self, request: HttpRequest) -> Union[HttpResponse, HttpResponseRedirect]:
         """
@@ -51,99 +54,67 @@ class CreateCourse(View):
         name: Optional[str] = str(request.POST.get("name", None))
         description: Optional[str] = str(request.POST.get("description", None))
         instructor: Optional[str] = str(request.POST.get("instructor", None))
+        tas: List[str] = request.POST.getlist('ta')
+        ta_accounts: List[Account] = []
 
         if name:
             if all(x.isalpha() or x.isspace() for x in description):
+                
                 for course in CourseUtil.getAllCourses():
                     if (course.name.casefold() == name.casefold()) and (
                         course.instructor.user.username.casefold()
                         == instructor.casefold()
                     ):
-                        return render(
-                            request,
-                            "course/create.html",
-                            {
-                                "warning": "Class already exists with this instructor.",
-                                "instructors": AccountUtil.getInstructors(),
-                            },
-                        )
+                        return self.respond(request, { self.WARNING: "Class already exists with this instructor."})
+
             else:
-                return render(
-                    request,
-                    "course/create.html",
-                    {
-                        "warning": "Name can only contain [A-z][0--9]",
-                        "instructors": AccountUtil.getInstructors(),
-                    },
-                )
+                return self.respond(request, {self.WARNING : "Name can only contain [A-z][0-9]"})
+
         else:
-            return render(
-                request,
-                "course/create.html",
-                {
-                    "warning": "Name must not be blank.",
-                    "instructors": AccountUtil.getInstructors(),
-                },
-            )
+            return self.respond(request, {self.WARNING : "Name must not be blank."})
+
+        # check description
         if description:
             if not all(x.isalpha() or x.isspace() for x in description):
-                return render(
-                    request,
-                    "course/create.html",
-                    {
-                        "warning": "Description can only contain [A-z][0--9]",
-                        "instructors": AccountUtil.getInstructors(),
-                    },
-                )
-        else:
-            return render(
-                request,
-                "course/create.html",
-                {
-                    "warning": "Description must not be blank.",
-                    "instructors": AccountUtil.getInstructors(),
-                },
-            )
+                return self.respond(request, {self.WARNING: "Description can only contain [A-z][0-9]"})
 
-        if instructor:
-            try:
-                instructor_account = AccountUtil.getAccountByUsername(instructor)
-            except IndexError:
-                instructor_account = None
-                return render(
-                    request,
-                    "course/create.html",
-                    {
-                        "error": "Instructor could not be found.",
-                        "instructors": AccountUtil.getInstructors(),
-                    },
-                )
         else:
-            return render(
-                request,
-                "course/create.html",
-                {
-                    "warning": "Instructor must not be blank.",
-                    "instructors": AccountUtil.getInstructors(),
-                },
-            )
+            return self.respond(request, {self.WARNING : "Description must not be blank."})
 
+        # check instructor
+        if instructor:  
+            instructor_account = AccountUtil.getAccountByUsername(instructor)
+            if instructor_account is None:
+                return self.respond(request, {self.ERROR: "Instructor could not be found."})
+        else:
+            return self.respond(request, {self.WARNING : "Instructor must not be blank."})
+
+        # check tas
+        if tas:
+            for ta in tas:
+                ta_account = AccountUtil.getAccountByUsername(ta)
+                if not ta_account:
+                    return self.respond(request, {self.ERROR: "TA '" + ta + "' does not exist."})
+                else:
+                    ta_accounts.append(ta_account)
+                    
+                
         # adds course to database if instructor, name and description are not none
         if instructor_account and name and description:
-            CourseUtil.createCourse(name, description, instructor_account)
-            return render(
-                request,
-                "course/create.html",
-                {
-                    "message": "Course created.",
-                    "instructors": AccountUtil.getInstructors(),
-                },
-            )
-        return render(
-            request,
-            "course/create.html",
-            {
-                "error": "Class could not be created.",
-                "instructors": AccountUtil.getInstructors(),
-            },
-        )
+            CourseUtil.createCourse(name, description, instructor_account, ta_accounts)
+            return self.respond(request, {self.MESSAGE: "Course created."})
+
+        return self.respond(request, {self.ERROR: "Class could not be created."})
+
+
+    def respond(self, request: HttpRequest, context: Mapping[str, Any]):
+        """
+        Helper method that returns a response
+        @param request: the HTTP request object to use
+        @param context: the context to attach to render, instructors and TAs are added
+        @pre: request must not be null
+        @post: rendered response
+        """
+        context["tas"] = AccountUtil.getTAs()
+        context["instructors"] = AccountUtil.getInstructors()
+        return render(request, self.TEMPLATE, context)

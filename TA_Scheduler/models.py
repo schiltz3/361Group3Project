@@ -46,7 +46,11 @@ class Course(models.Model):
 
     # SET_NULL --> when an instructor is deleted, set this thing to null
     # ForeignKey is many-to-one relation (an instructor can have many courses)
-    instructor = models.ForeignKey(Account, on_delete=models.SET_NULL, null=True)
+    instructor = models.ForeignKey(Account, on_delete=models.SET_NULL, null=True, related_name='instructors')
+
+    # multiple TAs can have multiple courses
+    tas = models.ManyToManyField(Account, related_name='tas', blank=True)
+
 
     def __str__(self):
         return self.name
