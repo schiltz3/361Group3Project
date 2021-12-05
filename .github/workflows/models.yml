@@ -7,24 +7,36 @@ on:
     branches: [ docs/models ]
 
 jobs:
-  build:
+  # This workflow contains a single job called "generate-docs"
+  generate-docs:
+    # Check if the PR is not from a fork
+    if: github.event.pull_request.head.repo.full_name == github.repository
 
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.head_ref }}
+
       - name: Set up Python 3.9
         uses: actions/setup-python@v2
         with:
           python-version: 3.9
+
       - name: Install Graphviz
         run: |
           sudo apt install graphviz
+
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+
+      - name: Migrate DB
+        run: |
+          python manage.py makemigrations --merge
+          python manage.py migrate
+
       - name: Generate pdf and svg
         run: |
           python manage.py graph_models -a -o docs\models\CS361Group3Project.pdf
@@ -33,7 +45,6 @@ jobs:
       - name: Check for modified files
         id: git-check
         run: echo ::set-output name=modified::$(if git diff-index --quiet HEAD --; then echo "false"; else echo "true"; fi)
-
 
       - name: Push changes
         if: steps.git-check.outputs.modified == 'true'
