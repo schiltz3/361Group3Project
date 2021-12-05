@@ -7,7 +7,10 @@ from TA_Scheduler.models import Account, Course
 class CourseUtil:
     @staticmethod
     def createCourse(
-        name: str, description: str = None, instructor: Account = None, tas: List[Account] = None
+        name: str,
+        description: str = None,
+        instructor: Account = None,
+        tas: List[Account] = None,
     ) -> Union[int, TypeError]:
         """
         Creates a course and saves it in the Course database
@@ -23,7 +26,7 @@ class CourseUtil:
 
         for ta in tas:
             course.tas.add(ta)
-        
+
         print(course.tas)
 
         return course.id

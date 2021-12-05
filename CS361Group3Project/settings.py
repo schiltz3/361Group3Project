@@ -121,7 +121,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Load up the table with initial data.
 # Folder located in CS361GroupProject/fixtures/data.json
-# If you want to add more initial data, 
+# If you want to add more initial data,
 # use manage.py dumpdata to generate a new json
 # and paste it into data.json
 # https://docs.djangoproject.com/en/3.2/howto/initial-data/

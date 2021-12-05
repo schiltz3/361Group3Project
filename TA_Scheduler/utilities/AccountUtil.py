@@ -75,7 +75,7 @@ class AccountUtil:
                 result.append(Account.objects.get(user=user.id))
         except Account.DoesNotExist:
             return None
-        
+
         return result if result else None
 
     @staticmethod
