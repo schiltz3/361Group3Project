@@ -17,6 +17,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
         with:
@@ -32,3 +34,17 @@ jobs:
         run: |
           python manage.py graph_models -a -o docs\models\CS361Group3Project.pdf
           python manage.py graph_models -a -o docs\models\CS361Group3Project.svg
+
+      - name: Check for modified files
+        id: git-check
+        run: echo ::set-output name=modified::$(if git diff-index --quiet HEAD --; then echo "false"; else echo "true"; fi)
+
+
+      - name: Push changes
+        if: steps.git-check.outputs.modified == 'true'
+        run: |
+          git config --global user.name 'John Schiltz'
+          git config --global user.email '45466247+schiltz3@users.noreply.github.com'
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          git commit -am "Built graphs for current models in docs\models"
+          git push
