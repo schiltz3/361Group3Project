@@ -24,6 +24,7 @@ POST Vars:
                 <span class="input-group-text" id="Name">Name:</span>
                 <input type="text" name="name" class="form-control"
                        placeholder="Name of class"
+                       required="True"
                        aria-label="Name"
                        aria-describedby="Name"/>
             </div>
@@ -31,15 +32,17 @@ POST Vars:
                 <span class="input-group-text" id="Description">Description:</span>
                 <input type="text" name="description" class="form-control"
                        placeholder="Description of class"
+                       required="True"
                        aria-label="Description"
                        aria-describedby=Description">
             </div>
             <div class="input-group mb-2">
                 <span class="input-group-text" id="Instructor">Instructor</span>
                 <select name="instructor" class="form-select"
+                        required="True"
                         aria-label="Instructor"
                         aria-describedby="Instructor">
-                    <option selected>Select Instructor</option>
+                    required="True"
                     {% for i in instructors %}
                     <option value="{{ i.user }}">{{ i.user.first_name }} {{ i.user.last_name }}</option>
                     {% endfor %}
