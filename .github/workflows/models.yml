@@ -36,10 +36,12 @@ jobs:
           python manage.py makemigrations --merge
           python manage.py migrate
 
+
       - name: Generate pdf and svg
         run: |
-          python manage.py graph_models -a -o docs\models\CS361Group3Project.pdf
-          python manage.py graph_models -a -o docs\models\CS361Group3Project.svg
+          python manage.py graph_models
+          python manage.py graph_models -a -o "docs\models\CS361Group3Project.pdf"
+          python manage.py graph_models -a -o "docs\models\CS361Group3Project.svg"
 
       - name: sanity check
         run: ls docs/models
