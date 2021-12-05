@@ -18,7 +18,6 @@ from django.urls import path
 
 # login/homepage
 from TA_Scheduler.views.Login.loginViews import Login
-from TA_Scheduler.views.homepage.home import Home
 
 
 # course

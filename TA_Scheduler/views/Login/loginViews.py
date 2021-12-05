@@ -9,7 +9,7 @@ class Login(View):
     def post(self, request):
         user1 = AccountUtil.getAccountByUsername(request.POST['username'])
         if user1 is None:
-            return render(request, "login/login.html", {"error": "Invalid username"})
+            return render(request, "login/login.html", {"error": "Invalid username", "username": 'username'})
         else:
             invalidPassword = user1.user.check_password(request.POST['password'])
         if not invalidPassword:

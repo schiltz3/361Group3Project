@@ -15,6 +15,7 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/TA_Scheduler/Tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/TA_Scheduler/UnitTests" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.10 (CS361Group3Project)" jdkType="Python SDK" />
@@ -32,5 +33,8 @@
         <option value="$MODULE_DIR$/CS361Group3Project/templates" />
       </list>
     </option>
+  </component>
+  <component name="TestRunnerService">
+    <option name="PROJECT_TEST_RUNNER" value="Unittests" />
   </component>
 </module>
