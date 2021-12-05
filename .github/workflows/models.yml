@@ -45,8 +45,6 @@ jobs:
       - name: sanity check
         run: ls docs/models
 
-      - name: Add new files
-
       - name: Check for modified files
         id: git-check
         run: |
