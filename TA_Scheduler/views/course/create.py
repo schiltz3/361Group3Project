@@ -9,13 +9,21 @@ from typing import Union
 
 
 class CreateCourse(View):
-
     def get(self, request: HttpRequest) -> Union[HttpResponse, HttpResponseRedirect]:
         """
         Called when the user opens the page, course/create.html
         @param request: Request from course/create.html
         @return: Response with "instructors"
         """
+        # TODO: should be pulled out to a utis class
+        # if user is anonymous or not admin, show error
+        if request.user.is_anonymous:
+            return redirect('/login', {"error": "User is not authorized to create a course"})
+        elif request.user.groups.filter(name="instructor").exists():
+            return redirect('/dashboard/instructor/', {"error": "Instructors are not authorized to create courses"})
+        elif request.user.groups.filter(name="ta").exists():
+            return redirect('/dashboard/ta/', {"error": "TAs are not authorized to create courses"})
+
         return render(
             request,
             "course/create.html",
@@ -29,13 +37,12 @@ class CreateCourse(View):
         @return: Response with "instructors", "message", "warning" and "error" or redirect
         """
         # if user is anonymous or not admin, show error
-
-        if request.user.is_anonymous or request.user.account.authority == 0:
-            return redirect(
-                to="home.html",
-                permanent=True,
-                kwargs={"error": "User is not authorized to create the course."}
-            )
+        if request.user.is_anonymous:
+            return redirect('/login', {"error": "User is not authorized to create a course"})
+        elif request.user.groups.filter(name="instructor").exists():
+            return redirect('/dashboard/instructor/', {"error": "Instructors are not authorized to create courses"})
+        elif request.user.groups.filter(name="ta").exists():
+            return redirect('/dashboard/ta/', {"error": "TAs are not authorized to create courses"})
 
         name = request.POST["name"]
         description = request.POST["description"]
