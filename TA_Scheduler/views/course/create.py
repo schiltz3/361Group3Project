@@ -131,21 +131,19 @@ class CreateCourse(View):
         # adds course to database if instructor, name and description are not none
         if instructor_account and name and description:
             CourseUtil.createCourse(name, description, instructor_account)
-        else:
             return render(
                 request,
                 "course/create.html",
                 {
-                    "error": "Class could not be created.",
-                    "instructors": AccountUtil.getInstructors(),
+                    "message": "Course created.",
+                    "instructors": AccountUtil.getInstructors()
                 },
             )
-
         return render(
             request,
             "course/create.html",
             {
-                "message": "Course created.",
-                "instructors": AccountUtil.getInstructors()
+                "error": "Class could not be created.",
+                "instructors": AccountUtil.getInstructors(),
             },
         )
