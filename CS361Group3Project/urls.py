@@ -49,9 +49,8 @@ from TA_Scheduler.views.tester import TestHomePage
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    #login
+    # login
     path("", Login.as_view(), name="login"),
-
     # course
     path("course/create/", CreateCourse.as_view(), name="create-course"),
     path("course/edit/", EditCourse.as_view(), name="edit-course"),

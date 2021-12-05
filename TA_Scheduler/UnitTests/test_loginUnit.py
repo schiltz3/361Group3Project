@@ -1,6 +1,7 @@
-from django.test import TestCase,Client
+from django.test import TestCase, Client
 from TA_Scheduler.utilities.AccountUtil import AccountUtil
 from django.contrib.auth.models import Group
+
 
 class MyTestCase(TestCase):
     def setUp(self):
@@ -12,14 +13,19 @@ class MyTestCase(TestCase):
         self.user1 = AccountUtil.getAccountByUsername("admin")
 
     def test_RedirectStatusCode(self):
-        resp = self.client.post("/", {"username": "admin", "password": "pass123"},
-                                follow=True)
+        resp = self.client.post(
+            "/", {"username": "admin", "password": "pass123"}, follow=True
+        )
         self.assertEqual(resp.status_code, 200)
 
     def test_InvalidUsername(self):
-        resp = self.client.post("/", {"username": "notValid", "password": "pass123"}, follow=True)
+        resp = self.client.post(
+            "/", {"username": "notValid", "password": "pass123"}, follow=True
+        )
         self.assertFalse(self.user1.user.username == resp.context["username"])
 
     def test_InvalidPass(self):
-        resp = self.client.post("/", {"username": "admin", "password": "password"}, follow=True)
+        resp = self.client.post(
+            "/", {"username": "admin", "password": "password"}, follow=True
+        )
         self.assertFalse(self.user1.user.check_password(resp.context["password"]))
