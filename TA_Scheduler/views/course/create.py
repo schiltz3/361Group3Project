@@ -16,9 +16,9 @@ class CreateCourse(View):
         @return: Response with "instructors"
         """
         # TODO: should be pulled out to a utis class
-        # if user is anonymous or not admin, show error
+        # if user is anonymous or not admin, redirect to correct page
         if request.user.is_anonymous:
-            return redirect('/login', {"error": "User is not authorized to create a course"})
+            return redirect('/', {"error": "User is not authorized to create a course"})
         elif request.user.groups.filter(name="instructor").exists():
             return redirect('/dashboard/instructor/', {"error": "Instructors are not authorized to create courses"})
         elif request.user.groups.filter(name="ta").exists():
@@ -36,13 +36,6 @@ class CreateCourse(View):
         @param request: Request from course/create.html
         @return: Response with "instructors", "message", "warning" and "error" or redirect
         """
-        # if user is anonymous or not admin, show error
-        if request.user.is_anonymous:
-            return redirect('/login', {"error": "User is not authorized to create a course"})
-        elif request.user.groups.filter(name="instructor").exists():
-            return redirect('/dashboard/instructor/', {"error": "Instructors are not authorized to create courses"})
-        elif request.user.groups.filter(name="ta").exists():
-            return redirect('/dashboard/ta/', {"error": "TAs are not authorized to create courses"})
 
         name = request.POST["name"]
         description = request.POST["description"]
