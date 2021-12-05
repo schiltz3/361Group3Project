@@ -5,7 +5,7 @@ from django.views import View
 from django.shortcuts import render, redirect, reverse
 from TA_Scheduler.utilities.AccountUtil import AccountUtil
 from TA_Scheduler.utilities.CourseUtil import CourseUtil
-from typing import Any, List, Mapping, Union, Optional
+from typing import Any, List, Mapping, MutableMapping, Union, Optional
 
 
 class CreateCourse(View):
@@ -38,7 +38,7 @@ class CreateCourse(View):
                 "/dashboard/ta/", {"error": "TAs are not authorized to create courses"}
             )
 
-        return self.respond(request, {self.MESSAGE, ""})
+        return self.respond(request, self.MESSAGE, "")
 
 
     def post(self, request: HttpRequest) -> Union[HttpResponse, HttpResponseRedirect]:
@@ -65,36 +65,36 @@ class CreateCourse(View):
                         course.instructor.user.username.casefold()
                         == instructor.casefold()
                     ):
-                        return self.respond(request, { self.WARNING: "Class already exists with this instructor."})
+                        return self.respond(request, self.WARNING, "Class already exists with this instructor.")
 
             else:
-                return self.respond(request, {self.WARNING : "Name can only contain [A-z][0-9]"})
+                return self.respond(request, self.WARNING, "Name can only contain [A-z][0-9]")
 
         else:
-            return self.respond(request, {self.WARNING : "Name must not be blank."})
+            return self.respond(request, self.WARNING, "Name must not be blank.")
 
         # check description
         if description:
             if not all(x.isalpha() or x.isspace() for x in description):
-                return self.respond(request, {self.WARNING: "Description can only contain [A-z][0-9]"})
+                return self.respond(request, self.WARNING, "Description can only contain [A-z][0-9]")
 
         else:
-            return self.respond(request, {self.WARNING : "Description must not be blank."})
+            return self.respond(request, self.WARNING, "Description must not be blank.")
 
         # check instructor
         if instructor:  
             instructor_account = AccountUtil.getAccountByUsername(instructor)
             if instructor_account is None:
-                return self.respond(request, {self.ERROR: "Instructor could not be found."})
+                return self.respond(request, self.ERROR, "Instructor could not be found.")
         else:
-            return self.respond(request, {self.WARNING : "Instructor must not be blank."})
+            return self.respond(request, self.WARNING, "Instructor must not be blank.")
 
         # check tas
         if tas:
             for ta in tas:
                 ta_account = AccountUtil.getAccountByUsername(ta)
                 if not ta_account:
-                    return self.respond(request, {self.ERROR: "TA '" + ta + "' does not exist."})
+                    return self.respond(request, self.ERROR, "TA '" + ta + "' does not exist.")
                 else:
                     ta_accounts.append(ta_account)
                     
@@ -102,19 +102,21 @@ class CreateCourse(View):
         # adds course to database if instructor, name and description are not none
         if instructor_account and name and description:
             CourseUtil.createCourse(name, description, instructor_account, ta_accounts)
-            return self.respond(request, {self.MESSAGE: "Course created."})
+            return self.respond(request, self.MESSAGE, "Course created.")
 
-        return self.respond(request, {self.ERROR: "Class could not be created."})
+        return self.respond(request, self.ERROR, "Class could not be created.")
 
 
-    def respond(self, request: HttpRequest, context: Mapping[str, Any]):
+    def respond(self, request: HttpRequest, msg_type: str, msg: str):
         """
         Helper method that returns a response
         @param request: the HTTP request object to use
-        @param context: the context to attach to render, instructors and TAs are added
+        @param msg_type: the type of notification message
+        @param msg: the message to show
         @pre: request must not be null
         @post: rendered response
         """
-        context["tas"] = AccountUtil.getTAs()
-        context["instructors"] = AccountUtil.getInstructors()
+        # context["tas"] = AccountUtil.getTAs()
+        # context["instructors"] = AccountUtil.getInstructors()
+        context = {msg_type: msg, "tas": AccountUtil.getTAs(), "instructors" : AccountUtil.getInstructors()}
         return render(request, self.TEMPLATE, context)

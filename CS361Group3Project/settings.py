@@ -126,6 +126,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # and paste it into data.json
 # https://docs.djangoproject.com/en/3.2/howto/initial-data/
 
+# USAGE: manage.py loaddata data.json
+
 # if there is an 'table does not exist' error,
 # run 'manage.py migrate --run-syncdb'
 FIXTURE_DIRS = [BASE_DIR / "CS361Group3Project/fixtures"]

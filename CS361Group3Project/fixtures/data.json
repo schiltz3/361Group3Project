@@ -195,6 +195,318 @@
        }
     },
     {
+       "model":"admin.logentry",
+       "pk":16,
+       "fields":{
+          "action_time":"2021-12-05T22:06:00.829Z",
+          "user":1,
+          "content_type":4,
+          "object_id":"5",
+          "object_repr":"lyao",
+          "action_flag":1,
+          "change_message":"[{\"added\": {}}]"
+       }
+    },
+    {
+       "model":"admin.logentry",
+       "pk":17,
+       "fields":{
+          "action_time":"2021-12-05T22:06:40.880Z",
+          "user":1,
+          "content_type":4,
+          "object_id":"5",
+          "object_repr":"lyao",
+          "action_flag":2,
+          "change_message":"[{\"changed\": {\"fields\": [\"First name\", \"Last name\", \"Email address\", \"Groups\"]}}]"
+       }
+    },
+    {
+       "model":"admin.logentry",
+       "pk":18,
+       "fields":{
+          "action_time":"2021-12-05T22:07:08.062Z",
+          "user":1,
+          "content_type":4,
+          "object_id":"6",
+          "object_repr":"ahughes",
+          "action_flag":1,
+          "change_message":"[{\"added\": {}}]"
+       }
+    },
+    {
+       "model":"admin.logentry",
+       "pk":19,
+       "fields":{
+          "action_time":"2021-12-05T22:07:53.178Z",
+          "user":1,
+          "content_type":4,
+          "object_id":"6",
+          "object_repr":"ahughes",
+          "action_flag":2,
+          "change_message":"[{\"changed\": {\"fields\": [\"First name\", \"Last name\", \"Email address\", \"Groups\"]}}]"
+       }
+    },
+    {
+       "model":"admin.logentry",
+       "pk":20,
+       "fields":{
+          "action_time":"2021-12-05T22:08:46.505Z",
+          "user":1,
+          "content_type":4,
+          "object_id":"7",
+          "object_repr":"somranian",
+          "action_flag":1,
+          "change_message":"[{\"added\": {}}]"
+       }
+    },
+    {
+       "model":"admin.logentry",
+       "pk":21,
+       "fields":{
+          "action_time":"2021-12-05T22:09:05.028Z",
+          "user":1,
+          "content_type":4,
+          "object_id":"7",
+          "object_repr":"somranian",
+          "action_flag":2,
+          "change_message":"[{\"changed\": {\"fields\": [\"First name\", \"Last name\", \"Email address\", \"Groups\"]}}]"
+       }
+    },
+    {
+       "model":"admin.logentry",
+       "pk":22,
+       "fields":{
+          "action_time":"2021-12-05T22:09:25.807Z",
+          "user":1,
+          "content_type":4,
+          "object_id":"8",
+          "object_repr":"cwang",
+          "action_flag":1,
+          "change_message":"[{\"added\": {}}]"
+       }
+    },
+    {
+       "model":"admin.logentry",
+       "pk":23,
+       "fields":{
+          "action_time":"2021-12-05T22:09:46.540Z",
+          "user":1,
+          "content_type":4,
+          "object_id":"8",
+          "object_repr":"cwang",
+          "action_flag":2,
+          "change_message":"[{\"changed\": {\"fields\": [\"First name\", \"Last name\", \"Email address\", \"Groups\"]}}]"
+       }
+    },
+    {
+       "model":"admin.logentry",
+       "pk":24,
+       "fields":{
+          "action_time":"2021-12-05T22:10:15.256Z",
+          "user":1,
+          "content_type":4,
+          "object_id":"9",
+          "object_repr":"hghanbari",
+          "action_flag":1,
+          "change_message":"[{\"added\": {}}]"
+       }
+    },
+    {
+       "model":"admin.logentry",
+       "pk":25,
+       "fields":{
+          "action_time":"2021-12-05T22:10:34.926Z",
+          "user":1,
+          "content_type":4,
+          "object_id":"9",
+          "object_repr":"hghanbari",
+          "action_flag":2,
+          "change_message":"[{\"changed\": {\"fields\": [\"First name\", \"Last name\", \"Email address\", \"Groups\"]}}]"
+       }
+    },
+    {
+       "model":"admin.logentry",
+       "pk":26,
+       "fields":{
+          "action_time":"2021-12-05T22:11:12.987Z",
+          "user":1,
+          "content_type":4,
+          "object_id":"10",
+          "object_repr":"aprasad",
+          "action_flag":1,
+          "change_message":"[{\"added\": {}}]"
+       }
+    },
+    {
+       "model":"admin.logentry",
+       "pk":27,
+       "fields":{
+          "action_time":"2021-12-05T22:11:34.582Z",
+          "user":1,
+          "content_type":4,
+          "object_id":"10",
+          "object_repr":"aprasad",
+          "action_flag":2,
+          "change_message":"[{\"changed\": {\"fields\": [\"First name\", \"Last name\", \"Email address\", \"Groups\"]}}]"
+       }
+    },
+    {
+       "model":"admin.logentry",
+       "pk":28,
+       "fields":{
+          "action_time":"2021-12-05T22:11:49.069Z",
+          "user":1,
+          "content_type":7,
+          "object_id":"4",
+          "object_repr":"ahughes",
+          "action_flag":1,
+          "change_message":"[{\"added\": {}}]"
+       }
+    },
+    {
+       "model":"admin.logentry",
+       "pk":29,
+       "fields":{
+          "action_time":"2021-12-05T22:11:54.474Z",
+          "user":1,
+          "content_type":7,
+          "object_id":"5",
+          "object_repr":"aprasad",
+          "action_flag":1,
+          "change_message":"[{\"added\": {}}]"
+       }
+    },
+    {
+       "model":"admin.logentry",
+       "pk":30,
+       "fields":{
+          "action_time":"2021-12-05T22:11:58.880Z",
+          "user":1,
+          "content_type":7,
+          "object_id":"5",
+          "object_repr":"cwang",
+          "action_flag":2,
+          "change_message":"[{\"changed\": {\"fields\": [\"User\"]}}]"
+       }
+    },
+    {
+       "model":"admin.logentry",
+       "pk":31,
+       "fields":{
+          "action_time":"2021-12-05T22:12:02.079Z",
+          "user":1,
+          "content_type":7,
+          "object_id":"5",
+          "object_repr":"hghanbari",
+          "action_flag":2,
+          "change_message":"[{\"changed\": {\"fields\": [\"User\"]}}]"
+       }
+    },
+    {
+       "model":"admin.logentry",
+       "pk":32,
+       "fields":{
+          "action_time":"2021-12-05T22:12:05.473Z",
+          "user":1,
+          "content_type":7,
+          "object_id":"5",
+          "object_repr":"lyao",
+          "action_flag":2,
+          "change_message":"[{\"changed\": {\"fields\": [\"User\"]}}]"
+       }
+    },
+    {
+       "model":"admin.logentry",
+       "pk":33,
+       "fields":{
+          "action_time":"2021-12-05T22:12:09.489Z",
+          "user":1,
+          "content_type":7,
+          "object_id":"5",
+          "object_repr":"somranian",
+          "action_flag":2,
+          "change_message":"[{\"changed\": {\"fields\": [\"User\"]}}]"
+       }
+    },
+    {
+       "model":"admin.logentry",
+       "pk":34,
+       "fields":{
+          "action_time":"2021-12-05T22:12:31.477Z",
+          "user":1,
+          "content_type":7,
+          "object_id":"6",
+          "object_repr":"aprasad",
+          "action_flag":1,
+          "change_message":"[{\"added\": {}}]"
+       }
+    },
+    {
+       "model":"admin.logentry",
+       "pk":35,
+       "fields":{
+          "action_time":"2021-12-05T22:12:35.754Z",
+          "user":1,
+          "content_type":7,
+          "object_id":"7",
+          "object_repr":"cwang",
+          "action_flag":1,
+          "change_message":"[{\"added\": {}}]"
+       }
+    },
+    {
+       "model":"admin.logentry",
+       "pk":36,
+       "fields":{
+          "action_time":"2021-12-05T22:12:38.849Z",
+          "user":1,
+          "content_type":7,
+          "object_id":"8",
+          "object_repr":"hghanbari",
+          "action_flag":1,
+          "change_message":"[{\"added\": {}}]"
+       }
+    },
+    {
+       "model":"admin.logentry",
+       "pk":37,
+       "fields":{
+          "action_time":"2021-12-05T22:13:04.266Z",
+          "user":1,
+          "content_type":7,
+          "object_id":"9",
+          "object_repr":"lyao",
+          "action_flag":1,
+          "change_message":"[{\"added\": {}}]"
+       }
+    },
+    {
+       "model":"admin.logentry",
+       "pk":38,
+       "fields":{
+          "action_time":"2021-12-05T22:13:45.724Z",
+          "user":1,
+          "content_type":4,
+          "object_id":"1",
+          "object_repr":"super",
+          "action_flag":2,
+          "change_message":"[{\"changed\": {\"fields\": [\"First name\", \"Last name\", \"Email address\", \"Groups\"]}}]"
+       }
+    },
+    {
+       "model":"admin.logentry",
+       "pk":39,
+       "fields":{
+          "action_time":"2021-12-05T22:13:58.339Z",
+          "user":1,
+          "content_type":7,
+          "object_id":"10",
+          "object_repr":"super",
+          "action_flag":1,
+          "change_message":"[{\"added\": {}}]"
+       }
+    },
+    {
        "model":"auth.permission",
        "pk":1,
        "fields":{
@@ -517,17 +829,17 @@
        "pk":1,
        "fields":{
           "password":"pbkdf2_sha256$260000$2yAe3uCJEXshQFcSAWNyIZ$Lw9EsJieDEIpK9hTs8t7odvLB2F4DT4pRBibqdZDxiE=",
-          "last_login":"2021-12-05T18:24:56.638Z",
+          "last_login":"2021-12-05T22:05:01Z",
           "is_superuser":true,
           "username":"super",
-          "first_name":"",
-          "last_name":"",
-          "email":"",
+          "first_name":"Super",
+          "last_name":"User",
+          "email":"super@mail.com",
           "is_staff":true,
           "is_active":true,
-          "date_joined":"2021-12-05T18:24:52.561Z",
+          "date_joined":"2021-12-05T18:24:52Z",
           "groups":[
-             
+             1
           ],
           "user_permissions":[
              
@@ -601,6 +913,138 @@
        }
     },
     {
+       "model":"auth.user",
+       "pk":5,
+       "fields":{
+          "password":"pbkdf2_sha256$260000$xu1UpYpe3NJtNTnLUr3h0p$rlcpsP6lZJLsV1qmQw7mGpSmuAsRC6aA/e66IGi2d7I=",
+          "last_login":null,
+          "is_superuser":false,
+          "username":"lyao",
+          "first_name":"Lei",
+          "last_name":"Yao",
+          "email":"leiyao@uwm.edu",
+          "is_staff":false,
+          "is_active":true,
+          "date_joined":"2021-12-05T22:06:00Z",
+          "groups":[
+             3
+          ],
+          "user_permissions":[
+             
+          ]
+       }
+    },
+    {
+       "model":"auth.user",
+       "pk":6,
+       "fields":{
+          "password":"pbkdf2_sha256$260000$QOmSX0a4zmHDrBrIAKPZh0$UD3QK1AzX+vFG+cMutbEJmomz6fGFLNTeUwYqFoCRZk=",
+          "last_login":null,
+          "is_superuser":false,
+          "username":"ahughes",
+          "first_name":"Andrew",
+          "last_name":"Hughes",
+          "email":"hughes49@uwm.edu",
+          "is_staff":false,
+          "is_active":true,
+          "date_joined":"2021-12-05T22:07:07Z",
+          "groups":[
+             3
+          ],
+          "user_permissions":[
+             
+          ]
+       }
+    },
+    {
+       "model":"auth.user",
+       "pk":7,
+       "fields":{
+          "password":"pbkdf2_sha256$260000$Dv5zm7n5724JlfFiO9lly1$sQUB85OoMD5g9iCvWH8O64U/kPIXAtbLTxpDgF2Uw4M=",
+          "last_login":null,
+          "is_superuser":false,
+          "username":"somranian",
+          "first_name":"Sammie",
+          "last_name":"Omranian",
+          "email":"omranian@uwm.edu",
+          "is_staff":false,
+          "is_active":true,
+          "date_joined":"2021-12-05T22:08:46Z",
+          "groups":[
+             3
+          ],
+          "user_permissions":[
+             
+          ]
+       }
+    },
+    {
+       "model":"auth.user",
+       "pk":8,
+       "fields":{
+          "password":"pbkdf2_sha256$260000$u35k2V3aC1i3XFFJy6yhdZ$pSHZaqcQn97yH7c2HbQHdcvRflmxrQFHPDITT8ZO/XQ=",
+          "last_login":null,
+          "is_superuser":false,
+          "username":"cwang",
+          "first_name":"Chuanbo",
+          "last_name":"Wang",
+          "email":"chuanbo@uwm.edu",
+          "is_staff":false,
+          "is_active":true,
+          "date_joined":"2021-12-05T22:09:25Z",
+          "groups":[
+             3
+          ],
+          "user_permissions":[
+             
+          ]
+       }
+    },
+    {
+       "model":"auth.user",
+       "pk":9,
+       "fields":{
+          "password":"pbkdf2_sha256$260000$GtlvzMxrF8dQxhRC29v7hd$wpzB9t6fFNhLsuevcJV8SZHKPIyuAGQP/FEAKUlhZ3U=",
+          "last_login":null,
+          "is_superuser":false,
+          "username":"hghanbari",
+          "first_name":"Hossein",
+          "last_name":"Ghanbari",
+          "email":"ghanbar3@uwm.edu",
+          "is_staff":false,
+          "is_active":true,
+          "date_joined":"2021-12-05T22:10:15Z",
+          "groups":[
+             3
+          ],
+          "user_permissions":[
+             
+          ]
+       }
+    },
+    {
+       "model":"auth.user",
+       "pk":10,
+       "fields":{
+          "password":"pbkdf2_sha256$260000$hUxB1eRUAhj7y9BgHQ5XCb$f4h57SZ8eiRhNAZOxJatSuhZwtIbM9IqfKLzsyCCEY0=",
+          "last_login":null,
+          "is_superuser":false,
+          "username":"aprasad",
+          "first_name":"Apoorv",
+          "last_name":"Prasad",
+          "email":"prasada@uwm.edu",
+          "is_staff":false,
+          "is_active":true,
+          "date_joined":"2021-12-05T22:11:12Z",
+          "groups":[
+             3
+          ],
+          "user_permissions":[
+             
+          ]
+       }
+    },
+    {
        "model":"contenttypes.contenttype",
        "pk":1,
        "fields":{
@@ -666,6 +1110,14 @@
     },
     {
        "model":"sessions.session",
+       "pk":"aqdjbd77su317l8cl13ucb421r67lvwh",
+       "fields":{
+          "session_data":".eJxVjDsOwjAQBe_iGlneGP8o6XMGa71rkwCypXwqxN3BUgpoXvFmNC8Rcd-muK95iTOLiwBx-v0S0iPXDviO9dYktbotc5JdkQdd5dg4P6-H-xeYcJ16lrQvcFaegjIeBmQCC2iGlF1QBV0ogb1ird13LBWjCFhzMNaDgyTeH8s1Nz4:1mtzcz:lhWI11txXL2S2_BFwlI-nQfmtYBTrPasnH5IPSTpWNc",
+          "expire_date":"2021-12-19T22:05:01.181Z"
+       }
+    },
+    {
+       "model":"sessions.session",
        "pk":"bydg7az6iaugprnpjyx23pb1ny4bpidl",
        "fields":{
           "session_data":".eJxVjDsOwjAQBe_iGlneGP8o6XMGa71rkwCypXwqxN3BUgpoXvFmNC8Rcd-muK95iTOLiwBx-v0S0iPXDviO9dYktbotc5JdkQdd5dg4P6-H-xeYcJ16lrQvcFaegjIeBmQCC2iGlF1QBV0ogb1ird13LBWjCFhzMNaDgyTeH8s1Nz4:1mtwC0:NW5sYcNrsP7XrKvkQmGeBNK5F0l8nWSTuQnlN1jAzEE",
@@ -691,6 +1143,55 @@
        "pk":3,
        "fields":{
           "user":3
+       }
+    },
+    {
+       "model":"TA_Scheduler.account",
+       "pk":4,
+       "fields":{
+          "user":6
+       }
+    },
+    {
+       "model":"TA_Scheduler.account",
+       "pk":5,
+       "fields":{
+          "user":7
+       }
+    },
+    {
+       "model":"TA_Scheduler.account",
+       "pk":6,
+       "fields":{
+          "user":10
+       }
+    },
+    {
+       "model":"TA_Scheduler.account",
+       "pk":7,
+       "fields":{
+          "user":8
+       }
+    },
+    {
+       "model":"TA_Scheduler.account",
+       "pk":8,
+       "fields":{
+          "user":9
+       }
+    },
+    {
+       "model":"TA_Scheduler.account",
+       "pk":9,
+       "fields":{
+          "user":5
+       }
+    },
+    {
+       "model":"TA_Scheduler.account",
+       "pk":10,
+       "fields":{
+          "user":1
        }
     },
     {
