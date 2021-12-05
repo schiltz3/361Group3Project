@@ -1,52 +1,121 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from TA_Scheduler.models import Account
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.views import View
+from django.shortcuts import render, redirect, reverse
 from TA_Scheduler.utilities.AccountUtil import AccountUtil
 from TA_Scheduler.utilities.CourseUtil import CourseUtil
+from typing import Union, Optional
 
 
 class CreateCourse(View):
+    def get(self, request: HttpRequest) -> Union[HttpResponse, HttpResponseRedirect]:
+        """
+        Called when the user opens the page, course/create.html
+        @param request: Request from course/create.html
+        @return: Response with "instructors"
+        """
+        # TODO: should be pulled out to a utis class
+        # if user is anonymous or not admin, redirect to correct page
+        if request.user.is_anonymous:
+            return redirect('/', {"error": "User is not authorized to create a course"})
+        elif request.user.groups.filter(name="instructor").exists():
+            return redirect('/dashboard/instructor/', {"error": "Instructors are not authorized to create courses"})
+        elif request.user.groups.filter(name="ta").exists():
+            return redirect('/dashboard/ta/', {"error": "TAs are not authorized to create courses"})
 
-    # this is called when the user opens the page, the course/create.html
-    def get(self, request):
         return render(
             request,
             "course/create.html",
             {"message": "", "instructors": AccountUtil.getInstructors()},
         )
 
-    # this is called when the user clicks submit.
-    def post(self, request):
+    def post(self, request: HttpRequest) -> Union[HttpResponse, HttpResponseRedirect]:
+        """
+        Called when the user clicks submit.
+        @param request: Request from course/create.html
+        @return: Response with "instructors", "message", "warning" and "error" or redirect
+        """
 
-        # if user is anonymous or not admin, show error
-        if request.user.is_anonymous or request.user.account.authority == 0:
+        name: Optional[str] = str(request.POST["name"])
+        description: Optional[str] = str(request.POST["description"])
+        instructor: Optional[str] = str(request.POST["instructor"])
+
+        if name:
+            if name.isalnum():
+                for course in CourseUtil.getAllCourses():
+                    if course.name.casefold() == name.casefold() and course.instructor.user.username.casefold() == instructor.casefold():
+                        return render(
+                            request,
+                            "course/create.html",
+                            {
+                                "warning": "Class already exists with this instructor.",
+                                "instructors": AccountUtil.getInstructors(),
+                            }
+                        )
+        else:
             return render(
                 request,
                 "course/create.html",
                 {
-                    "message": "User is not authorized to create the course.",
+                    "warning": "Name must not be blank.",
                     "instructors": AccountUtil.getInstructors(),
                 },
             )
-
-        name = request.POST["name"]
-        description = request.POST["description"]
-
-        # if name is blank show error
-        if not name:
+        if description:
+            if not all(x.isalpha() or x.isspace() for x in description):
+                return render(
+                    request,
+                    "course/create.html",
+                    {
+                        "warning": "Description must only consist of Number and/or Letters",
+                        "instructors": AccountUtil.getInstructors(),
+                    }
+                )
+        else:
             return render(
                 request,
                 "course/create.html",
                 {
-                    "message": "Course name must not be blank.",
+                    "warning": "Description must not be blank.",
                     "instructors": AccountUtil.getInstructors(),
                 },
             )
 
-        instructor = request.POST["instructor"]
+        if instructor:
+            try:
+                instructor_account = AccountUtil.getAccountByUsername(instructor)
+            except IndexError:
+                instructor_account = None
+                return render(
+                    request,
+                    "course/create.html",
+                    {
+                        "error": "Instructor could not be found.",
+                        "instructors": AccountUtil.getInstructors(),
+                    },
+                )
+        else:
+            return render(
+                request,
+                "course/create.html",
+                {
+                    "warning": "Instructor must not be blank.",
+                    "instructors": AccountUtil.getInstructors(),
+                },
+            )
 
-        # adds course to database
-        # TODO need to confirm this works when users can be created
-        CourseUtil.createCourse(name, description, instructor)
+        # adds course to database if instructor, name and description are not none
+        if instructor_account and name and description:
+            CourseUtil.createCourse(name, description, instructor_account)
+        else:
+            return render(
+                request,
+                "course/create.html",
+                {
+                    "error": "Class could not be created.",
+                    "instructors": AccountUtil.getInstructors(),
+                },
+            )
 
         return render(request, "course/create.html", {"message": "Course created."})
