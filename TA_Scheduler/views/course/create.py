@@ -87,6 +87,14 @@ class CreateCourse(View):
                 instructor_account = AccountUtil.getAccountByUsername(instructor)
             except IndexError:
                 instructor_account = None
+                return render(
+                    request,
+                    "course/create.html",
+                    {
+                        "error": "Instructor could not be found.",
+                        "instructors": AccountUtil.getInstructors(),
+                    },
+                )
         else:
             return render(
                 request,
@@ -100,5 +108,14 @@ class CreateCourse(View):
         # adds course to database if instructor, name and description are not none
         if instructor_account and name and description:
             CourseUtil.createCourse(name, description, instructor_account)
+        else:
+            return render(
+                request,
+                "course/create.html",
+                {
+                    "error": "Class could not be created.",
+                    "instructors": AccountUtil.getInstructors(),
+                },
+            )
 
         return render(request, "course/create.html", {"message": "Course created."})
