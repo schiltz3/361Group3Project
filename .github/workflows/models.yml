@@ -39,7 +39,6 @@ jobs:
 
       - name: Generate pdf and svg
         run: |
-          python manage.py graph_models
           python manage.py graph_models -a -o "docs\models\CS361Group3Project.pdf"
           python manage.py graph_models -a -o "docs\models\CS361Group3Project.svg"
 
