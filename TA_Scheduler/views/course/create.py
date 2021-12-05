@@ -56,8 +56,8 @@ class CreateCourse(View):
             if all(x.isalpha() or x.isspace() for x in description):
                 for course in CourseUtil.getAllCourses():
                     if (course.name.casefold() == name.casefold()) and (
-                            course.instructor.user.username.casefold()
-                            == instructor.casefold()
+                        course.instructor.user.username.casefold()
+                        == instructor.casefold()
                     ):
                         return render(
                             request,
@@ -136,7 +136,7 @@ class CreateCourse(View):
                 "course/create.html",
                 {
                     "message": "Course created.",
-                    "instructors": AccountUtil.getInstructors()
+                    "instructors": AccountUtil.getInstructors(),
                 },
             )
         return render(
