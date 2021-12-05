@@ -49,7 +49,7 @@ class CreateCourse(View):
                             request,
                             "course/create.html",
                             {
-                                "error": "Class already exists with this instructor.",
+                                "warning": "Class already exists with this instructor.",
                                 "instructors": AccountUtil.getInstructors(),
                             }
                         )
@@ -68,7 +68,7 @@ class CreateCourse(View):
                     request,
                     "course/create.html",
                     {
-                        "error": "Description must only consist of Number and/or Letters",
+                        "warning": "Description must only consist of Number and/or Letters",
                         "instructors": AccountUtil.getInstructors(),
                     }
                 )
