@@ -53,12 +53,11 @@ class CreateCourse(View):
         instructor: Optional[str] = str(request.POST.get("instructor", None))
 
         if name:
-            if name.isalnum():
+            if all(x.isalpha() or x.isspace() for x in description):
                 for course in CourseUtil.getAllCourses():
-                    if (
-                        course.name.casefold() == name.casefold()
-                        and course.instructor.user.username.casefold()
-                        == instructor.casefold()
+                    if (course.name.casefold() == name.casefold()) and (
+                            course.instructor.user.username.casefold()
+                            == instructor.casefold()
                     ):
                         return render(
                             request,
@@ -68,6 +67,15 @@ class CreateCourse(View):
                                 "instructors": AccountUtil.getInstructors(),
                             },
                         )
+            else:
+                return render(
+                    request,
+                    "course/create.html",
+                    {
+                        "warning": "Name can only contain [A-z][0--9]",
+                        "instructors": AccountUtil.getInstructors(),
+                    },
+                )
         else:
             return render(
                 request,
@@ -83,7 +91,7 @@ class CreateCourse(View):
                     request,
                     "course/create.html",
                     {
-                        "warning": "Description must only consist of Number and/or Letters",
+                        "warning": "Description can only contain [A-z][0--9]",
                         "instructors": AccountUtil.getInstructors(),
                     },
                 )
