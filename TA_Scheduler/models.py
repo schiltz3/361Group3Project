@@ -12,7 +12,7 @@ class Account(models.Model):
     takes care of password encryption.
 
     account.id --> id in db
-    account.user --> assosiated User object
+    account.user --> associated User object
     account.user.username --> username
     account.user.password --> password
     account.user.first_name --> first name of user
