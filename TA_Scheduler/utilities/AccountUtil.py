@@ -19,7 +19,7 @@ class AccountUtil:
         if username == "" or password == "":
             raise TypeError("Username, password, and authority cannot be empty.")
 
-        user = User.objects.create(username=username, password=password)
+        user = User.objects.create_user(username=username, password=password)
 
         ta_group = Group.objects.get(name="TA")
         ta_group.user_set.add(user)
@@ -32,7 +32,7 @@ class AccountUtil:
         if username == "" or password == "":
             raise TypeError("Username, password, and authority cannot be empty.")
 
-        user = User.objects.create(username=username, password=password)
+        user = User.objects.create_user(username=username, password=password)
 
         instructor_group = Group.objects.get(name="instructor")
         instructor_group.user_set.add(user)
@@ -45,7 +45,7 @@ class AccountUtil:
         if username == "" or password == "":
             raise TypeError("Username, password, and authority cannot be empty.")
 
-        user = User.objects.create(username=username, password=password)
+        user = User.objects.create_user(username=username, password=password)
 
         admin_group = Group.objects.get(name="admin")
         admin_group.user_set.add(user)
@@ -93,6 +93,9 @@ class AccountUtil:
         except Account.DoesNotExist:
             return None
 
+        except IndexError:
+            return None
+
         return None
 
     @staticmethod
@@ -107,5 +110,5 @@ class AccountUtil:
 
         except Account.DoesNotExist:
             return None
-
-        return None
+        except IndexError:
+            return None
