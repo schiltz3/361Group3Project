@@ -46,7 +46,7 @@ jobs:
 
       - name: Check for modified files
         id: git-check
-        run: echo ::set-output name=added::$(if [[-n `git status --porcelain`]]; then echo "true"; else echo "false"; fi)
+        run: echo ::set-output name=added::$(if [[`git status --porcelain`]]; then echo "true"; else echo "false"; fi)
 
       - name: Push changes
         if: steps.git-check.outputs.added == 'true'
