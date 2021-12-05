@@ -21,13 +21,14 @@ POST Variables:
                 </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text" name="description" id="Description">Description:</span>
-                    <input type="text" class="form-control" placeholder="Description of class" aria-label="Description"
+                    <input type="text" name="description" class="form-control" placeholder="Description of class"
+                           aria-label="Description"
                            aria-describedby=Description">
                 </div>
                 <div class="input-group mb-2">
                     <span class="input-group-text" id="Instructor">Instructor</span>
                     <select name="instructor" class="form-select" aria-label="Instructor" aria-describedby="Instructor">
-                        <option selected>Select Instructor</option>
+                        <option disabled selected>Select Instructor</option>
                         {% for i in instructors %}
                         <option value="{{ i.user }}">{{ i.user.first_name }} {{ i.user.last_name }}</option>
                         {% endfor %}
@@ -41,16 +42,17 @@ POST Variables:
             <div class="col mb-3">
                 <h1>Create Class</h1>
                 <div class="form-floating mb-2">
-                    <input type="text" class="form-control" placeholder="Class Name" id="ClassNameInput"/>
+                    <input type="text" name="name" class="form-control" placeholder="Class Name" id="ClassNameInput"/>
                     <label for="ClassNameInput">Class Name</label>
                 </div>
                 <div class="form-floating mb-2">
-                    <input type="text" class="form-control" placeholder="Class Description" id="ClassDescriptionInput"/>
+                    <input type="text" name="description" class="form-control" placeholder="Class Description"
+                           id="ClassDescriptionInput"/>
                     <label for="ClassDescriptionInput">Class Description</label>
                 </div>
                 <div class="form-floating mb-2">
-                    <select class="form-select" id="InstructorSelect" aria-label="Instructor">
-                        <option selected>Select Instructor</option>
+                    <select class="form-select" name="instructor" id="InstructorSelect" aria-label="Instructor">
+                        <option selected disabled>Select Instructor</option>
                         {% for i in instructors %}
                         <option value="{{ i.user }}">{{ i.user.first_name }} {{ i.user.last_name }}</option>
                         {% endfor %}
