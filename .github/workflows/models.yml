@@ -44,13 +44,10 @@ jobs:
           python manage.py graph_models -a -o "docs/models/CS361Group3Project.pdf"
           python manage.py graph_models -a -o "docs/models/CS361Group3Project.svg"
 
-      - name: sanity check
-        run: ls docs/models
-
       - name: Check for modified files
         id: git-check
         run: |
-          echo ::set-output name=added::$(if [['git status --porcelain']]; then echo "true"; else echo "false"; fi)
+          echo ::set-output name=added::$(if git status --porcelain; then echo "true"; else echo "false"; fi)
 
       - name: Push changes
         if: steps.git-check.outputs.added == 'true'
