@@ -5,7 +5,7 @@ from django.views import View
 from django.shortcuts import render, redirect, reverse
 from TA_Scheduler.utilities.AccountUtil import AccountUtil
 from TA_Scheduler.utilities.CourseUtil import CourseUtil
-from typing import Union
+from typing import Union, Optional
 
 
 class CreateCourse(View):
@@ -37,9 +37,9 @@ class CreateCourse(View):
         @return: Response with "instructors", "message", "warning" and "error" or redirect
         """
 
-        name = request.POST["name"]
-        description = request.POST["description"]
-        instructor = request.POST["instructor"]
+        name: Optional[str] = str(request.POST["name"])
+        description: Optional[str] = str(request.POST["description"])
+        instructor: Optional[str] = str(request.POST["instructor"])
 
         # if name is blank show error
         if not name:
@@ -71,8 +71,8 @@ class CreateCourse(View):
                 },
             )
 
-        # adds course to database
-        # TODO need to confirm this works when users can be created
+        # adds course to database if instructor, name and description are not none
+        if instructor_account and name and description:
         CourseUtil.createCourse(name, description, instructor)
 
         return render(request, "course/create.html", {"message": "Course created."})
