@@ -62,19 +62,6 @@ class AccountUtil:
             return None
 
     @staticmethod
-    def getAccountByUsername(username: str) -> Optional[Account]:
-        try:
-            user = User.objects.get(username=username)
-            account = Account.objects.get(user=user)
-            return account
-
-        except User.DoesNotExist:
-            return None
-
-        except Account.DoesNotExist:
-            return None
-
-    @staticmethod
     def getAllAccounts() -> Optional[Iterable[Account]]:
         set: QuerySet = Account.objects.all()
         return set if set.exists() else None
@@ -111,3 +98,17 @@ class AccountUtil:
 
         return None
 
+    @staticmethod
+    def getAccountByUsername(username: str) -> Optional[Account]:
+        try:
+            user = User.objects.filter(username=username)[0]
+            account = Account.objects.filter(user=user.id)[0]
+            return account
+
+        except User.DoesNotExist:
+            return None
+
+        except Account.DoesNotExist:
+            return None
+        except IndexError:
+            return None
