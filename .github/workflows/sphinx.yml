@@ -14,7 +14,12 @@ jobs:
           ref: ${{ github.head_ref }}
       - uses: ammaraskar/sphinx-action@master
         with:
-          docs-folder: "docs/"
+          docs-folder: "Sphinx/"
+
+      - name: Move docs to published folder
+        run: |
+          mkdir -p docs
+          cp -a Sphinx/_build/html/. docs/
 
       - name: Push changes
         run: |
