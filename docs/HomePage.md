@@ -1,2 +1,3 @@
-layout: page title: "Home Page"
+layout: page 
+title: "Home Page"
 permalink: /_build/html/
