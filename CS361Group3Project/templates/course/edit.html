@@ -1,5 +1,14 @@
-{% extends "base.html" %}
+{% extends "bar_base.html" %}
 
-{% block content %}
-    <h1> Edit course page works! </h1>
-{% endblock content %}
+{% block application_pane %}
+
+<row>
+    <form action="/course/edit.html" method="post">
+        {% csrf_token %}
+        <div class="col-7">
+            <h1>Edit course</h1>
+        </div>
+    </form>
+</row>
+
+{% endblock application_pane %}
