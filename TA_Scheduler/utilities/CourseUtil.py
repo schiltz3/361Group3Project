@@ -27,8 +27,6 @@ class CourseUtil:
         for ta in tas:
             course.tas.add(ta)
 
-        print(course.tas)
-
         return course.id
 
     @staticmethod
@@ -51,3 +49,16 @@ class CourseUtil:
         """
         set: QuerySet = Course.objects.all()
         return set if set.exists() else None
+
+    @staticmethod
+    def getCourseByName(name: str) -> Optional[Course]:
+        """
+        Gets a course from the database, by it's name.
+        If the course is not found, returns None
+        """
+        try:
+            course = Course.objects.filter(name=name)[0]
+        except IndexError:
+            return None
+        
+        return course
