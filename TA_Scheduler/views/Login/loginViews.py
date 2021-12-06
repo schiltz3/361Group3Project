@@ -13,7 +13,7 @@ class Login(View):
             return render(
                 request,
                 "login/login.html",
-                {"error": "Invalid username", "username": "username"},
+                {"error": "Invalid username", "username": request.POST["username"]},
             )
         else:
             invalidPassword = user1.user.check_password(request.POST["password"])
@@ -21,7 +21,7 @@ class Login(View):
             return render(
                 request,
                 "login/login.html",
-                {"error": "Invalid password", "password": invalidPassword},
+                {"error": "Invalid password", "password": request.POST["password"]},
             )
         else:
             request.session["username"] = user1.user.username
