@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate
 
 from TA_Scheduler.models import Account
 
+
 # Note to teammate:
 # This is a utility class to access the Account database.
 # Use the methods below to get accounts:
@@ -21,7 +22,7 @@ class AccountUtil:
 
         user = User.objects.create_user(username=username, password=password)
 
-        ta_group = Group.objects.get(name="TA")
+        ta_group = Group.objects.get(name="ta")
         ta_group.user_set.add(user)
 
         account = Account.objects.create(user=user)

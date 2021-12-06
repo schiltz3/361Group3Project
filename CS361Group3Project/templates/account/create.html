@@ -1,34 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- is this where the bootstrap indicator goes? -->
-    {% extends 'bar_base.html' %}
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    {% block application_pane %}
+{% extends 'bar_base.html' %}
+
+{% comment %}
+Create account
+
+{% endcomment %}
+
+{% block application_pane %}
     <h1>Create New User Account</h1>
-    <form action="/" method="post">
+    <form action="/account/create/" method="post">
         {% csrf_token %}
         <table>
             <tr><td>Username: </td><td><input type="text" name="username" required></td></tr>
             <tr><td>Password: </td><td><input type="password" name="password" required></td></tr>
-            <tr><td>Name: </td><td><input type="text" name="firstname"></td><td><input type="text" name="lastname"></td></td></tr>
             <tr><td>User Type: </td><td><select name="authority">
                 <option value="1">Administrator</option>
                 <option value="2">Instructor</option>
                 <option value="3">TA</option>
             </select></td></tr>
             <!-- below fields are unimplemented (they don't actually do anything yet) -->
+            <!-- <tr><td>Name: </td><td><input type="text" name="firstname"></td><td><input type="text" name="lastname"></td></td></tr>
             <tr><td>Address: </td><td><input type="text" name="address"></td></tr>
-            <tr><td>Phone Number: </td><td><input type="text" name="number" pattern="[0-9]{10}"></td></tr>
-            <!-- ^unsure if regex is right^ -->
             <tr><td>Email: </td><td><input type="text" name="email"></td></tr>
+            <tr><td>Phone Number: </td><td><input type="text" name="number" pattern="[0-9]{10}"></td></tr> -->
+            <!-- ^unsure if regex is right^ -->
         </table>
         <input type="submit">
     </form>
     {{ message }}
-    {% endblock application_pane %}
-    </body>
-</html>
+{% endblock application_pane %}
