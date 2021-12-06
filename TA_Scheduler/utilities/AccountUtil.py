@@ -67,6 +67,18 @@ class AccountUtil:
         return set if set.exists() else None
 
     @staticmethod
+    def getTAs() -> Optional[Iterable[Account]]:
+        set: QuerySet = User.objects.filter(groups__name="ta")
+        result = []
+        try:
+            for user in set:
+                result.append(Account.objects.get(user=user.id))
+        except Account.DoesNotExist:
+            return None
+
+        return result if result else None
+
+    @staticmethod
     def getInstructors() -> Optional[Iterable[Account]]:
         set: QuerySet = User.objects.filter(groups__name="instructor")
         result = []
@@ -104,6 +116,9 @@ class AccountUtil:
             user = User.objects.filter(username=username)[0]
             account = Account.objects.filter(user=user.id)[0]
             return account
+
+        except IndexError:
+            return None
 
         except User.DoesNotExist:
             return None
