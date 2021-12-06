@@ -1,6 +1,9 @@
-name: "Pull Request Docs Check"
+name: "Doc builder"
 on:
-  - pull_request
+  pull_request:
+    branches: [ docs/doxygen ]
+  push:
+    branches: [ docs/doxygen ]
 
 jobs:
   docs:
