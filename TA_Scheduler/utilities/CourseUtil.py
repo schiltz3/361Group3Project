@@ -60,5 +60,5 @@ class CourseUtil:
             course = Course.objects.filter(name=name)[0]
         except IndexError:
             return None
-        
+
         return course

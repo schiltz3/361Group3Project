@@ -7,6 +7,7 @@ from TA_Scheduler.utilities.AccountUtil import AccountUtil
 from TA_Scheduler.utilities.CourseUtil import CourseUtil
 from typing import Any, List, Mapping, MutableMapping, Union, Optional
 
+
 class CreateCourse(View):
 
     TEMPLATE = "course/create.html"
@@ -50,7 +51,6 @@ class CreateCourse(View):
         @par: Side effect: Create a new class object
         """
 
-
         name: Optional[str] = str(request.POST.get("name", None))
         description: Optional[str] = str(request.POST.get("description", None))
         instructor: Optional[str] = str(request.POST.get("instructor", None))
@@ -82,7 +82,9 @@ class CreateCourse(View):
 
         # check description
         if description:
-            if not all(x.isalpha() or x.isnumeric() or x.isspace() for x in description):
+            if not all(
+                x.isalpha() or x.isnumeric() or x.isspace() for x in description
+            ):
                 return self.respond(
                     request, self.WARNING, "Description can only contain [A-z][0-9]"
                 )
@@ -127,7 +129,7 @@ class CreateCourse(View):
         @pre: request must not be null
         @post: rendered response
         """
-        
+
         context = {
             msg_type: msg,
             "tas": AccountUtil.getTAs(),
