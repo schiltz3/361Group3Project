@@ -7,7 +7,6 @@ from TA_Scheduler.utilities.AccountUtil import AccountUtil
 from TA_Scheduler.utilities.CourseUtil import CourseUtil
 from typing import Any, List, Mapping, MutableMapping, Union, Optional
 
-
 class CreateCourse(View):
 
     TEMPLATE = "course/create.html"
@@ -26,6 +25,7 @@ class CreateCourse(View):
         """
         # TODO: should be pulled out to a utis class
         # if user is anonymous or not admin, redirect to correct page
+
         if request.user.is_anonymous:
             return redirect("/", {"error": "User is not authorized to create a course"})
         elif request.user.groups.filter(name="instructor").exists():
@@ -49,6 +49,7 @@ class CreateCourse(View):
         @post: Correct return or new class object
         @par: Side effect: Create a new class object
         """
+
 
         name: Optional[str] = str(request.POST.get("name", None))
         description: Optional[str] = str(request.POST.get("description", None))
@@ -126,8 +127,7 @@ class CreateCourse(View):
         @pre: request must not be null
         @post: rendered response
         """
-        # context["tas"] = AccountUtil.getTAs()
-        # context["instructors"] = AccountUtil.getInstructors()
+        
         context = {
             msg_type: msg,
             "tas": AccountUtil.getTAs(),

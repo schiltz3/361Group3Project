@@ -1,4 +1,5 @@
 from typing import List
+from django.contrib.auth import login
 from django.test import TestCase, Client
 from TA_Scheduler.models import Account
 from TA_Scheduler.utilities.AccountUtil import AccountUtil
@@ -15,11 +16,16 @@ class CreateCourseTest(TestCase):
     def setUp(self):
         self.amount = 15
         Group.objects.create(name="instructor")
-        Group.objects.create(name="TA")
+        Group.objects.create(name="ta")
         Group.objects.create(name="admin")
         self.client = Client()
 
         self.courses = []
+
+        self.password = "password"
+        self.admin_account = AccountUtil.getAccountByID(AccountUtil.createAdminAccount("admin", self.password))
+        self.instr_account = AccountUtil.getAccountByID(AccountUtil.createInstructorAccount("instructor", self.password))
+        self.ta_account = AccountUtil.getAccountByID(AccountUtil.createTAAccount("ta", self.password))
 
         for i in range(self.amount):
             tas = []
@@ -30,7 +36,6 @@ class CreateCourseTest(TestCase):
             instructor_id = AccountUtil.createInstructorAccount("Instructor" + str(i), "password" + str(i))
             instructor = AccountUtil.getAccountByID(instructor_id)
             self.courses.append(self.form("Course" + str(i), "Description", instructor, tas))
-
 
 
     def test_createCourse(self):
@@ -58,17 +63,20 @@ class CreateCourseTest(TestCase):
             self.assertEquals(result.instructor, course["instructor"], msg="Failed to store correct instructor in database.")
             self.assertEquals(list(result.tas.all()), course["ta"], msg="Failed to store correct TAs in database.")
 
-    
+    def test_adminCanAccess(self):
+        self.client.login(username=self.admin_account.user.username, password=self.password)
+        resp = self.client.get(self.TEMPLATE)
+        self.assertEqual("", resp.context[self.MESSAGE], msg="Admin failed to access page.")
 
+    def test_redirectInstructor(self):
+        self.client.login(username=self.instr_account.user.username, password=self.password)
+        resp = self.client.get(self.TEMPLATE)
+        self.assertRedirects(resp, "/dashboard/instructor/")
 
-        
-        
-
-
-        
-
-
-
+    def test_redirectTA(self):
+        self.client.login(username=self.ta_account.user.username, password=self.password)
+        resp = self.client.get(self.TEMPLATE)
+        self.assertRedirects(resp, "/dashboard/ta/")
 
 
     def form(self, name: str, description: str, instructor: Account, tas: List[Account]) :

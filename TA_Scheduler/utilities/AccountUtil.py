@@ -21,7 +21,7 @@ class AccountUtil:
 
         user = User.objects.create_user(username=username, password=password)
 
-        ta_group = Group.objects.get(name="TA")
+        ta_group = Group.objects.get(name="ta")
         ta_group.user_set.add(user)
 
         account = Account.objects.create(user=user)
