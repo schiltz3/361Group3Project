@@ -19,7 +19,7 @@ class AccountUtil:
         if username == "" or password == "":
             raise TypeError("Username, password, and authority cannot be empty.")
 
-        user = User.objects.create(username=username, password=password)
+        user = User.objects.create_user(username=username, password=password)
 
         ta_group = Group.objects.get(name="TA")
         ta_group.user_set.add(user)
@@ -32,7 +32,7 @@ class AccountUtil:
         if username == "" or password == "":
             raise TypeError("Username, password, and authority cannot be empty.")
 
-        user = User.objects.create(username=username, password=password)
+        user = User.objects.create_user(username=username, password=password)
 
         instructor_group = Group.objects.get(name="instructor")
         instructor_group.user_set.add(user)
@@ -45,7 +45,7 @@ class AccountUtil:
         if username == "" or password == "":
             raise TypeError("Username, password, and authority cannot be empty.")
 
-        user = User.objects.create(username=username, password=password)
+        user = User.objects.create_user(username=username, password=password)
 
         admin_group = Group.objects.get(name="admin")
         admin_group.user_set.add(user)
@@ -80,6 +80,18 @@ class AccountUtil:
         return set if set.exists() else None
 
     @staticmethod
+    def getTAs() -> Optional[Iterable[Account]]:
+        set: QuerySet = User.objects.filter(groups__name="ta")
+        result = []
+        try:
+            for user in set:
+                result.append(Account.objects.get(user=user.id))
+        except Account.DoesNotExist:
+            return None
+
+        return result if result else None
+
+    @staticmethod
     def getInstructors() -> Optional[Iterable[Account]]:
         set: QuerySet = User.objects.filter(groups__name="instructor")
         result = []
@@ -106,6 +118,9 @@ class AccountUtil:
         except Account.DoesNotExist:
             return None
 
+        except IndexError:
+            return None
+
         return None
 
     @staticmethod
@@ -115,10 +130,13 @@ class AccountUtil:
             account = Account.objects.filter(user=user.id)[0]
             return account
 
+        except IndexError:
+            return None
+
         except User.DoesNotExist:
             return None
 
         except Account.DoesNotExist:
             return None
-
-        return None
+        except IndexError:
+            return None

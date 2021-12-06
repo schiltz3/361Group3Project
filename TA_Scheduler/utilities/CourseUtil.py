@@ -1,13 +1,16 @@
-from typing import Iterable, Optional, Union
+from typing import Iterable, List, Optional, Union
 from django.contrib.auth.models import User
 from django.db.models.query import QuerySet
-from TA_Scheduler.models import Course
+from TA_Scheduler.models import Account, Course
 
 
 class CourseUtil:
     @staticmethod
     def createCourse(
-        name: str, description: str = None, instructor: User = None
+        name: str,
+        description: str = None,
+        instructor: Account = None,
+        tas: List[Account] = None,
     ) -> Union[int, TypeError]:
         """
         Creates a course and saves it in the Course database
@@ -20,6 +23,12 @@ class CourseUtil:
         course = Course.objects.create(
             name=name, description=description, instructor=instructor
         )
+
+        for ta in tas:
+            course.tas.add(ta)
+
+        print(course.tas)
+
         return course.id
 
     @staticmethod

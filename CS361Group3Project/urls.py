@@ -16,6 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+# login/homepage
+from TA_Scheduler.views.Login.loginViews import Login
+
+
 # course
 from TA_Scheduler.views.course.create import CreateCourse
 from TA_Scheduler.views.course.list import ListCourse
@@ -45,6 +49,8 @@ from TA_Scheduler.views.tester import TestHomePage
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    # login
+    path("", Login.as_view(), name="login"),
     # course
     path("course/create/", CreateCourse.as_view(), name="create-course"),
     path("course/edit/", EditCourse.as_view(), name="edit-course"),
@@ -69,5 +75,5 @@ urlpatterns = [
     path("lab/list/", ListLab.as_view(), name="list-lab"),
     path("lab/edit/", DeleteLab.as_view(), name="delete-lab"),
     path("bootstrapTest/", BootstrapTest.as_view(), name="bootstrap-test"),
-    path("", TestHomePage.as_view(), name="test-home"),
+    path("testhome/", TestHomePage.as_view(), name="test-home"),
 ]
