@@ -11,7 +11,7 @@ class NewAccountTest(TestCase):
         AccountUtil.createAdminAccount(username="user", password="pass")
         # do I have to navigate to createaccounts page or can I just start there??
         # self.client.post("/login.html", {"name": "user", "password": "pass"})
-        # self.client.post("/home.html", select button? to go to createaccounts)
+        # self.client.post("/testhome.html", select button? to go to createaccounts)
 
     def test_admin(self):
         response = self.client.post("account/create.html", {"username": "new", "password": "password",
