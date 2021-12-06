@@ -63,6 +63,14 @@ class CreateCourseTest(TestCase):
             self.assertEquals(result.instructor, course["instructor"], msg="Failed to store correct instructor in database.")
             self.assertEquals(list(result.tas.all()), course["ta"], msg="Failed to store correct TAs in database.")
 
+    def test_createBadCourse(self):
+        course = self.form(name="Course1")
+        self.client.post(
+            self.TEMPLATE, course["form"]
+        )
+        result = CourseUtil.getCourseByName(course["name"])
+        self.assertIsNone(result, msg="Stored bad course in database.")
+
     def test_adminCanAccess(self):
         self.client.login(username=self.admin_account.user.username, password=self.password)
         resp = self.client.get(self.TEMPLATE)
@@ -79,10 +87,11 @@ class CreateCourseTest(TestCase):
         self.assertRedirects(resp, "/dashboard/ta/")
 
 
-    def form(self, name: str, description: str, instructor: Account, tas: List[Account]) :
+    def form(self, name: str = "", description: str = "", instructor: Account = None, tas: List[Account] = None) :
         tas_strs = []
-        for ta in tas:
-            tas_strs.append(str(ta))
+        if tas:
+            for ta in tas:
+                tas_strs.append(str(ta))
         return {
             "name": name,
             "description": description,
