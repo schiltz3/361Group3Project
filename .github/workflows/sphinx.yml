@@ -1,0 +1,21 @@
+name: "Pull Request Docs Check"
+on:
+  - pull_request
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: ammaraskar/sphinx-action@master
+        with:
+          docs-folder: "docs/"
+
+      - name: Push changes
+        run: |
+          git config --global user.name 'John Schiltz'
+          git config --global user.email '45466247+schiltz3@users.noreply.github.com'
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          git add .
+          git commit -am "Docs built"
+          git push
