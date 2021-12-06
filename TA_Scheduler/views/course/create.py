@@ -26,6 +26,7 @@ class CreateCourse(View):
         """
         # TODO: should be pulled out to a utis class
         # if user is anonymous or not admin, redirect to correct page
+
         if request.user.is_anonymous:
             return redirect("/", {"error": "User is not authorized to create a course"})
         elif request.user.groups.filter(name="instructor").exists():
@@ -57,18 +58,19 @@ class CreateCourse(View):
         ta_accounts: List[Account] = []
 
         if name:
-            if all(x.isalpha() or x.isspace() for x in description):
-
-                for course in CourseUtil.getAllCourses():
-                    if (course.name.casefold() == name.casefold()) and (
-                        course.instructor.user.username.casefold()
-                        == instructor.casefold()
-                    ):
-                        return self.respond(
-                            request,
-                            self.WARNING,
-                            "Class already exists with this instructor.",
-                        )
+            if all(x.isalpha() or x.isnumeric() or x.isspace() for x in name):
+                courses = CourseUtil.getAllCourses()
+                if courses:
+                    for course in courses:
+                        if (course.name.casefold() == name.casefold()) and (
+                            course.instructor.user.username.casefold()
+                            == instructor.casefold()
+                        ):
+                            return self.respond(
+                                request,
+                                self.WARNING,
+                                "Class already exists with this instructor.",
+                            )
 
             else:
                 return self.respond(
@@ -80,7 +82,9 @@ class CreateCourse(View):
 
         # check description
         if description:
-            if not all(x.isalpha() or x.isspace() for x in description):
+            if not all(
+                x.isalpha() or x.isnumeric() or x.isspace() for x in description
+            ):
                 return self.respond(
                     request, self.WARNING, "Description can only contain [A-z][0-9]"
                 )
@@ -125,8 +129,7 @@ class CreateCourse(View):
         @pre: request must not be null
         @post: rendered response
         """
-        # context["tas"] = AccountUtil.getTAs()
-        # context["instructors"] = AccountUtil.getInstructors()
+
         context = {
             msg_type: msg,
             "tas": AccountUtil.getTAs(),
