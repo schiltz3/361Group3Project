@@ -9,11 +9,8 @@ class CreateAccount(View):
         return render(request, "account/create.html", {"message": " "})
 
     def post(self, request):
-        preexisting = True
         username = request.POST['username']
         if AccountUtil.getAccountByUsername(username) is None:
-            preexisting = False
-        if preexisting:
             return render(request, "account/create.html", {"message": "username '" + username + "' is already in use"})
         else:
             usertype = int(request.POST['authority'])
