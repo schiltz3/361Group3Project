@@ -9,20 +9,21 @@ from typing import Any, List, Mapping, MutableMapping, Union, Optional
 
 
 class CreateCourse(View):
-
+    """Create Course View
+    """
     TEMPLATE = "course/create.html"
     MESSAGE = "message"
     ERROR = "error"
     WARNING = "warning"
 
     def get(self, request: HttpRequest) -> Union[HttpResponse, HttpResponseRedirect]:
-        """
-        Called when the user opens the page, course/create.html
-        @param request: Request from course/create.html
-        @return: Response with "instructors"
-        @pre: User is not anonymous, instructor, or ta
-        @post: None
-        @par: Side effect: Redirects you to login or dashboard depending on your group
+        """Called when the user opens the page, course/create.html
+
+        :param request: Request from course/create.html
+        :return: Response with "instructors"
+        :pre: User is not anonymous, instructor, or ta
+        :post: None
+        :par: Side effect: Redirects you to login or dashboard depending on your group
         """
         # TODO: should be pulled out to a utis class
         # if user is anonymous or not admin, redirect to correct page
@@ -41,13 +42,13 @@ class CreateCourse(View):
         return self.respond(request, self.MESSAGE, "")
 
     def post(self, request: HttpRequest) -> Union[HttpResponse, HttpResponseRedirect]:
-        """
-        Called when the user clicks submit.
-        @param request: Request from course/create.html
-        @return: Response with "instructors", "message", "warning" and "error" or redirect
-        @pre: None
-        @post: Correct return or new class object
-        @par: Side effect: Create a new class object
+        """ Called when the user clicks submit.
+
+        :param request: Request from course/create.html
+        :return: Response with "instructors", "message", "warning" and "error" or redirect
+        :pre: None
+        :post: Correct return or new class object
+        :par: Side effect: Create a new class object
         """
 
         name: Optional[str] = str(request.POST.get("name", None))
@@ -61,8 +62,8 @@ class CreateCourse(View):
 
                 for course in CourseUtil.getAllCourses():
                     if (course.name.casefold() == name.casefold()) and (
-                        course.instructor.user.username.casefold()
-                        == instructor.casefold()
+                            course.instructor.user.username.casefold()
+                            == instructor.casefold()
                     ):
                         return self.respond(
                             request,
@@ -117,13 +118,13 @@ class CreateCourse(View):
         return self.respond(request, self.ERROR, "Class could not be created.")
 
     def respond(self, request: HttpRequest, msg_type: str, msg: str):
-        """
-        Helper method that returns a response
-        @param request: the HTTP request object to use
-        @param msg_type: the type of notification message
-        @param msg: the message to show
-        @pre: request must not be null
-        @post: rendered response
+        """ Helper method that returns a response
+
+        :param request: the HTTP request object to use
+        :param msg_type: the type of notification message
+        :param msg: the message to show
+        :pre: request must not be null
+        :post: rendered response
         """
         # context["tas"] = AccountUtil.getTAs()
         # context["instructors"] = AccountUtil.getInstructors()
