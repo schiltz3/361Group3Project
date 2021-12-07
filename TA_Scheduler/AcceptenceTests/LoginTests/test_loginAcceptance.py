@@ -9,7 +9,7 @@ class LoginTests(TestCase):
     def setUp(self):
         self.client = Client()
         Group.objects.create(name="instructor")
-        Group.objects.create(name="TA")
+        Group.objects.create(name="ta")
         Group.objects.create(name="admin")
         AccountUtil.createAdminAccount(username="admin", password="pass123")
         AccountUtil.createInstructorAccount(

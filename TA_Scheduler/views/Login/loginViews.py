@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from TA_Scheduler.utilities.AccountUtil import AccountUtil
+from django.contrib.auth import login
 
 
 class Login(View):
@@ -25,6 +26,9 @@ class Login(View):
             )
         else:
             request.session["username"] = user1.user.username
+
+            # login as the user in django
+            login(request, user1.user)
             if user1.user.groups.filter(name="admin").exists():
                 return redirect("/dashboard/admin/")
             elif user1.user.groups.filter(name="instructor").exists():
