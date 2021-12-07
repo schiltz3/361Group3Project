@@ -21,7 +21,12 @@ class CreateAccount(View):
                 authority = None
 
         # if only one of the fields is filled out and the user refreshes a site, it can send None
-        if username is None or password is None or authority is None or usertype is None:
+        if (
+            username is None
+            or password is None
+            or authority is None
+            or usertype is None
+        ):
             return render(
                 request,
                 "account/create.html",
