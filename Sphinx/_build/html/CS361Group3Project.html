@@ -42,7 +42,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-CS361Group3Project.asgi">CS361Group3Project.asgi module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-CS361Group3Project.settings">CS361Group3Project.settings module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#cs361group3project-urls-module">CS361Group3Project.urls module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-CS361Group3Project.urls">CS361Group3Project.urls module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-CS361Group3Project.wsgi">CS361Group3Project.wsgi module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-CS361Group3Project">Module contents</a></li>
 </ul>
@@ -99,8 +99,33 @@
 <p>For the full list of settings and their values, see
 <a class="reference external" href="https://docs.djangoproject.com/en/3.2/ref/settings/">https://docs.djangoproject.com/en/3.2/ref/settings/</a></p>
 </div>
-<div class="section" id="cs361group3project-urls-module">
-<h2>CS361Group3Project.urls module<a class="headerlink" href="#cs361group3project-urls-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-CS361Group3Project.urls">
+<span id="cs361group3project-urls-module"></span><h2>CS361Group3Project.urls module<a class="headerlink" href="#module-CS361Group3Project.urls" title="Permalink to this headline">¶</a></h2>
+<p>CS361Group3Project URL Configuration</p>
+<dl class="simple">
+<dt>The <cite>urlpatterns</cite> list routes URLs to views. For more information please see:</dt><dd><p><a class="reference external" href="https://docs.djangoproject.com/en/3.2/topics/http/urls/">https://docs.djangoproject.com/en/3.2/topics/http/urls/</a></p>
+</dd>
+</dl>
+<p>Examples:
+Function views</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Add an import:  from my_app import views</p></li>
+<li><p>Add a URL to urlpatterns:  path(‘’, views.home, name=’home’)</p></li>
+</ol>
+</div></blockquote>
+<dl class="simple">
+<dt>Class-based views</dt><dd><ol class="arabic simple">
+<li><p>Add an import:  from other_app.views import Home</p></li>
+<li><p>Add a URL to urlpatterns:  path(‘’, Home.as_view(), name=’home’)</p></li>
+</ol>
+</dd>
+<dt>Including another URLconf</dt><dd><ol class="arabic simple">
+<li><p>Import the include() function: from django.urls import include, path</p></li>
+<li><p>Add a URL to urlpatterns:  path(‘blog/’, include(‘blog.urls’))</p></li>
+</ol>
+</dd>
+</dl>
 </div>
 <div class="section" id="module-CS361Group3Project.wsgi">
 <span id="cs361group3project-wsgi-module"></span><h2>CS361Group3Project.wsgi module<a class="headerlink" href="#module-CS361Group3Project.wsgi" title="Permalink to this headline">¶</a></h2>
