@@ -14,13 +14,14 @@ class CreateAccount(View):
 
         # Not correctly checking authority for null. Can't convert NoneType to int
         usertype = request.POST.get("authority")
-        if usertype is None:
-            authority = int(usertype)
-        else:
-            authority = None
+        if usertype is not None:
+            try:
+                authority = int(usertype)
+            except ValueError:
+                authority = None
 
         # if only one of the fields is filled out and the user refreshes a site, it can send None
-        if username is None or password is None or authority is None:
+        if username is None or password is None or authority is None or usertype is None:
             return render(
                 request,
                 "account/create.html",
