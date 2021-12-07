@@ -13,7 +13,8 @@ class CreateAccount(View):
         password = request.POST.get("password")
 
         # Not correctly checking authority for null. Can't convert NoneType to int
-        if usertype := request.POST.get("authority"):
+        usertype = request.POST.get("authority")
+        if usertype is None:
             authority = int(usertype)
         else:
             authority = None
