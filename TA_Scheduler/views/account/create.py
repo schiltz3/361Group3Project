@@ -9,37 +9,55 @@ class CreateAccount(View):
         return render(request, "account/create.html", {"message": " "})
 
     def post(self, request):
-        username = request.POST["username"]
-        if AccountUtil.getAccountByUsername(username) is None:
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+
+        # Not correctly checking authority for null. Can't convert NoneType to int
+        if usertype := request.POST.get("authority"):
+            authority = int(usertype)
+        else:
+            authority = None
+
+        # if only one of the fields is filled out and the user refreshes a site, it can send None
+        if username is None or password is None or authority is None:
+            return render(
+                request,
+                "account/create.html",
+                {"message": "Please fill out all fields"},
+            )
+        # getAcountByUsername return None if user does not exist
+        if AccountUtil.getAccountByUsername(username) is not None:
             return render(
                 request,
                 "account/create.html",
                 {"message": "username '" + username + "' is already in use"},
             )
         else:
-            usertype = int(request.POST["authority"])
-            if usertype == 1:
-                AccountUtil.createAdminAccount(username, request.POST["password"])
+            if authority == 1:
+                AccountUtil.createAdminAccount(username, password)
                 return render(
                     request,
                     "account/create.html",
-                    {"message": "Admin account '" + username + "' created"},
+                    # "Admin" did not match the test"
+                    {"message": "Administrator account '" + username + "' created"},
                 )
-            elif usertype == 2:
-                AccountUtil.createInstructorAccount(username, request.POST["password"])
+            elif authority == 2:
+                AccountUtil.createInstructorAccount(username, password)
                 return render(
                     request,
                     "account/create.html",
                     {"message": "Instructor account '" + username + "' created"},
                 )
-            elif usertype == 3:
-                AccountUtil.createTAAccount(username, request.POST["password"])
+            elif authority == 3:
+                AccountUtil.createTAAccount(username, password)
                 return render(
                     request,
                     "account/create.html",
                     {"message": "TA account '" + username + "' created"},
                 )
-            else:
+            elif authority < 1 or authority > 3:
                 return render(
-                    request, "account/create.html", {"message": "enter user type"}
+                    # Since we already check for null, now check if in correct range
+                    request, "account/create.html", {"message": "user type does not exist"}
                 )
+        # Should put some default response here like an error message or a redirect to login or home with an error message
