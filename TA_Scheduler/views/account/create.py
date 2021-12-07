@@ -58,6 +58,8 @@ class CreateAccount(View):
             elif authority < 1 or authority > 3:
                 return render(
                     # Since we already check for null, now check if in correct range
-                    request, "account/create.html", {"message": "user type does not exist"}
+                    request,
+                    "account/create.html",
+                    {"message": "user type does not exist"},
                 )
         # Should put some default response here like an error message or a redirect to login or home with an error message

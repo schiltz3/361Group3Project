@@ -78,7 +78,7 @@ class NewAccountTest(TestCase):
             self.client.post(
                 # account/create.html is the file not the uri you are trying to post to
                 "/account/create/",
-                {"username": "new", "password": "", "authority": "1"}
+                {"username": "new", "password": "", "authority": "1"},
             )
 
     def test_usernameTaken(self):
