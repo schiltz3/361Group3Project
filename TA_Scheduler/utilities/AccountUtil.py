@@ -142,7 +142,9 @@ class AccountUtil:
         except IndexError:
             return None
 
-    def updateAccountInfo(id: int, first: str, last: str, email: str, address: str, phone: int):
+    def updateAccountInfo(
+        id: int, first: str, last: str, email: str, address: str, phone: int
+    ):
         if account := AccountUtil.getAccountByID(id):
             if first is not None:
                 account.user.first_name = first
