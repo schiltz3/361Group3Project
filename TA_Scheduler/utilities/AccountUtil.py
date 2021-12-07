@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate
 
 from TA_Scheduler.models import Account
 
+
 # Note to teammate:
 # This is a utility class to access the Account database.
 # Use the methods below to get accounts:
@@ -21,7 +22,7 @@ class AccountUtil:
 
         user = User.objects.create_user(username=username, password=password)
 
-        ta_group = Group.objects.get(name="TA")
+        ta_group = Group.objects.get(name="ta")
         ta_group.user_set.add(user)
 
         account = Account.objects.create(user=user)
@@ -62,9 +63,34 @@ class AccountUtil:
             return None
 
     @staticmethod
+    def getAccountByUsername(username: str) -> Optional[Account]:
+        try:
+            user = User.objects.get(username=username)
+            account = Account.objects.get(user=user)
+            return account
+
+        except User.DoesNotExist:
+            return None
+
+        except Account.DoesNotExist:
+            return None
+
+    @staticmethod
     def getAllAccounts() -> Optional[Iterable[Account]]:
         set: QuerySet = Account.objects.all()
         return set if set.exists() else None
+
+    @staticmethod
+    def getTAs() -> Optional[Iterable[Account]]:
+        set: QuerySet = User.objects.filter(groups__name="ta")
+        result = []
+        try:
+            for user in set:
+                result.append(Account.objects.get(user=user.id))
+        except Account.DoesNotExist:
+            return None
+
+        return result if result else None
 
     @staticmethod
     def getInstructors() -> Optional[Iterable[Account]]:
@@ -104,6 +130,9 @@ class AccountUtil:
             user = User.objects.filter(username=username)[0]
             account = Account.objects.filter(user=user.id)[0]
             return account
+
+        except IndexError:
+            return None
 
         except User.DoesNotExist:
             return None
