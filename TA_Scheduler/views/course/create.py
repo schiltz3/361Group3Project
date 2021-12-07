@@ -64,8 +64,8 @@ class CreateCourse(View):
                 if courses:
                     for course in courses:
                         if (course.name.casefold() == name.casefold()) and (
-                            course.instructor.user.username.casefold()
-                            == instructor.casefold()
+                                course.instructor.user.username.casefold()
+                                == instructor.casefold()
                         ):
                             return self.respond(
                                 request,
@@ -84,7 +84,7 @@ class CreateCourse(View):
         # check description
         if description:
             if not all(
-                x.isalpha() or x.isnumeric() or x.isspace() for x in description
+                    x.isalpha() or x.isnumeric() or x.isspace() for x in description
             ):
                 return self.respond(
                     request, self.WARNING, "Description can only contain [A-z][0-9]"
@@ -129,13 +129,6 @@ class CreateCourse(View):
         :param msg: the message to show
         :pre: request must not be null
         :post: rendered response
-        """
-        Helper method that returns a response
-        @param request: the HTTP request object to use
-        @param msg_type: the type of notification message
-        @param msg: the message to show
-        @pre: request must not be null
-        @post: rendered response
         """
 
         context = {
