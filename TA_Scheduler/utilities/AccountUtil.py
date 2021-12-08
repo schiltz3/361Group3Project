@@ -143,7 +143,8 @@ class AccountUtil:
             return None
 
     def updateAccountInfo(id: int, first: str, last: str, email: str, address: str, phone: int):
-        if account := AccountUtil.getAccountByID(id):
+        if AccountUtil.getAccountByID(id) is not None:
+            account = AccountUtil.getAccountByID(id)
             if first is not None:
                 account.user.first_name = first
             if last is not None:
