@@ -142,7 +142,10 @@ class AccountUtil:
         except IndexError:
             return None
 
-    def updateAccountInfo(id: int, first: str, last: str, email: str, address: str, phone: int):
+    def updateAccountInfo(id: int = None, first: str = None, last: str = None, email: str = None,
+                          address: str = None, phone: int = None):
+        if id is None:
+            raise TypeError("must enter an id number")
         if AccountUtil.getAccountByID(id) is not None:
             account = AccountUtil.getAccountByID(id)
             if first is not None:
