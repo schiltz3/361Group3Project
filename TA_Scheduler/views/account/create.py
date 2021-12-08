@@ -52,8 +52,14 @@ class CreateAccount(View):
         else:
             if authority == 1:
                 id = AccountUtil.createAdminAccount(username, password)
-                AccountUtil.updateAccountInfo(id, firstname, lastname, email, request.POST.get("address"),
-                                              request.POST.get("phone"))
+                AccountUtil.updateAccountInfo(
+                    id,
+                    firstname,
+                    lastname,
+                    email,
+                    request.POST.get("address"),
+                    request.POST.get("phone"),
+                )
                 return render(
                     request,
                     "account/create.html",
@@ -61,8 +67,14 @@ class CreateAccount(View):
                 )
             elif authority == 2:
                 id = AccountUtil.createInstructorAccount(username, password)
-                AccountUtil.updateAccountInfo(id, firstname, lastname, email, request.POST.get("address"),
-                                              request.POST.get("phone"))
+                AccountUtil.updateAccountInfo(
+                    id,
+                    firstname,
+                    lastname,
+                    email,
+                    request.POST.get("address"),
+                    request.POST.get("phone"),
+                )
                 return render(
                     request,
                     "account/create.html",
@@ -70,8 +82,14 @@ class CreateAccount(View):
                 )
             elif authority == 3:
                 id = AccountUtil.createTAAccount(username, password)
-                AccountUtil.updateAccountInfo(id, firstname, lastname, email, request.POST.get("address"),
-                                              request.POST.get("phone"))
+                AccountUtil.updateAccountInfo(
+                    id,
+                    firstname,
+                    lastname,
+                    email,
+                    request.POST.get("address"),
+                    request.POST.get("phone"),
+                )
                 return render(
                     request,
                     "account/create.html",
@@ -80,10 +98,13 @@ class CreateAccount(View):
             elif authority < 1 or authority > 3:
                 # Since we already check for null, now check if in correct range
                 return render(
-
                     request,
                     "account/create.html",
                     {"message": "user type does not exist"},
                 )
         # default error response
-        return render(request, "account/create.html", {"message": "error occurred, no account created"})
+        return render(
+            request,
+            "account/create.html",
+            {"message": "error occurred, no account created"},
+        )

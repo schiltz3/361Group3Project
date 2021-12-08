@@ -95,7 +95,11 @@ class NewAccountTest(TestCase):
                 "email": "fake@test.com",
             },
         )
-        self.assertEqual("Please fill out all required fields", response.context.get("message"), "no username")
+        self.assertEqual(
+            "Please fill out all required fields",
+            response.context.get("message"),
+            "no username",
+        )
 
     def test_noPassword(self):
         response = self.client.post(
@@ -109,7 +113,11 @@ class NewAccountTest(TestCase):
                 "email": "fake@test.com",
             },
         )
-        self.assertEqual("Please fill out all required fields", response.context.get("message"), "no password")
+        self.assertEqual(
+            "Please fill out all required fields",
+            response.context.get("message"),
+            "no password",
+        )
 
     def test_usernameTaken(self):
         response = self.client.post(
@@ -159,7 +167,11 @@ class NewAccountTest(TestCase):
                 "email": "fake@test.com",
             },
         )
-        self.assertEqual("Please fill out all required fields", response.context.get("message"), "no authority")
+        self.assertEqual(
+            "Please fill out all required fields",
+            response.context.get("message"),
+            "no authority",
+        )
 
     def test_outOfRangeAuthority(self):
         response = self.client.post(
@@ -171,10 +183,13 @@ class NewAccountTest(TestCase):
                 "firstname": "First",
                 "lastname": "Last",
                 "email": "fake@test.com",
-            }
-            ,
+            },
         )
-        self.assertEqual("user type does not exist", response.context.get("message"), "out of range authority")
+        self.assertEqual(
+            "user type does not exist",
+            response.context.get("message"),
+            "out of range authority",
+        )
 
     def test_noFirstName(self):
         response = self.client.post(
@@ -188,7 +203,11 @@ class NewAccountTest(TestCase):
                 "email": "fake@test.com",
             },
         )
-        self.assertEqual("Please fill out all required fields", response.context.get("message"), "no first name")
+        self.assertEqual(
+            "Please fill out all required fields",
+            response.context.get("message"),
+            "no first name",
+        )
 
     def test_noLastName(self):
         response = self.client.post(
@@ -202,7 +221,11 @@ class NewAccountTest(TestCase):
                 "email": "fake@test.com",
             },
         )
-        self.assertEqual("Please fill out all required fields", response.context.get("message"), "no last name")
+        self.assertEqual(
+            "Please fill out all required fields",
+            response.context.get("message"),
+            "no last name",
+        )
 
     def test_noEmail(self):
         response = self.client.post(
@@ -216,7 +239,11 @@ class NewAccountTest(TestCase):
                 "email": "",
             },
         )
-        self.assertEqual("Please fill out all required fields", response.context.get("message"), "no email")
+        self.assertEqual(
+            "Please fill out all required fields",
+            response.context.get("message"),
+            "no email",
+        )
 
     def test_withAddress(self):
         response = self.client.post(
@@ -228,7 +255,7 @@ class NewAccountTest(TestCase):
                 "firstname": "First",
                 "lastname": "Last",
                 "email": "fake@test.com",
-                "address": "123 Testing Way"
+                "address": "123 Testing Way",
             },
         )
         self.assertEqual(
@@ -247,7 +274,7 @@ class NewAccountTest(TestCase):
                 "firstname": "First",
                 "lastname": "Last",
                 "email": "fake@test.com",
-                "phone": "9876543210"
+                "phone": "9876543210",
             },
         )
         self.assertEqual(
@@ -267,7 +294,7 @@ class NewAccountTest(TestCase):
                 "lastname": "Last",
                 "email": "fake@test.com",
                 "address": "123 Testing Way",
-                "phone": "9876543210"
+                "phone": "9876543210",
             },
         )
         self.assertEqual(
