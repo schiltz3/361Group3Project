@@ -143,9 +143,10 @@ class AccountUtil:
             return None
 
     def updateAccountInfo(id: int = None, first: str = None, last: str = None, email: str = None,
-                          address: str = None, phone: int = None):
+                          address: str = None, phone: int = None) -> [bool]:
         if id is None:
             raise TypeError("must enter an id number")
+
         if AccountUtil.getAccountByID(id) is not None:
             account = AccountUtil.getAccountByID(id)
             if first is not None:
@@ -159,3 +160,6 @@ class AccountUtil:
             if phone is not None:
                 account.phone = phone
             account.save()
+            return True
+        else:
+            return False
