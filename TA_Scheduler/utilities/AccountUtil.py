@@ -152,7 +152,7 @@ class AccountUtil:
     ):
         if id is None:
             raise TypeError("must enter an id number")
-        
+
         if AccountUtil.getAccountByID(id) is not None:
             account = AccountUtil.getAccountByID(id)
             if first is not None:
