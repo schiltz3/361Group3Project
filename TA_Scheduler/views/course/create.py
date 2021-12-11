@@ -9,7 +9,6 @@ from typing import Any, List, Mapping, MutableMapping, Union, Optional
 
 
 class CreateCourse(View):
-
     TEMPLATE = "course/create.html"
     MESSAGE = "message"
     ERROR = "error"
@@ -51,20 +50,24 @@ class CreateCourse(View):
         @par: Side effect: Create a new class object
         """
 
-        name: Optional[str] = str(request.POST.get("name", None))
-        description: Optional[str] = str(request.POST.get("description", None))
-        instructor: Optional[str] = str(request.POST.get("instructor", None))
+        name: Optional[str] = str(request.POST.get("name"))
+        description: Optional[str] = str(request.POST.get("description"))
+        instructor: Optional[str] = str(request.POST.get("instructor"))
         tas: List[str] = request.POST.getlist("ta")
         ta_accounts: List[Account] = []
 
-        if name:
+        # Convert String "None" to NoneType
+        if instructor == "None":
+            instructor = None
+
+        if name and instructor:
             if all(x.isalpha() or x.isnumeric() or x.isspace() for x in name):
                 courses = CourseUtil.getAllCourses()
                 if courses:
                     for course in courses:
                         if (course.name.casefold() == name.casefold()) and (
-                            course.instructor.user.username.casefold()
-                            == instructor.casefold()
+                                course.instructor.user.username.casefold()
+                                == instructor.casefold()
                         ):
                             return self.respond(
                                 request,
@@ -77,13 +80,10 @@ class CreateCourse(View):
                     request, self.WARNING, "Name can only contain [A-z][0-9]"
                 )
 
-        else:
-            return self.respond(request, self.WARNING, "Name must not be blank.")
-
         # check description
         if description:
             if not all(
-                x.isalpha() or x.isnumeric() or x.isspace() for x in description
+                    x.isalpha() or x.isnumeric() or x.isspace() for x in description
             ):
                 return self.respond(
                     request, self.WARNING, "Description can only contain [A-z][0-9]"
@@ -100,7 +100,7 @@ class CreateCourse(View):
                     request, self.ERROR, "Instructor could not be found."
                 )
         else:
-            return self.respond(request, self.WARNING, "Instructor must not be blank.")
+            instructor_account = None
 
         # check tas
         if tas:
@@ -114,7 +114,7 @@ class CreateCourse(View):
                     ta_accounts.append(ta_account)
 
         # adds course to database if instructor, name and description are not none
-        if instructor_account and name and description:
+        if name and description:
             CourseUtil.createCourse(name, description, instructor_account, ta_accounts)
             return self.respond(request, self.MESSAGE, "Course created.")
 
