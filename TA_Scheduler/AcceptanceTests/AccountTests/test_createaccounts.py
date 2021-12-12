@@ -303,6 +303,7 @@ class NewAccountTest(TestCase):
             "confirmation message not given",
         )
 
+    ''' these last three involve making sure the html works - how to test? '''
     def test_invalidEmail(self):
         pass
 
