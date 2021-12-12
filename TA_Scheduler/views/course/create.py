@@ -5,7 +5,10 @@ from django.views import View
 from django.shortcuts import render, redirect, reverse
 from TA_Scheduler.utilities.AccountUtil import AccountUtil
 from TA_Scheduler.utilities.CourseUtil import CourseUtil
-from typing import Any, List, Mapping, MutableMapping, Union, Optional
+from TA_Scheduler.utilities.RedirectUtil import RedirectUtil
+from typing import List, Union, Optional
+
+from TA_Scheduler.utilities.RedirectUtil import RedirectUtil
 
 
 class CreateCourse(View):
@@ -25,22 +28,15 @@ class CreateCourse(View):
         :post: None
         :par: Side effect: Redirects you to login or dashboard depending on your group
         """
-        # TODO: should be pulled out to a utis class
-        # if user is anonymous or not admin, redirect to correct page
-
-        if request.user.is_anonymous:
-            return redirect("/", {"error": "User is not authorized to create a course"})
-        elif request.user.groups.filter(name="instructor").exists():
-            return redirect(
-                "/dashboard/instructor/",
-                {"error": "Instructors are not authorized to create courses"},
-            )
-        elif request.user.groups.filter(name="ta").exists():
-            return redirect(
-                "/dashboard/ta/", {"error": "TAs are not authorized to create courses"}
-            )
-
-        return self.respond(request, self.MESSAGE, "")
+        Called when the user opens the page, course/create.html
+        @param request: Request from course/create.html
+        @return: Response with "instructors"
+        @pre: User is not anonymous, instructor, or ta
+        @post: None
+        """
+        return RedirectUtil.admin(
+            request, "create courses", self.respond(request, self.MESSAGE, "")
+        )
 
     def post(self, request: HttpRequest) -> Union[HttpResponse, HttpResponseRedirect]:
         """ Called when the user clicks submit.
