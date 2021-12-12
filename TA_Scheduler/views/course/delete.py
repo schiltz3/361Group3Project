@@ -6,8 +6,6 @@ from TA_Scheduler.utilities.RedirectUtil import RedirectUtil
 
 
 class DeleteCourse(View):
-    """Delete Course View
-    """
     TEMPLATE = "course/delete.html"
     MESSAGE = "message"
     ERROR = "error"
