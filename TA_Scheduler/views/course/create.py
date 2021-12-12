@@ -28,12 +28,6 @@ class CreateCourse(View):
         :post: None
         :par: Side effect: Redirects you to login or dashboard depending on your group
         """
-        Called when the user opens the page, course/create.html
-        @param request: Request from course/create.html
-        @return: Response with "instructors"
-        @pre: User is not anonymous, instructor, or ta
-        @post: None
-        """
         return RedirectUtil.admin(
             request, "create courses", self.respond(request, self.MESSAGE, "")
         )
