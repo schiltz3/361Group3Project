@@ -26,14 +26,13 @@ class CreateCourse(View):
         :return: Response with "instructors"
         :pre: User is not anonymous, instructor, or ta
         :post: None
-        :par: Side effect: Redirects you to login or dashboard depending on your group
         """
         return RedirectUtil.admin(
             request, "create courses", self.respond(request, self.MESSAGE, "")
         )
 
     def post(self, request: HttpRequest) -> Union[HttpResponse, HttpResponseRedirect]:
-        """ Called when the user clicks submit.
+        """Called when the user clicks submit.
 
         :param request: Request from course/create.html
         :return: Response with "instructors", "message", "warning" and "error" or redirect
@@ -112,7 +111,7 @@ class CreateCourse(View):
         return self.respond(request, self.ERROR, "Class could not be created.")
 
     def respond(self, request: HttpRequest, msg_type: str, msg: str):
-        """ Helper method that returns a response
+        """Helper method that returns a response.
 
         :param request: the HTTP request object to use
         :param msg_type: the type of notification message
