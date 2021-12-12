@@ -1,5 +1,41 @@
-{% extends "base.html" %}
+{% extends 'bar_base.html' %}
 
-{% block content %}
-    <h1> Create account page works! </h1>
-{% endblock content %}
+{% comment %}
+Create account
+
+Context:
+message
+
+username
+password
+authority
+firstname
+lastname
+email
+address
+phone
+{% endcomment %}
+
+{% block application_pane %}
+    <h1>Create New User Account</h1>
+    <form action="/account/create/" method="post">
+        {% csrf_token %}
+        <table>
+            <tr><td>Username: </td><td><input type="text" name="username" required></td></tr>
+            <tr><td>Password: </td><td><input type="password" name="password" required></td></tr>
+            <tr><td>User Type: </td><td><select name="authority">
+                <option value="1">Administrator</option>
+                <option value="2">Instructor</option>
+                <option value="3">TA</option>
+            </select></td></tr>
+            <tr><td>Name: </td><td><input type="text" name="firstname" required></td><td><input
+                    type="text" name="lastname" required></td></td></tr>
+            <tr><td>Email: </td><td><input type="email" name="email" required></td></tr>
+            <tr><td>Address: </td><td><input type="text" name="address"></td></tr>
+            <tr><td>Phone Number: </td><td><input type="text" name="phone" pattern="[0-9]{10}"></td></tr>
+            <!-- ^unsure if regex is right^ -->
+        </table>
+        <input type="submit">
+    </form>
+    {{ message }}
+{% endblock application_pane %}

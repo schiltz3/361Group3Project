@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate
 
 from TA_Scheduler.models import Account
 
+
 # Note to teammate:
 # This is a utility class to access the Account database.
 # Use the methods below to get accounts:
@@ -21,7 +22,7 @@ class AccountUtil:
 
         user = User.objects.create_user(username=username, password=password)
 
-        ta_group = Group.objects.get(name="TA")
+        ta_group = Group.objects.get(name="ta")
         ta_group.user_set.add(user)
 
         account = Account.objects.create(user=user)
@@ -58,6 +59,19 @@ class AccountUtil:
         try:
             account = Account.objects.get(id=id)
             return account
+        except Account.DoesNotExist:
+            return None
+
+    @staticmethod
+    def getAccountByUsername(username: str) -> Optional[Account]:
+        try:
+            user = User.objects.get(username=username)
+            account = Account.objects.get(user=user)
+            return account
+
+        except User.DoesNotExist:
+            return None
+
         except Account.DoesNotExist:
             return None
 
@@ -127,3 +141,31 @@ class AccountUtil:
             return None
         except IndexError:
             return None
+
+    def updateAccountInfo(
+        id: int = None,
+        first: str = None,
+        last: str = None,
+        email: str = None,
+        address: str = None,
+        phone: int = None,
+    ):
+        if id is None:
+            raise TypeError("must enter an id number")
+
+        if AccountUtil.getAccountByID(id) is not None:
+            account = AccountUtil.getAccountByID(id)
+            if first is not None:
+                account.user.first_name = first
+            if last is not None:
+                account.user.last_name = last
+            if email is not None:
+                account.user.email = email
+            if address is not None:
+                account.address = address
+            if phone is not None:
+                account.phone = phone
+            account.save()
+            return True
+        else:
+            return False
