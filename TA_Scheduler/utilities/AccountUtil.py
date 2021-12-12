@@ -8,14 +8,14 @@ from TA_Scheduler.models import Account
 class AccountUtil:
     @staticmethod
     def createTAAccount(username: str, password: str) -> Union[int, TypeError]:
-        """
-        Create an account in the TA group.
-        @param username: The username of the account to create
-        @param password: The password of the account to create
-        @return: ID of the account if it was successfully created,
+        """Create an account in the TA group.
+
+        :param username: The username of the account to create
+        :param password: The password of the account to create
+        :return: ID of the account if it was successfully created,
             TypeError if username or password are blank
-        @pre: Username and password must not be blank
-        @post: None
+        :pre: Username and password must not be blank
+        :post: None
         """
         if username == "" or password == "":
             raise TypeError("Username, password, and authority cannot be empty.")
@@ -30,14 +30,14 @@ class AccountUtil:
 
     @staticmethod
     def createInstructorAccount(username: str, password: str) -> Union[int, TypeError]:
-        """
-        Create an account in the Instructor group.
-        @param username: The username of the account to create
-        @param password: The password of the account to create
-        @return: ID of the account if it was successfully created,
+        """Create an account in the Instructor group.
+
+        :param username: The username of the account to create
+        :param password: The password of the account to create
+        :return: ID of the account if it was successfully created,
             TypeError if username or password are blank
-        @pre: Username and password must not be blank
-        @post: None
+        :pre: Username and password must not be blank
+        :post: None
         """
         if username == "" or password == "":
             raise TypeError("Username, password, and authority cannot be empty.")
@@ -52,14 +52,14 @@ class AccountUtil:
 
     @staticmethod
     def createAdminAccount(username: str, password: str) -> Union[int, TypeError]:
-        """
-        Create an account in the Admin group.
-        @param username: The username of the account to create
-        @param password: The password of the account to create
-        @return: ID of the account if it was successfully created,
+        """Create an account in the Admin group.
+
+        :param username: The username of the account to create
+        :param password: The password of the account to create
+        :return: ID of the account if it was successfully created,
             TypeError if username or password are blank
-        @pre: Username and password must not be blank
-        @post: None
+        :pre: Username and password must not be blank
+        :post: None
         """
         if username == "" or password == "":
             raise TypeError("Username, password, and authority cannot be empty.")
@@ -74,14 +74,13 @@ class AccountUtil:
 
     @staticmethod
     def getAccountByID(id: int) -> Optional[Account]:
-        """
-        Looks in the Account database for an account that matches
-        the argument ID.
-        @param id: The id to look for in the Account database
-        @return: If successful, an account with an ID that matches the 
+        """Looks in the Account database for an account that matches the argument ID.
+
+        :param id: The id to look for in the Account database
+        :return: If successful, an account with an ID that matches the 
             argument, None otherwise
-        @pre: None
-        @post: None
+        :pre: None
+        :post: None
         """
         try:
             account = Account.objects.get(id=id)
@@ -91,14 +90,13 @@ class AccountUtil:
 
     @staticmethod
     def getAccountByUsername(username: str) -> Optional[Account]:
-        """
-        Looks in the Account database for an account that matches
-        the argument username.
-        @param username: The username to look for in the Account database
-        @return: If successful, an account with a username that matches the 
+        """Looks in the Account database for an account that matches the argument username.
+
+        :param username: The username to look for in the Account database
+        :return: If successful, an account with a username that matches the 
             argument, None otherwise
-        @pre: None
-        @post: None
+        :pre: None
+        :post: None
         """
         try:
             user = User.objects.filter(username=username)[0]
@@ -118,26 +116,23 @@ class AccountUtil:
 
     @staticmethod
     def getAllAccounts() -> Optional[Iterable[Account]]:
-        """
-        Returns all of the accounts that are stored in the Account
-        database.
-        @return: a list of all existing accounts, or 
+        """Returns all of the accounts that are stored in the Account database.
+        :return: a list of all existing accounts, or 
             None if there are none
-        @pre: None
-        @post: None    
+        :pre: None
+        :post: None    
         """
         set: QuerySet = Account.objects.all()
         return set if set.exists() else None
 
     @staticmethod
     def getTAs() -> Optional[Iterable[Account]]:
-        """
-        Returns all of the accounts in the TA group 
-        that are stored in the Account database.
-        @return: a list of all existing TA accounts, or None if
+        """Returns all of the accounts in the TA group that are stored in the Account database.
+
+        :return: a list of all existing TA accounts, or None if
             there are none.
-        @pre: None
-        @post: None    
+        :pre: None
+        :post: None    
         """
         set: QuerySet = User.objects.filter(groups__name="ta")
         result = []
@@ -151,13 +146,12 @@ class AccountUtil:
 
     @staticmethod
     def getInstructors() -> Optional[Iterable[Account]]:
-        """
-        Returns all of the accounts in the Instructor group 
-        that are stored in the Account database.
-        @return: a list of all existing Instructor accounts, or None if
+        """Returns all of the accounts in the Instructor group that are stored in the Account database.
+
+        :return: a list of all existing Instructor accounts, or None if
             there are none.
-        @pre: None
-        @post: None    
+        :pre: None
+        :post: None    
         """
         set: QuerySet = User.objects.filter(groups__name="instructor")
         result = []
@@ -172,11 +166,11 @@ class AccountUtil:
 
     @staticmethod
     def getAccountByCredentials(username: str, password: str) -> Optional[Account]:
-        """
-        Returns an account that matches the argument credentials.
-        @param username: the username to find in the Account database
-        @param password: the password to find in the Account database
-        @return: if found, and account with a username and password
+        """Returns an account that matches the argument credentials.
+
+        :param username: the username to find in the Account database
+        :param password: the password to find in the Account database
+        :return: if found, and account with a username and password
             that match the arguments, None otherwise
         """
         try:
