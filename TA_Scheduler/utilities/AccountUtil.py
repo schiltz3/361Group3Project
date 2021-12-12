@@ -129,6 +129,19 @@ class AccountUtil:
         except IndexError:
             return None
 
+    """ Used to change information of a preexisting account
+
+    :param id: id of account being edited
+    :param first: what the first name should be changed to 
+    :param last: what the last name should be changed to
+    :param email: what the email should be changed to
+    :param address: what the address should be changed to
+    :param phone: what the phone number should be changed to
+    :return bool: whether account was successfully found and edited
+    :pre: None
+    :post: account, if it exists, is edited
+    """
+
     def updateAccountInfo(
         id: int = None,
         first: str = None,

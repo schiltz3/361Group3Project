@@ -5,8 +5,25 @@ from TA_Scheduler.utilities.AccountUtil import AccountUtil
 
 
 class CreateAccount(View):
+
+    """ Called when the user opens the Create Account page.
+
+    :param request: request from account/create.html
+    :return: rendering of account/create.html with blank form
+    :pre: User is not anonymous, instructor, or ta
+    :post: None
+    """
+
     def get(self, request):
         return render(request, "account/create.html", {"message": " "})
+
+    """ Called when the user submits the form on the Create Accounts page.
+
+    :param request: request from account/create.html
+    :return: rendering of account/create.html with message
+    :pre: User is not anonymous, instructor, or ta
+    :post: None
+    """
 
     def post(self, request):
 
@@ -42,7 +59,7 @@ class CreateAccount(View):
                 "account/create.html",
                 {"message": "Please fill out all required fields"},
             )
-        # getAccountByUsername return None if user does not exist
+        # getAccountByUsername returns None if user does not exist
         if AccountUtil.getAccountByUsername(username) is not None:
             return render(
                 request,
