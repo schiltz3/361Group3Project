@@ -11,9 +11,6 @@ class NewAccountTest(TestCase):
         Group.objects.create(name="ta")
         Group.objects.create(name="admin")
         AccountUtil.createAdminAccount(username="user", password="pass")
-        # do I have to navigate to createaccounts page or can I just start there??
-        # self.client.post("/login.html", {"name": "user", "password": "pass"})
-        # self.client.post("/testhome.html", select button? to go to createaccounts)
 
     def test_admin(self):
         response = self.client.post(
