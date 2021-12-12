@@ -29,8 +29,7 @@ class DeleteCourse(View):
         )
 
     def post(self, request):
-        """
-        Called when the user clicks the action to delete selected courses.
+        """Called when the user clicks the action to delete selected courses.
         @param request: Request from course/delete.html
         @return: Response with remaining courses, and a message
             to inform about success or an error
