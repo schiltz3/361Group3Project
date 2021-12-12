@@ -55,7 +55,7 @@ urlpatterns = [
     path("course/create/", CreateCourse.as_view(), name="create-course"),
     path("course/edit/", EditCourse.as_view(), name="edit-course"),
     path("course/list/", ListCourse.as_view(), name="list-course"),
-    path("course/edit/", DeleteCourse.as_view(), name="delete-course"),
+    path("course/delete/", DeleteCourse.as_view(), name="delete-course"),
     # account
     path("account/create/", CreateAccount.as_view(), name="create-account"),
     path("account/edit/", EditAccount.as_view(), name="edit-account"),

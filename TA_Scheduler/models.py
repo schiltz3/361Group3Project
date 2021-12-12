@@ -17,7 +17,8 @@ class Account(models.Model):
     account.user.password --> password
     account.user.first_name --> first name of user
     account.user.last_name --> last name of user
-    account.authority --> authority of user (currently 1,2,3)
+    account.address --> home address
+    account.phone --> phone number
     """
 
     # unique database primary key
@@ -25,6 +26,9 @@ class Account(models.Model):
 
     # the one-to-one mapping with the built-in User
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    address = models.CharField(max_length=50, null=True, blank=True)
+    phone = models.PositiveBigIntegerField(null=True, blank=True)
 
     def __str__(self):
         return self.user.username
