@@ -78,7 +78,7 @@ class AccountUtil:
         """Looks in the Account database for an account that matches the argument ID.
 
         :param id: The id to look for in the Account database
-        :return: If successful, an account with an ID that matches the 
+        :return: If successful, an account with an ID that matches the
             argument, None otherwise
         :pre: None
         :post: None
@@ -94,7 +94,7 @@ class AccountUtil:
         """Looks in the Account database for an account that matches the argument username.
 
         :param username: The username to look for in the Account database
-        :return: If successful, an account with a username that matches the 
+        :return: If successful, an account with a username that matches the
             argument, None otherwise
         :pre: None
         :post: None
@@ -118,10 +118,10 @@ class AccountUtil:
     @staticmethod
     def getAllAccounts() -> Optional[Iterable[Account]]:
         """Returns all of the accounts that are stored in the Account database.
-        :return: a list of all existing accounts, or 
+        :return: a list of all existing accounts, or
             None if there are none
         :pre: None
-        :post: None    
+        :post: None
         """
         set: QuerySet = Account.objects.all()
         return set if set.exists() else None
@@ -133,7 +133,7 @@ class AccountUtil:
         :return: a list of all existing TA accounts, or None if
             there are none.
         :pre: None
-        :post: None    
+        :post: None
         """
         set: QuerySet = User.objects.filter(groups__name="ta")
         result = []
@@ -152,7 +152,7 @@ class AccountUtil:
         :return: a list of all existing Instructor accounts, or None if
             there are none.
         :pre: None
-        :post: None    
+        :post: None
         """
         set: QuerySet = User.objects.filter(groups__name="instructor")
         result = []

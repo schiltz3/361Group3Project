@@ -30,7 +30,7 @@ class DeleteCourse(View):
         """Called when the user clicks the action to delete selected courses.
 
         :param request: Request from course/delete.html
-        :return: Response with remaining courses, and a message 
+        :return: Response with remaining courses, and a message
             to inform about success or an error
         :pre: None
         :post: Correct return or new class object
