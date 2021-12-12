@@ -25,7 +25,6 @@ class CreateCourse(View):
         @return: Response with "instructors"
         @pre: User is not anonymous, instructor, or ta
         @post: None
-        @par: Side effect: Redirects you to login or dashboard depending on your group
         """
         return RedirectUtil.admin(request, "create courses", self.respond(request, self.MESSAGE, "")) 
 

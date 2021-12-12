@@ -62,3 +62,21 @@ class CourseUtil:
             return None
 
         return course
+
+    @staticmethod
+    def deleteCourseByName(name: str) -> bool:
+        """
+        Looks for a course that matches the argument name,
+        deletes it if it exists.
+        @param name: the name of the course to delete
+        @return: True if course was found and deleted, 
+            False otherwise
+        """
+        course = CourseUtil.getCourseByName(name)
+        if course:
+            course.delete()
+            return True
+        else:
+            return False
+
+
