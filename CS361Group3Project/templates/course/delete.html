@@ -1,5 +1,21 @@
-{% extends "base.html" %}
+{% extends 'bar_base.html' %}
 
-{% block content %}
-    <h1> Delete course page works! </h1>
-{% endblock content %}
+{% block application_pane %}
+<h3>Select courses to delete:</h3>
+<form action="/course/delete/" method="post">
+    {% csrf_token %}
+
+    <select class="form-select" 
+        multiple aria-label="multiple select example"
+        size="20">
+
+        {% for course in courses %}
+        <option value="{{ course }}"> {{ course.name }} - {{ course.description }} </option>
+        {% endfor %}
+    </select>
+    <br>
+    <button type="submit" class="btn btn-primary">Delete Selection</button>
+</form>
+
+
+{% endblock application_pane %}
