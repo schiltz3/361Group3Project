@@ -60,4 +60,3 @@ class RedirectUtil:
             return redirect("/", {"error": "User is not authorized to " + action})
         else:
             return fallback
-

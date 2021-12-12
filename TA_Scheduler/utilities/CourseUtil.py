@@ -69,7 +69,7 @@ class CourseUtil:
         Looks for a course that matches the argument name,
         deletes it if it exists.
         @param name: the name of the course to delete
-        @return: True if course was found and deleted, 
+        @return: True if course was found and deleted,
             False otherwise
         """
         course = CourseUtil.getCourseByName(name)
@@ -78,5 +78,3 @@ class CourseUtil:
             return True
         else:
             return False
-
-
