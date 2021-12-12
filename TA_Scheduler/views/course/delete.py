@@ -12,8 +12,7 @@ class DeleteCourse(View):
     WARNING = "warning"
 
     def get(self, request):
-        """
-        Called when the user opens the Delete Course page.
+        """Called when the user opens the Delete Course page.
         @param request: request from course/delete.html
         @return: response with the course selection
         @pre: User is not anonymous, instructor, or ta
