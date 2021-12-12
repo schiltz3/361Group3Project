@@ -26,7 +26,9 @@ class CreateCourse(View):
         :pre: User is not anonymous, instructor, or ta
         :post: None
         """
-        return RedirectUtil.admin(request, "create courses", self.respond(request, self.MESSAGE, "")) 
+        return RedirectUtil.admin(
+            request, "create courses", self.respond(request, self.MESSAGE, "")
+        )
 
     def post(self, request: HttpRequest) -> Union[HttpResponse, HttpResponseRedirect]:
         """Called when the user clicks submit.

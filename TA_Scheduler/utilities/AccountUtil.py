@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate
 
 from TA_Scheduler.models import Account
 
+
 class AccountUtil:
     @staticmethod
     def createTAAccount(username: str, password: str) -> Union[int, TypeError]:

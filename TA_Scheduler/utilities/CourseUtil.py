@@ -85,5 +85,3 @@ class CourseUtil:
             return True
         else:
             return False
-
-
