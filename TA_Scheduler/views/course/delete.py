@@ -51,8 +51,3 @@ class DeleteCourse(View):
             return render(request, self.TEMPLATE, {"courses": coursesRemaining, "error": errorMsg})
         else:
             return render(request, self.TEMPLATE, {"courses": coursesRemaining, "message": "Successfully deleted selected courses."})
-
-
-
-
-    
