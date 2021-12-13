@@ -15,22 +15,56 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Account',
+            name="Account",
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='Account ID')),
-                ('address', models.CharField(blank=True, max_length=50, null=True)),
-                ('phone', models.PositiveBigIntegerField(blank=True, null=True)),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.AutoField(
+                        primary_key=True, serialize=False, verbose_name="Account ID"
+                    ),
+                ),
+                ("address", models.CharField(blank=True, max_length=50, null=True)),
+                ("phone", models.PositiveBigIntegerField(blank=True, null=True)),
+                (
+                    "user",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Course',
+            name="Course",
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='Course ID')),
-                ('name', models.CharField(max_length=200, verbose_name='Course Name')),
-                ('description', models.CharField(max_length=5000, verbose_name='Course Description')),
-                ('instructor', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='instructors', to='TA_Scheduler.account')),
-                ('tas', models.ManyToManyField(blank=True, related_name='tas', to='TA_Scheduler.Account')),
+                (
+                    "id",
+                    models.AutoField(
+                        primary_key=True, serialize=False, verbose_name="Course ID"
+                    ),
+                ),
+                ("name", models.CharField(max_length=200, verbose_name="Course Name")),
+                (
+                    "description",
+                    models.CharField(
+                        max_length=5000, verbose_name="Course Description"
+                    ),
+                ),
+                (
+                    "instructor",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        related_name="instructors",
+                        to="TA_Scheduler.account",
+                    ),
+                ),
+                (
+                    "tas",
+                    models.ManyToManyField(
+                        blank=True, related_name="tas", to="TA_Scheduler.Account"
+                    ),
+                ),
             ],
         ),
     ]
