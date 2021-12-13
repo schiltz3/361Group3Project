@@ -57,8 +57,8 @@ class CreateCourse(View):
                 if courses:
                     for course in courses:
                         if (course.name.casefold() == name.casefold()) and (
-                                course.instructor.user.username.casefold()
-                                == instructor.casefold()
+                            course.instructor.user.username.casefold()
+                            == instructor.casefold()
                         ):
                             return self.respond(
                                 request,
@@ -71,9 +71,7 @@ class CreateCourse(View):
                     request, self.WARNING, "Name can only contain [A-z][0-9]"
                 )
         if name is None:
-            return self.respond(
-                request, self.WARNING, "Name must not be blank"
-            )
+            return self.respond(request, self.WARNING, "Name must not be blank")
         # check instructor
         if instructor:
             instructor_account = AccountUtil.getAccountByUsername(instructor)
@@ -87,7 +85,7 @@ class CreateCourse(View):
         # check description
         if description:
             if not all(
-                    x.isalpha() or x.isnumeric() or x.isspace() for x in description
+                x.isalpha() or x.isnumeric() or x.isspace() for x in description
             ):
                 return self.respond(
                     request, self.WARNING, "Description can only contain [A-z][0-9]"

@@ -123,11 +123,11 @@ class CreateCourseTest(TestCase):
         )
 
     def form(
-            self,
-            name: str = "Course1",
-            description: str = "description",
-            instructor: Account = None,
-            tas: List[Account] = None,
+        self,
+        name: str = "Course1",
+        description: str = "description",
+        instructor: Account = None,
+        tas: List[Account] = None,
     ):
         tas_strs = []
         if tas:
