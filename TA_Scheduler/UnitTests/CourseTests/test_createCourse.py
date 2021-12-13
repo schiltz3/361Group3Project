@@ -55,11 +55,10 @@ class CreateCourseTest(TestCase):
             name="", instructor=self.course["instructor"], tas=self.course["ta"]
         )
         resp = self.client.post(self.TEMPLATE, course["form"])
-        print(resp)
         self.assertEquals(
-            "Course created",
-            resp.context[self.MESSAGE],
-            msg="Course was not created",
+            "Name must not be blank",
+            resp.context[self.WARNING],
+            msg="Failed to detect bad course name.",
         )
 
     def test_badDescription(self):
@@ -95,14 +94,14 @@ class CreateCourseTest(TestCase):
             msg="Failed to detect nonexistent instructor.",
         )
 
-    # def test_instructorIsNone(self):
-    #    course = self.form()
-    #    resp = self.client.post(self.TEMPLATE, course["form"])
-    #    self.assertEquals(
-    #        "Instructor must not be blank.",
-    #        resp.context[self.WARNING],
-    #        msg="Failed to detect None instructor.",
-    #    )
+    def test_instructorIsNone(self):
+        course = self.form()
+        resp = self.client.post(self.TEMPLATE, course["form"])
+        self.assertEquals(
+            "Course created.",
+            resp.context[self.MESSAGE],
+            msg="Failed to create class.",
+        )
 
     def test_TANotFound(self):
         ta = "turtle"

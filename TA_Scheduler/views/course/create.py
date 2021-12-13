@@ -45,9 +45,11 @@ class CreateCourse(View):
         tas: List[str] = request.POST.getlist("ta")
         ta_accounts: List[Account] = []
 
-        # Convert String "None" to NoneType
+        # Convert Incorrect strings to NoneType
         if instructor == "None":
             instructor = None
+        if name == "":
+            name = None
 
         if name and instructor:
             if all(x.isalpha() or x.isnumeric() or x.isspace() for x in name):
@@ -68,6 +70,19 @@ class CreateCourse(View):
                 return self.respond(
                     request, self.WARNING, "Name can only contain [A-z][0-9]"
                 )
+        if name is None:
+            return self.respond(
+                request, self.WARNING, "Name must not be blank"
+            )
+        # check instructor
+        if instructor:
+            instructor_account = AccountUtil.getAccountByUsername(instructor)
+            if instructor_account is None:
+                return self.respond(
+                    request, self.ERROR, "Instructor could not be found."
+                )
+        else:
+            instructor_account = None
 
         # check description
         if description:
@@ -80,16 +95,6 @@ class CreateCourse(View):
 
         else:
             return self.respond(request, self.WARNING, "Description must not be blank.")
-
-        # check instructor
-        if instructor:
-            instructor_account = AccountUtil.getAccountByUsername(instructor)
-            if instructor_account is None:
-                return self.respond(
-                    request, self.ERROR, "Instructor could not be found."
-                )
-        else:
-            instructor_account = None
 
         # check tas
         if tas:
