@@ -5,59 +5,53 @@ from django.views import View
 from django.shortcuts import render, redirect, reverse
 from TA_Scheduler.utilities.AccountUtil import AccountUtil
 from TA_Scheduler.utilities.CourseUtil import CourseUtil
-from typing import Any, List, Mapping, MutableMapping, Union, Optional
+from TA_Scheduler.utilities.RedirectUtil import RedirectUtil
+from typing import List, Union, Optional
+
+from TA_Scheduler.utilities.RedirectUtil import RedirectUtil
 
 
 class CreateCourse(View):
-
     TEMPLATE = "course/create.html"
     MESSAGE = "message"
     ERROR = "error"
     WARNING = "warning"
 
     def get(self, request: HttpRequest) -> Union[HttpResponse, HttpResponseRedirect]:
-        """
-        Called when the user opens the page, course/create.html
-        @param request: Request from course/create.html
-        @return: Response with "instructors"
-        @pre: User is not anonymous, instructor, or ta
-        @post: None
-        @par: Side effect: Redirects you to login or dashboard depending on your group
-        """
-        # TODO: should be pulled out to a utis class
-        # if user is anonymous or not admin, redirect to correct page
+        """Called when the user opens the page, course/create.html
 
-        if request.user.is_anonymous:
-            return redirect("/", {"error": "User is not authorized to create a course"})
-        elif request.user.groups.filter(name="instructor").exists():
-            return redirect(
-                "/dashboard/instructor/",
-                {"error": "Instructors are not authorized to create courses"},
-            )
-        elif request.user.groups.filter(name="ta").exists():
-            return redirect(
-                "/dashboard/ta/", {"error": "TAs are not authorized to create courses"}
-            )
-
-        return self.respond(request, self.MESSAGE, "")
+        :param request: Request from course/create.html
+        :return: Response with "instructors"
+        :pre: User is not anonymous, instructor, or ta
+        :post: None
+        """
+        return RedirectUtil.admin(
+            request, "create courses", self.respond(request, self.MESSAGE, "")
+        )
 
     def post(self, request: HttpRequest) -> Union[HttpResponse, HttpResponseRedirect]:
-        """
-        Called when the user clicks submit.
-        @param request: Request from course/create.html
-        @return: Response with "instructors", "message", "warning" and "error" or redirect
-        @pre: None
-        @post: Correct return or new class object
-        @par: Side effect: Create a new class object
+        """Called when the user clicks submit.
+
+        :param request: Request from course/create.html
+        :return: Response with "instructors", "message", "warning" and "error" or redirect
+        :pre: None
+        :post: Correct return or new class object
+        :par: Side effect: Create a new class object
         """
 
-        name: Optional[str] = str(request.POST.get("name", None))
-        description: Optional[str] = str(request.POST.get("description", None))
-        instructor: Optional[str] = str(request.POST.get("instructor", None))
+        name: Optional[str] = str(request.POST.get("name"))
+        description: Optional[str] = str(request.POST.get("description"))
+        instructor: Optional[str] = str(request.POST.get("instructor"))
         tas: List[str] = request.POST.getlist("ta")
         ta_accounts: List[Account] = []
 
-        if name:
+        # Convert Incorrect strings to NoneType
+        if instructor == "None":
+            instructor = None
+        if name == "":
+            name = None
+
+        if name and instructor:
             if all(x.isalpha() or x.isnumeric() or x.isspace() for x in name):
                 courses = CourseUtil.getAllCourses()
                 if courses:
@@ -76,9 +70,17 @@ class CreateCourse(View):
                 return self.respond(
                     request, self.WARNING, "Name can only contain [A-z][0-9]"
                 )
-
+        if name is None:
+            return self.respond(request, self.WARNING, "Name must not be blank")
+        # check instructor
+        if instructor:
+            instructor_account = AccountUtil.getAccountByUsername(instructor)
+            if instructor_account is None:
+                return self.respond(
+                    request, self.ERROR, "Instructor could not be found."
+                )
         else:
-            return self.respond(request, self.WARNING, "Name must not be blank.")
+            instructor_account = None
 
         # check description
         if description:
@@ -92,16 +94,6 @@ class CreateCourse(View):
         else:
             return self.respond(request, self.WARNING, "Description must not be blank.")
 
-        # check instructor
-        if instructor:
-            instructor_account = AccountUtil.getAccountByUsername(instructor)
-            if instructor_account is None:
-                return self.respond(
-                    request, self.ERROR, "Instructor could not be found."
-                )
-        else:
-            return self.respond(request, self.WARNING, "Instructor must not be blank.")
-
         # check tas
         if tas:
             for ta in tas:
@@ -114,20 +106,20 @@ class CreateCourse(View):
                     ta_accounts.append(ta_account)
 
         # adds course to database if instructor, name and description are not none
-        if instructor_account and name and description:
+        if name and description:
             CourseUtil.createCourse(name, description, instructor_account, ta_accounts)
             return self.respond(request, self.MESSAGE, "Course created.")
 
         return self.respond(request, self.ERROR, "Class could not be created.")
 
     def respond(self, request: HttpRequest, msg_type: str, msg: str):
-        """
-        Helper method that returns a response
-        @param request: the HTTP request object to use
-        @param msg_type: the type of notification message
-        @param msg: the message to show
-        @pre: request must not be null
-        @post: rendered response
+        """Helper method that returns a response.
+
+        :param request: the HTTP request object to use
+        :param msg_type: the type of notification message
+        :param msg: the message to show
+        :pre: request must not be null
+        :post: rendered response
         """
 
         context = {

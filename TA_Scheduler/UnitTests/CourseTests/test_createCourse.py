@@ -56,7 +56,7 @@ class CreateCourseTest(TestCase):
         )
         resp = self.client.post(self.TEMPLATE, course["form"])
         self.assertEquals(
-            "Name must not be blank.",
+            "Name must not be blank",
             resp.context[self.WARNING],
             msg="Failed to detect bad course name.",
         )
@@ -98,9 +98,9 @@ class CreateCourseTest(TestCase):
         course = self.form()
         resp = self.client.post(self.TEMPLATE, course["form"])
         self.assertEquals(
-            "Instructor must not be blank.",
-            resp.context[self.WARNING],
-            msg="Failed to detect None instructor.",
+            "Course created.",
+            resp.context[self.MESSAGE],
+            msg="Failed to create class.",
         )
 
     def test_TANotFound(self):

@@ -6,17 +6,18 @@ from django.contrib.auth import authenticate
 from TA_Scheduler.models import Account
 
 
-# Note to teammate:
-# This is a utility class to access the Account database.
-# Use the methods below to get accounts:
-
-# createAccount(username, password, authority) --> returns id in database or error
-# getAccountByID(id)
-# getAllAccounts()
-# getInstructors()
 class AccountUtil:
     @staticmethod
     def createTAAccount(username: str, password: str) -> Union[int, TypeError]:
+        """Create an account in the TA group.
+
+        :param username: The username of the account to create
+        :param password: The password of the account to create
+        :return: ID of the account if it was successfully created,
+            TypeError if username or password are blank
+        :pre: Username and password must not be blank
+        :post: None
+        """
         if username == "" or password == "":
             raise TypeError("Username, password, and authority cannot be empty.")
 
@@ -30,6 +31,15 @@ class AccountUtil:
 
     @staticmethod
     def createInstructorAccount(username: str, password: str) -> Union[int, TypeError]:
+        """Create an account in the Instructor group.
+
+        :param username: The username of the account to create
+        :param password: The password of the account to create
+        :return: ID of the account if it was successfully created,
+            TypeError if username or password are blank
+        :pre: Username and password must not be blank
+        :post: None
+        """
         if username == "" or password == "":
             raise TypeError("Username, password, and authority cannot be empty.")
 
@@ -43,6 +53,15 @@ class AccountUtil:
 
     @staticmethod
     def createAdminAccount(username: str, password: str) -> Union[int, TypeError]:
+        """Create an account in the Admin group.
+
+        :param username: The username of the account to create
+        :param password: The password of the account to create
+        :return: ID of the account if it was successfully created,
+            TypeError if username or password are blank
+        :pre: Username and password must not be blank
+        :post: None
+        """
         if username == "" or password == "":
             raise TypeError("Username, password, and authority cannot be empty.")
 
@@ -56,6 +75,14 @@ class AccountUtil:
 
     @staticmethod
     def getAccountByID(id: int) -> Optional[Account]:
+        """Looks in the Account database for an account that matches the argument ID.
+
+        :param id: The id to look for in the Account database
+        :return: If successful, an account with an ID that matches the
+            argument, None otherwise
+        :pre: None
+        :post: None
+        """
         try:
             account = Account.objects.get(id=id)
             return account
@@ -63,12 +90,51 @@ class AccountUtil:
             return None
 
     @staticmethod
+    def getAccountByUsername(username: str) -> Optional[Account]:
+        """Looks in the Account database for an account that matches the argument username.
+
+        :param username: The username to look for in the Account database
+        :return: If successful, an account with a username that matches the
+            argument, None otherwise
+        :pre: None
+        :post: None
+        """
+        try:
+            user = User.objects.filter(username=username)[0]
+            account = Account.objects.filter(user=user.id)[0]
+            return account
+
+        except IndexError:
+            return None
+
+        except User.DoesNotExist:
+            return None
+
+        except Account.DoesNotExist:
+            return None
+        except IndexError:
+            return None
+
+    @staticmethod
     def getAllAccounts() -> Optional[Iterable[Account]]:
+        """Returns all of the accounts that are stored in the Account database.
+        :return: a list of all existing accounts, or
+            None if there are none
+        :pre: None
+        :post: None
+        """
         set: QuerySet = Account.objects.all()
         return set if set.exists() else None
 
     @staticmethod
     def getTAs() -> Optional[Iterable[Account]]:
+        """Returns all of the accounts in the TA group that are stored in the Account database.
+
+        :return: a list of all existing TA accounts, or None if
+            there are none.
+        :pre: None
+        :post: None
+        """
         set: QuerySet = User.objects.filter(groups__name="ta")
         result = []
         try:
@@ -81,6 +147,13 @@ class AccountUtil:
 
     @staticmethod
     def getInstructors() -> Optional[Iterable[Account]]:
+        """Returns all of the accounts in the Instructor group that are stored in the Account database.
+
+        :return: a list of all existing Instructor accounts, or None if
+            there are none.
+        :pre: None
+        :post: None
+        """
         set: QuerySet = User.objects.filter(groups__name="instructor")
         result = []
         try:
@@ -94,6 +167,13 @@ class AccountUtil:
 
     @staticmethod
     def getAccountByCredentials(username: str, password: str) -> Optional[Account]:
+        """Returns an account that matches the argument credentials.
+
+        :param username: the username to find in the Account database
+        :param password: the password to find in the Account database
+        :return: if found, and account with a username and password
+            that match the arguments, None otherwise
+        """
         try:
             user = authenticate(username=username, password=password)
             if user is not None:
@@ -111,37 +191,6 @@ class AccountUtil:
 
         return None
 
-    @staticmethod
-    def getAccountByUsername(username: str) -> Optional[Account]:
-        try:
-            user = User.objects.filter(username=username)[0]
-            account = Account.objects.filter(user=user.id)[0]
-            return account
-
-        except IndexError:
-            return None
-
-        except User.DoesNotExist:
-            return None
-
-        except Account.DoesNotExist:
-            return None
-        except IndexError:
-            return None
-
-    """ Used to change information of a preexisting account
-
-    :param id: id of account being edited
-    :param first: what the first name should be changed to 
-    :param last: what the last name should be changed to
-    :param email: what the email should be changed to
-    :param address: what the address should be changed to
-    :param phone: what the phone number should be changed to
-    :return bool: whether account was successfully found and edited
-    :pre: None
-    :post: account, if it exists, is edited
-    """
-
     def updateAccountInfo(
         id: int = None,
         first: str = None,
@@ -149,7 +198,7 @@ class AccountUtil:
         email: str = None,
         address: str = None,
         phone: int = None,
-    ) -> [bool]:
+    ):
         if id is None:
             raise TypeError("must enter an id number")
 
