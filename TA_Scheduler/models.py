@@ -3,13 +3,7 @@ from django.contrib.auth.models import AbstractUser, User
 
 
 class Account(models.Model):
-    """
-    Represents a row in the Account database.
-
-    Note to teammate:
-    Maps one-to-one with Django's build-in User object
-    User object has username, password, first_name and last_name fields,
-    takes care of password encryption.
+    """Represents a row in the Account database.
 
     account.id --> id in db
     account.user --> associated User object
@@ -35,8 +29,7 @@ class Account(models.Model):
 
 
 class Course(models.Model):
-    """
-    Represents a row in the course database.
+    """Represents a row in the course database.
 
     id - generated, and is the primary key
     name - name of the course (CompSci 250)

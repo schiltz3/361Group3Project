@@ -44,14 +44,16 @@ class DeleteCourse(View):
             for course in courses:
                 if not CourseUtil.deleteCourseByName(course):
                     error = True
-                    errorMsg.append(" " + course)
+                    errorMsg += " " + course
+        else :
+            return render(request, self.TEMPLATE, {"courses" : courses, self.WARNING: "No courses were selected."})
 
         # get remaining courses
         coursesRemaining = CourseUtil.getAllCourses()
 
         if error:
             return render(
-                request, self.TEMPLATE, {"courses": coursesRemaining, "error": errorMsg}
+                request, self.TEMPLATE, {"courses": coursesRemaining, self.ERROR: errorMsg}
             )
         else:
             return render(
@@ -59,6 +61,6 @@ class DeleteCourse(View):
                 self.TEMPLATE,
                 {
                     "courses": coursesRemaining,
-                    "message": "Successfully deleted selected courses.",
+                    self.MESSAGE: "Successfully deleted selected courses.",
                 },
             )
