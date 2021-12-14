@@ -12,7 +12,6 @@ from TA_Scheduler.utilities.RedirectUtil import RedirectUtil
 
 
 class CreateCourse(View):
-
     TEMPLATE = "course/create.html"
     MESSAGE = "message"
     ERROR = "error"
@@ -40,13 +39,19 @@ class CreateCourse(View):
         :par: Side effect: Create a new class object
         """
 
-        name: Optional[str] = str(request.POST.get("name", None))
-        description: Optional[str] = str(request.POST.get("description", None))
-        instructor: Optional[str] = str(request.POST.get("instructor", None))
+        name: Optional[str] = str(request.POST.get("name"))
+        description: Optional[str] = str(request.POST.get("description"))
+        instructor: Optional[str] = str(request.POST.get("instructor"))
         tas: List[str] = request.POST.getlist("ta")
         ta_accounts: List[Account] = []
 
-        if name:
+        # Convert Incorrect strings to NoneType
+        if instructor == "None":
+            instructor = None
+        if name == "":
+            name = None
+
+        if name and instructor:
             if all(x.isalpha() or x.isnumeric() or x.isspace() for x in name):
                 courses = CourseUtil.getAllCourses()
                 if courses:
@@ -65,9 +70,17 @@ class CreateCourse(View):
                 return self.respond(
                     request, self.WARNING, "Name can only contain [A-z][0-9]"
                 )
-
+        if name is None:
+            return self.respond(request, self.WARNING, "Name must not be blank")
+        # check instructor
+        if instructor:
+            instructor_account = AccountUtil.getAccountByUsername(instructor)
+            if instructor_account is None:
+                return self.respond(
+                    request, self.ERROR, "Instructor could not be found."
+                )
         else:
-            return self.respond(request, self.WARNING, "Name must not be blank.")
+            instructor_account = None
 
         # check description
         if description:
@@ -81,16 +94,6 @@ class CreateCourse(View):
         else:
             return self.respond(request, self.WARNING, "Description must not be blank.")
 
-        # check instructor
-        if instructor:
-            instructor_account = AccountUtil.getAccountByUsername(instructor)
-            if instructor_account is None:
-                return self.respond(
-                    request, self.ERROR, "Instructor could not be found."
-                )
-        else:
-            return self.respond(request, self.WARNING, "Instructor must not be blank.")
-
         # check tas
         if tas:
             for ta in tas:
@@ -103,7 +106,7 @@ class CreateCourse(View):
                     ta_accounts.append(ta_account)
 
         # adds course to database if instructor, name and description are not none
-        if instructor_account and name and description:
+        if name and description:
             CourseUtil.createCourse(name, description, instructor_account, ta_accounts)
             return self.respond(request, self.MESSAGE, "Course created.")
 
