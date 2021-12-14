@@ -31,10 +31,12 @@ class NewAccountTest(TestCase):
                          "no selection message not given")
 
     def test_invalidSelection(self):
+        # extra account to check no change in database
+        AccountUtil.createInstructorAccount(username="new", password="word")
         self.client.post("/account/delete/", {"account": self.accountID})
         accountList = AccountUtil.getAllAccounts()
         self.client.post("/account/delete/", {"account": self.accountID})
-        self.assertEqual(None, AccountUtil.getAllAccounts(),
+        self.assertQuerysetEqual(accountList, AccountUtil.getAllAccounts(), transform=lambda x: x,
                                  msg="invalid account should not change account list")
 
     def test_invalidSelectionMessage(self):
