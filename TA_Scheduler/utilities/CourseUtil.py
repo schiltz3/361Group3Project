@@ -12,10 +12,15 @@ class CourseUtil:
         instructor: Account = None,
         tas: List[Account] = None,
     ) -> Union[int, TypeError]:
-        """
-        Creates a course and saves it in the Course database
-        TypeError is raised if required fields are not provided (name)
-        Returns the id of the created course
+        """Creates a course and saves it in the Course database.
+
+        :param name: The name of the course to create
+        :param description: The description of the course to create
+        :param instructor: The instructor of this course
+        :param tas: The list of TAs of this course
+        :return: On success, the ID of the new course in the database, None otherwise
+        :pre: Name must not be blank
+        :post: TypeError is raised if required fields are not provided (name)
         """
         if name == "":
             raise TypeError("Course name cannot be empty.")
@@ -31,9 +36,12 @@ class CourseUtil:
 
     @staticmethod
     def getCourseByID(id: int) -> Optional[Course]:
-        """
-        Returns a course from the database, using it's ID
-        If the course does not exist, returns None
+        """Returns a course from the database, using it's ID.
+
+        :param id: The ID of the course to find in the database.
+        :return: On success, the course with an ID that matches the agument, None otherwise
+        :pre: None
+        :post: None
         """
         try:
             course = Course.objects.get(id=id)
@@ -43,18 +51,19 @@ class CourseUtil:
 
     @staticmethod
     def getAllCourses() -> Optional[Iterable[Course]]:
-        """
-        Gets all courses from database
-        If the database is empty, returns None
+        """Gets all courses from database.
+
+        :return: All the courses in the Course database, None if it is empty
         """
         set: QuerySet = Course.objects.all()
         return set if set.exists() else None
 
     @staticmethod
     def getCourseByName(name: str) -> Optional[Course]:
-        """
-        Gets a course from the database, by it's name.
-        If the course is not found, returns None
+        """Gets a course from the database, by it's name.
+
+        :param name: The name of the course to find in the database
+        :return: On success, the course with a name that matches the argument, None otherwise
         """
         try:
             course = Course.objects.filter(name=name)[0]
@@ -62,3 +71,17 @@ class CourseUtil:
             return None
 
         return course
+
+    @staticmethod
+    def deleteCourseByName(name: str) -> bool:
+        """Looks for a course that matches the argument name, deletes it if it exists.
+
+        :param name: the name of the course to delete
+        :return: True if course was found and deleted, False otherwise
+        """
+        course = CourseUtil.getCourseByName(name)
+        if course:
+            course.delete()
+            return True
+        else:
+            return False

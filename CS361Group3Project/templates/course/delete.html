@@ -1,5 +1,39 @@
-{% extends "base.html" %}
+{% extends 'bar_base.html' %}
 
-{% block content %}
-    <h1> Delete course page works! </h1>
-{% endblock content %}
+{% block application_pane %}
+<h3>Select courses to delete:</h3>
+<form action="/course/delete/" method="post">
+    {% csrf_token %}
+
+    <!-- Multiselect Dropdown -->
+    <select class="form-select" 
+        multiple aria-label="multiple select"
+        size="20"
+        name="courses">
+
+        {% for course in courses %}
+        <option value="{{ course }}"> {{ course.name }} - {{ course.description }} </option>
+        {% endfor %}
+    </select>
+    <br>
+
+    <!-- Submit Selection -->
+    <button type="submit" class="btn btn-primary">Delete Selection</button>
+    
+    <!-- Alert Messages -->
+    <div class="col-7">
+        {% if message %}
+        <div class="alert alert-primary mt-2" role="alert"> {{ message }}</div>
+        {% endif %}
+        {% if warning %}
+        <div class="alert alert-warning mt-2" role="alert"> {{ warning }}</div>
+        {% endif %}
+        {% if error %}
+        <div class="alert alert-danger mt-2" role="alert"> {{ error }}</div>
+        {% endif %}
+    </div>
+
+</form>
+
+
+{% endblock application_pane %}
