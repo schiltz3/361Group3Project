@@ -10,7 +10,7 @@ Context:
 POST Vars:
  - account: Account
 
-{% end comment %}
+{% endcomment %}
 
 {% block application_pane %}
     <h1> Delete Account </h1>
@@ -20,7 +20,7 @@ POST Vars:
         <select name="account" class="form-select" required="True">
             <option disabled selected value>Select Account</option>
             {% for i in accounts %}
-                <option value="{{ i }}">{{ i.user.first_name }} {{ i.user.last_name }}</option>
+                <option value="{{ i.id }}">{{ i.user.first_name }} {{ i.user.last_name }}</option>
             {% endfor %}
         </select>
     </form>

@@ -9,20 +9,21 @@ class NewAccountTest(TestCase):
         Group.objects.create(name="instructor")
         Group.objects.create(name="ta")
         Group.objects.create(name="admin")
-        self.id = AccountUtil.createAdminAccount(username="user", password="pass")
-        self.user = AccountUtil.getAccountByID(id)
+        self.accountID = AccountUtil.createAdminAccount(username="user", password="pass")
+        self.account = AccountUtil.getAccountByID(self.accountID)
 
     def test_success(self):
-        self.client.post("/account/delete/", {"account": self.user+""})
-        self.assertEqual(None, AccountUtil.getAccountByID(id), "Account not deleted")
+        self.client.post("/account/delete/", {"account": self.accountID})
+        self.assertEqual(None, AccountUtil.getAccountByID(self.accountID), "Account not deleted")
 
     def test_successMessage(self):
-        response = self.client.post("/account/delete/", {"account": self.user+""})
+        response = self.client.post("/account/delete/", {"account": self.accountID})
         self.assertEqual("Account deleted", response.context.get("message"), "confirmation message not given")
 
     def test_noSelection(self):
         self.client.post("/account/delete/")
-        self.assertEqual(self.user, AccountUtil.getAccountByID(self.id), "Account should not have been deleted")
+        self.assertEqual(self.account, AccountUtil.getAccountByID(self.accountID),
+                         "Account should not have been deleted")
 
     def test_noSelectionMessage(self):
         response = self.client.post("/account/delete/")
@@ -30,13 +31,14 @@ class NewAccountTest(TestCase):
                          "no selection message not given")
 
     def test_invalidSelection(self):
-        self.client.post("/account/delete/", {"account": self.user+""})
+        self.client.post("/account/delete/", {"account": self.accountID})
         accountList = AccountUtil.getAllAccounts()
-        self.client.post("/account/delete/", {"account": self.user + ""})
-        self.assertEqual(accountList, AccountUtil.getAllAccounts(), "invalid account should not change account list")
+        self.client.post("/account/delete/", {"account": self.accountID})
+        self.assertEqual(None, AccountUtil.getAllAccounts(),
+                                 msg="invalid account should not change account list")
 
     def test_invalidSelectionMessage(self):
-        self.client.post("/account/delete/", {"account": self.user+""})
-        response = self.client.post("/account/delete/", {"account": self.user + ""})
+        self.client.post("/account/delete/", {"account": self.accountID})
+        response = self.client.post("/account/delete/", {"account": self.accountID})
         self.assertEqual("Invalid account selection", response.context.get("message"),
                          "invalid selection message not given")

@@ -25,14 +25,16 @@ class DeleteAccount(View):
     """
 
     def post(self, request):
-        account = request.POST.get("account")
+        accountID = request.POST.get("account")
         # if the user refreshes a site, it can send None
-        if account is None:
+        if accountID is None:
             return render(request, "account/delete.html", {"message": "Please fill out all required fields",
                                                            "accounts": AccountUtil.getAllAccounts()})
 
+        account = AccountUtil.getAccountByID(accountID)
+
         # if invalid account is somehow submitted
-        if account not in AccountUtil.getAllAccounts():
+        if account is None:
             return render(request, "account/delete.html", {"message": "Invalid account selection",
                                                            "accounts": AccountUtil.getAllAccounts()})
         else:

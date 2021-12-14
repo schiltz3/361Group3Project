@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.views import View
-from TA_Scheduler.models import Account
 from TA_Scheduler.utilities.AccountUtil import AccountUtil
 
 
