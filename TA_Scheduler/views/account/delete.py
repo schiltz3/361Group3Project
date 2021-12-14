@@ -5,7 +5,7 @@ from TA_Scheduler.utilities.AccountUtil import AccountUtil
 
 class DeleteAccount(View):
 
-    """ Called when the user opens the Delete Account page.
+    """Called when the user opens the Delete Account page.
 
     :param request: request from account/delete.html
     :return: response with the account selection
@@ -14,7 +14,9 @@ class DeleteAccount(View):
     """
 
     def get(self, request):
-        return render(request, "account/delete.html", {"accounts": AccountUtil.getAllAccounts()})
+        return render(
+            request, "account/delete.html", {"accounts": AccountUtil.getAllAccounts()}
+        )
 
     """ Called when the user opens the Delete Course page.
 
@@ -28,16 +30,34 @@ class DeleteAccount(View):
         accountID = request.POST.get("account")
         # if the user refreshes a site, it can send None
         if accountID is None:
-            return render(request, "account/delete.html", {"message": "Please fill out all required fields",
-                                                           "accounts": AccountUtil.getAllAccounts()})
+            return render(
+                request,
+                "account/delete.html",
+                {
+                    "message": "Please fill out all required fields",
+                    "accounts": AccountUtil.getAllAccounts(),
+                },
+            )
 
         account = AccountUtil.getAccountByID(accountID)
 
         # if invalid account is somehow submitted
         if account is None:
-            return render(request, "account/delete.html", {"message": "Invalid account selection",
-                                                           "accounts": AccountUtil.getAllAccounts()})
+            return render(
+                request,
+                "account/delete.html",
+                {
+                    "message": "Invalid account selection",
+                    "accounts": AccountUtil.getAllAccounts(),
+                },
+            )
         else:
             account.delete()
-            return render(request, "account/delete.html", {"message": "Account deleted",
-                                                           "accounts": AccountUtil.getAllAccounts()})
+            return render(
+                request,
+                "account/delete.html",
+                {
+                    "message": "Account deleted",
+                    "accounts": AccountUtil.getAllAccounts(),
+                },
+            )

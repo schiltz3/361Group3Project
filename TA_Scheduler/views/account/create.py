@@ -5,7 +5,7 @@ from TA_Scheduler.utilities.AccountUtil import AccountUtil
 
 class CreateAccount(View):
 
-    """ Called when the user opens the Create Account page.
+    """Called when the user opens the Create Account page.
 
     :param request: request from account/create.html
     :return: rendering of account/create.html with blank form
