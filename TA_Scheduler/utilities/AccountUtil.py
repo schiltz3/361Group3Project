@@ -199,6 +199,16 @@ class AccountUtil:
         address: str = None,
         phone: int = None,
     ):
+        """ Changes the entered fields for the given account
+
+            :param id: id number of account to be changed
+            :param first: new first name
+            :param last: new last name
+            :param email: new email address
+            :param address: new address
+            :param phone: new phone number
+            :return: TypeError if no id given, otherwise bool of whether id is in Account database
+        """
         if id is None:
             raise TypeError("must enter an id number")
 

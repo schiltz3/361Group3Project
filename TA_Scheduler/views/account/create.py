@@ -5,28 +5,24 @@ from TA_Scheduler.utilities.AccountUtil import AccountUtil
 
 class CreateAccount(View):
 
-    """Called when the user opens the Create Account page.
-
-    :param request: request from account/create.html
-    :return: rendering of account/create.html with blank form
-    :pre: User is not anonymous, instructor, or ta
-    :post: None
-    """
-
     def get(self, request):
+        """Called when the user opens the Create Account page.
+
+            :param request: request from account/create.html
+            :return: rendering of account/create.html with blank form
+            :pre: User is not anonymous, instructor, or ta
+            :post: None
+        """
         return render(request, "account/create.html", {"message": " "})
 
-    """ Called when the user submits the form on the Create Accounts page.
-
-    :param request: request from account/create.html
-    :return: rendering of account/create.html with message
-    :pre: User is not anonymous, instructor, or ta
-    :post: None
-    """
-
     def post(self, request):
+        """ Called when the user submits the form on the Create Accounts page.
 
-        # Not correctly checking authority for null. Can't convert NoneType to int
+            :param request: request from account/create.html
+            :return: rendering of account/create.html with message
+            :pre: User is not anonymous, instructor, or ta
+            :post: None
+        """
         usertype = request.POST.get("authority")
         if usertype is not None:
             try:
