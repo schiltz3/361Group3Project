@@ -4,14 +4,13 @@ from TA_Scheduler.utilities.AccountUtil import AccountUtil
 
 
 class DeleteAccount(View):
-
     def get(self, request):
         """Called when the user opens the Delete Account page.
 
-            :param request: request from account/delete.html
-            :return: response with the account selection
-            :pre: User is not anonymous, instructor, or ta
-            :post: None
+        :param request: request from account/delete.html
+        :return: response with the account selection
+        :pre: User is not anonymous, instructor, or ta
+        :post: None
         """
 
         return render(
@@ -19,12 +18,12 @@ class DeleteAccount(View):
         )
 
     def post(self, request):
-        """ Called when the user opens the Delete Course page.
+        """Called when the user opens the Delete Course page.
 
-            :param request: request from account/delete.html
-            :return: response with the account selection and message
-            :pre: User is not anonymous, instructor, or ta
-            :post: account selected, if it exists, is deleted
+        :param request: request from account/delete.html
+        :return: response with the account selection and message
+        :pre: User is not anonymous, instructor, or ta
+        :post: account selected, if it exists, is deleted
         """
 
         accountID = request.POST.get("account")
