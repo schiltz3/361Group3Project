@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views import View
 from TA_Scheduler.utilities.AccountUtil import AccountUtil
+from django.core.exceptions import ValidationError
 
 
 class CreateAccount(View):
@@ -63,14 +64,21 @@ class CreateAccount(View):
         else:
             if authority == 1:
                 id = AccountUtil.createAdminAccount(username, password)
-                AccountUtil.updateAccountInfo(
-                    id,
-                    firstname,
-                    lastname,
-                    email,
-                    request.POST.get("address"),
-                    request.POST.get("phone"),
-                )
+                try:
+                    AccountUtil.updateAccountInfo(
+                        id,
+                        firstname,
+                        lastname,
+                        email,
+                        request.POST.get("address"),
+                        request.POST.get("phone"),
+                    )
+                except ValidationError:
+                    return render(
+                        request,
+                        "account/create.html",
+                        {"message": "invalid email or phone number"}
+                    )
                 return render(
                     request,
                     "account/create.html",
@@ -78,14 +86,21 @@ class CreateAccount(View):
                 )
             elif authority == 2:
                 id = AccountUtil.createInstructorAccount(username, password)
-                AccountUtil.updateAccountInfo(
-                    id,
-                    firstname,
-                    lastname,
-                    email,
-                    request.POST.get("address"),
-                    request.POST.get("phone"),
-                )
+                try:
+                    AccountUtil.updateAccountInfo(
+                        id,
+                        firstname,
+                        lastname,
+                        email,
+                        request.POST.get("address"),
+                        request.POST.get("phone"),
+                    )
+                except ValidationError:
+                    return render(
+                        request,
+                        "account/create.html",
+                        {"message": "invalid email or phone number"}
+                    )
                 return render(
                     request,
                     "account/create.html",
@@ -93,14 +108,21 @@ class CreateAccount(View):
                 )
             elif authority == 3:
                 id = AccountUtil.createTAAccount(username, password)
-                AccountUtil.updateAccountInfo(
-                    id,
-                    firstname,
-                    lastname,
-                    email,
-                    request.POST.get("address"),
-                    request.POST.get("phone"),
-                )
+                try:
+                    AccountUtil.updateAccountInfo(
+                        id,
+                        firstname,
+                        lastname,
+                        email,
+                        request.POST.get("address"),
+                        request.POST.get("phone"),
+                    )
+                except ValidationError:
+                    return render(
+                        request,
+                        "account/create.html",
+                        {"message": "invalid email or phone number"}
+                    )
                 return render(
                     request,
                     "account/create.html",

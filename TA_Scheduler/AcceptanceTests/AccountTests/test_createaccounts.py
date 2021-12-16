@@ -301,10 +301,38 @@ class NewAccountTest(TestCase):
         )
 
     def test_invalidEmail(self):
-        pass
+        response = self.client.post(
+                "/account/create/",
+                {
+                    "username": "new",
+                    "password": "password",
+                    "authority": "1",
+                    "firstname": "First",
+                    "lastname": "Last",
+                    "email": "invalid",
+                },
+            )
+        self.assertEqual(
+            "invalid email or phone number",
+            response.context.get("message"),
+            "invalid message not given",
+        )
 
     def test_invalidPhone(self):
-        pass
-
-    def test_addressTooLong(self):
-        pass
+        response = self.client.post(
+                "/account/create/",
+                {
+                    "username": "new",
+                    "password": "password",
+                    "authority": "1",
+                    "firstname": "First",
+                    "lastname": "Last",
+                    "email": "fake@test.com",
+                    "phone": "1",
+                },
+            )
+        self.assertEqual(
+            "invalid email or phone number",
+            response.context.get("message"),
+            "invalid message not given",
+        )
