@@ -4,6 +4,13 @@ from TA_Scheduler.utilities.AccountUtil import AccountUtil
 from django.core.exceptions import ValidationError
 
 
+def unvalidated(request):
+    return render(
+        request,
+        "account/create.html",
+        {"message": "invalid email or phone number"}
+    )
+
 class CreateAccount(View):
     def get(self, request):
         """Called when the user opens the Create Account page.
@@ -74,11 +81,7 @@ class CreateAccount(View):
                         request.POST.get("phone"),
                     )
                 except ValidationError:
-                    return render(
-                        request,
-                        "account/create.html",
-                        {"message": "invalid email or phone number"}
-                    )
+                    unvalidated(request)
                 return render(
                     request,
                     "account/create.html",
@@ -96,11 +99,7 @@ class CreateAccount(View):
                         request.POST.get("phone"),
                     )
                 except ValidationError:
-                    return render(
-                        request,
-                        "account/create.html",
-                        {"message": "invalid email or phone number"}
-                    )
+                    unvalidated(request)
                 return render(
                     request,
                     "account/create.html",
@@ -118,11 +117,7 @@ class CreateAccount(View):
                         request.POST.get("phone"),
                     )
                 except ValidationError:
-                    return render(
-                        request,
-                        "account/create.html",
-                        {"message": "invalid email or phone number"}
-                    )
+                    unvalidated(request)
                 return render(
                     request,
                     "account/create.html",
