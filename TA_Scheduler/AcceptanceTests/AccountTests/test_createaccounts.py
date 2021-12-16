@@ -302,16 +302,16 @@ class NewAccountTest(TestCase):
 
     def test_invalidEmail(self):
         response = self.client.post(
-                "/account/create/",
-                {
-                    "username": "new",
-                    "password": "password",
-                    "authority": "1",
-                    "firstname": "First",
-                    "lastname": "Last",
-                    "email": "invalid",
-                },
-            )
+            "/account/create/",
+            {
+                "username": "new",
+                "password": "password",
+                "authority": "1",
+                "firstname": "First",
+                "lastname": "Last",
+                "email": "invalid",
+            },
+        )
         self.assertEqual(
             "invalid email or phone number",
             response.context.get("message"),
@@ -320,17 +320,17 @@ class NewAccountTest(TestCase):
 
     def test_invalidPhone(self):
         response = self.client.post(
-                "/account/create/",
-                {
-                    "username": "new",
-                    "password": "password",
-                    "authority": "1",
-                    "firstname": "First",
-                    "lastname": "Last",
-                    "email": "fake@test.com",
-                    "phone": "1",
-                },
-            )
+            "/account/create/",
+            {
+                "username": "new",
+                "password": "password",
+                "authority": "1",
+                "firstname": "First",
+                "lastname": "Last",
+                "email": "fake@test.com",
+                "phone": "1",
+            },
+        )
         self.assertEqual(
             "invalid email or phone number",
             response.context.get("message"),
