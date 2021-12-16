@@ -6,10 +6,9 @@ from django.core.exceptions import ValidationError
 
 def unvalidated(request):
     return render(
-        request,
-        "account/create.html",
-        {"message": "invalid email or phone number"}
+        request, "account/create.html", {"message": "invalid email or phone number"}
     )
+
 
 class CreateAccount(View):
     def get(self, request):
