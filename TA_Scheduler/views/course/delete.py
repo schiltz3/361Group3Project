@@ -2,6 +2,7 @@ from typing import List
 from django.shortcuts import redirect, render
 from django.views import View
 from TA_Scheduler.utilities.CourseUtil import CourseUtil
+from TA_Scheduler.utilities.AccountUtil import AccountUtil
 from TA_Scheduler.utilities.RedirectUtil import RedirectUtil
 
 
@@ -20,10 +21,11 @@ class DeleteCourse(View):
         :post: None
         """
         courses = CourseUtil.getAllCourses()
+        group = AccountUtil.getUserGroup(user=request.user)
         return RedirectUtil.admin(
             request,
             "delete courses",
-            render(request, self.TEMPLATE, {"courses": courses}),
+            render(request, self.TEMPLATE, {"courses": courses, "group": group}),
         )
 
     def post(self, request):

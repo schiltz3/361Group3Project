@@ -6,7 +6,8 @@ from TA_Scheduler.utilities.AccountUtil import AccountUtil
 
 class CreateAccount(View):
     def get(self, request):
-        return render(request, "account/create.html", {"message": " "})
+        group = AccountUtil.getUserGroup(user=request.user)
+        return render(request, "account/create.html", {"message": " ", "group": group})
 
     def post(self, request):
 
