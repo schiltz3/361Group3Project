@@ -77,7 +77,7 @@ class CreateAccount(View):
                     return render(
                         request,
                         "account/create.html",
-                        {"message": "invalid email or phone number"}
+                        {"message": "invalid email or phone number"},
                     )
                 return render(
                     request,
@@ -99,7 +99,7 @@ class CreateAccount(View):
                     return render(
                         request,
                         "account/create.html",
-                        {"message": "invalid email or phone number"}
+                        {"message": "invalid email or phone number"},
                     )
                 return render(
                     request,
@@ -121,7 +121,7 @@ class CreateAccount(View):
                     return render(
                         request,
                         "account/create.html",
-                        {"message": "invalid email or phone number"}
+                        {"message": "invalid email or phone number"},
                     )
                 return render(
                     request,

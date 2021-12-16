@@ -215,7 +215,9 @@ class AccountUtil:
         if email is not None:
             validate_email(email)
         if phone is not None:
-            valid = RegexValidator(regex="[0-9]{10}", message="Enter a valid phone number")
+            valid = RegexValidator(
+                regex="[0-9]{10}", message="Enter a valid phone number"
+            )
             valid(phone)
 
         if AccountUtil.getAccountByID(id) is not None:
