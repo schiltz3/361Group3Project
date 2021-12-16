@@ -1,16 +1,27 @@
 from django.shortcuts import render
 from django.views import View
-from TA_Scheduler.models import Account
 from TA_Scheduler.utilities.AccountUtil import AccountUtil
 
 
 class CreateAccount(View):
     def get(self, request):
+        """Called when the user opens the Create Account page.
+
+        :param request: request from account/create.html
+        :return: rendering of account/create.html with blank form
+        :pre: User is not anonymous, instructor, or ta
+        :post: None
+        """
         return render(request, "account/create.html", {"message": " "})
 
     def post(self, request):
+        """Called when the user submits the form on the Create Accounts page.
 
-        # Not correctly checking authority for null. Can't convert NoneType to int
+        :param request: request from account/create.html
+        :return: rendering of account/create.html with message
+        :pre: User is not anonymous, instructor, or ta
+        :post: None
+        """
         usertype = request.POST.get("authority")
         if usertype is not None:
             try:
@@ -42,7 +53,7 @@ class CreateAccount(View):
                 "account/create.html",
                 {"message": "Please fill out all required fields"},
             )
-        # getAccountByUsername return None if user does not exist
+        # getAccountByUsername returns None if user does not exist
         if AccountUtil.getAccountByUsername(username) is not None:
             return render(
                 request,
