@@ -1,15 +1,11 @@
-from django.shortcuts import render, redirect
 from TA_Scheduler.models import Account
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.views import View
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render
 from TA_Scheduler.utilities.AccountUtil import AccountUtil
 from TA_Scheduler.utilities.CourseUtil import CourseUtil
 from TA_Scheduler.utilities.RedirectUtil import RedirectUtil
 from typing import List, Union, Optional
-
-from TA_Scheduler.utilities.RedirectUtil import RedirectUtil
-
 
 class CreateCourse(View):
     TEMPLATE = "course/create.html"
