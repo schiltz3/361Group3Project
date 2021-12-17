@@ -5,6 +5,11 @@ from django.core.exceptions import ValidationError
 
 
 def unvalidated(request):
+    """Called when an invalid email address or phone number is detected
+
+    :param request: request from account/create.html
+    :return: rendering of account/create.html with invalid entry message
+    """
     return render(
         request,
         "account/create.html",

@@ -208,7 +208,8 @@ class AccountUtil:
         :param email: new email address
         :param address: new address
         :param phone: new phone number
-        :return: TypeError if no id given, otherwise bool of whether id is in Account database
+        :return: TypeError if no id given, ValidationError if email or phone is of invalid format,
+                    otherwise bool of whether id is in Account database
         """
         if id is None:
             raise TypeError("must enter an id number")
