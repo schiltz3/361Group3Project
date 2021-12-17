@@ -1,14 +1,107 @@
-{% extends "bar_base.html" %}
+{% extends 'bar_base.html' %}
+
+{% comment %}
+Edit course objects
+
+Context:
+
+POST Vars:
+- message: String (should make message iterable type w/ color)
+- warning: String
+- error: String
+
+- instructors: Optional[Iterable[Account]]
+
+{% endcomment%}
 
 {% block application_pane %}
-
-<row>
-    <form action="/course/edit.html" method="post">
+<div class="row">
+    <form action="/course/edit/" method="post">
         {% csrf_token %}
         <div class="col-7">
-            <h1>Edit course</h1>
-        </div>
-    </form>
-</row>
+            {% autoescape off %}
+            <h1>Edit Class</h1>
+            <!-- Course selection -->
+            <div class="input-group mb-2">
+                <span class="input-group-text" id="Courses">Courses</span>
+                    <select name="course" class="form-select"
+                            required
+                            onchange="this.form.submit()"
+                            aria-label="course"
+                            aria-describedby="Courses">
+                        {% if selected_course %}
+                        <option selected disabled value="{{ selected_course }}">{{ selected_course.name }} {{ selected_course.instructor }}</option>
+                        {% else %}
+                        <option selected value>None</option>
+                        {% endif %}
+                        {% for course in courses %}
+                        <option value="{{ course }}">{{course.name}} {{ course.instructor }}</option>
+                        {% endfor %}
+                    </select>
+            </div>
+            {%if selected_course %}
+            <div class="input-group mb-2">
+                <span class="input-group-text" id="Name">Name:</span>
+                <input type="text" name="name" class="form-control"
+                       placeholder="{{selected_course}}"
+                       required
+                       aria-label="Name"
+                       aria-describedby="Name"/>
+            </div>
+            <div class="input-group mb-2">
+                <span class="input-group-text" id="Description">Description:</span>
+                <input type="text" name="description" class="form-control"
+                       placeholder="{{selected_course.description}}"
+                       required
+                       aria-label="Description"
+                       aria-describedby="Description">
+            </div>
 
-{% endblock application_pane %}
+            <!-- Instructor selection -->
+            <div class="input-group mb-2">
+                <span class="input-group-text" id="Instructor">Instructor</span>
+                <select name="instructor" class="form-select"
+                        aria-label="Instructor"
+                        aria-describedby="Instructor">
+                    required
+                    <option selected value>{{selected_course.instructor.first_name}} {{selected_course.instructor.last_name}}</option>
+                    {% for i in instructors %}
+                    <option value="{{ i }}">{{ i.user.first_name }} {{ i.user.last_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- TA selection -->
+            <div class="input-group mb-2">
+                <span class="input-group-text" id="ta">TAs</span>
+                <select name="ta" class="form-select"
+                        multiple="multiple"
+                        aria-label="TA"
+                        aria-describedby="TA"
+                        size="5">
+                    <option disabled selected value>Select TAs</option>
+                    {% for ta in tas %}
+                    <option value="{{ ta }}">{{ ta.user.first_name }} {{ ta.user.last_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            {% endif %}
+            {% endautoescape %}
+        </div>
+
+        <div class="col-7">
+            {% if message %}
+            <div class="alert alert-primary mt-2" role="alert"> {{ message }}</div>
+            {% endif %}
+            {% if warning %}
+            <div class="alert alert-warning mt-2" role="alert"> {{ warning }}</div>
+            {% endif %}
+            {% if error %}
+            <div class="alert alert-danger mt-2" role="alert"> {{ error }}</div>
+            {% endif %}
+        </div>
+
+    </form>
+</div>
+{% endblock application_pane %}}
