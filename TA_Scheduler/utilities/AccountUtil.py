@@ -2,6 +2,7 @@ from typing import Iterable, Optional, Union
 from django.contrib.auth.models import Group, User
 from django.db.models.query import QuerySet
 from django.contrib.auth import authenticate
+from django.core.validators import validate_email, RegexValidator
 
 from TA_Scheduler.models import Account
 
@@ -207,10 +208,18 @@ class AccountUtil:
         :param email: new email address
         :param address: new address
         :param phone: new phone number
-        :return: TypeError if no id given, otherwise bool of whether id is in Account database
+        :return: TypeError if no id given, ValidationError if email or phone is of invalid format,
+                    otherwise bool of whether id is in Account database
         """
         if id is None:
             raise TypeError("must enter an id number")
+        if email is not None:
+            validate_email(email)
+        if phone is not None:
+            valid = RegexValidator(
+                regex="[0-9]{10}", message="Enter a valid phone number"
+            )
+            valid(phone)
 
         if AccountUtil.getAccountByID(id) is not None:
             account = AccountUtil.getAccountByID(id)
