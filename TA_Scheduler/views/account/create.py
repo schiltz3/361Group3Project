@@ -11,10 +11,9 @@ def unvalidated(request):
     :return: rendering of account/create.html with invalid entry message
     """
     return render(
-        request,
-        "account/create.html",
-        {"message": "invalid email or phone number"}
+        request, "account/create.html", {"message": "invalid email or phone number"}
     )
+
 
 class CreateAccount(View):
     def get(self, request):
