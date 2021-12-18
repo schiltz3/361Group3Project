@@ -23,12 +23,12 @@ POST Vars:
             <h1>Edit Class</h1>
             <!-- Course selection -->
             <div class="input-group mb-2">
-                <span class="input-group-text" id="Courses">Courses</span>
+                <span class="input-group-text" id="courses-input">Courses</span>
                     <select name="course" class="form-select"
                             required
                             onchange="this.form.submit()"
                             aria-label="course"
-                            aria-describedby="Courses">
+                            aria-describedby="courses-input">
                         {% if selected_course %}
                         <option selected disabled value="{{ selected_course }}">{{ selected_course.name }} {{ selected_course.instructor }}</option>
                         {% else %}
@@ -40,44 +40,48 @@ POST Vars:
                     </select>
             </div>
             {%if selected_course %}
+            <!-- Course name -->
             <div class="input-group mb-2">
-                <span class="input-group-text" id="Name">Name:</span>
+                <span class="input-group-text" id="name-input">Name:</span>
                 <input type="text" name="name" class="form-control"
                        placeholder="{{selected_course}}"
                        required
                        aria-label="Name"
-                       aria-describedby="Name"/>
+                       aria-describedby="name-input"/>
             </div>
+            <!-- Course description -->
             <div class="input-group mb-2">
-                <span class="input-group-text" id="Description">Description:</span>
+                <span class="input-group-text" id="description-input">Description:</span>
                 <input type="text" name="description" class="form-control"
                        placeholder="{{selected_course.description}}"
                        required
-                       aria-label="Description"
-                       aria-describedby="Description">
+                       aria-label="description"
+                       aria-describedby="description-inp;ut">
             </div>
 
-            <!-- Instructor selection -->
+            {% for i in instructors %}
+            {{ i.user.first_name }} {{ i.user.last_name }}
+            {% endfor %}
+            <!-- Course Instructor selection -->
             <div class="input-group mb-2">
-                <span class="input-group-text" id="Instructor">Instructor</span>
-                <select name="instructor" class="form-select"
-                        aria-label="Instructor"
-                        aria-describedby="Instructor">
-                    required
-                    <option selected value>{{selected_course.instructor.first_name}} {{selected_course.instructor.last_name}}</option>
+                <span class="input-group-text" id="instructor-input">Instructor</span>
+                <select name="instructors" class="form-select"
+                        aria-label="instructor"
+                        aria-describedby="instructor-input">
+                    <option selected value="{{selected_course}}">{{selected_course.instructor}}</option>
                     {% for i in instructors %}
-                    <option value="{{ i }}">{{ i.user.first_name }} {{ i.user.last_name }}</option>
+                    <option value="{{i}}">{{ i.user.first_name}}</option>
                     {% endfor %}
                 </select>
             </div>
 
             <!-- TA selection -->
             <div class="input-group mb-2">
-                <span class="input-group-text" id="ta">TAs</span>
+                <span class="input-group-text" id="ta-input">TAs</span>
                 <select name="ta" class="form-select"
                         multiple="multiple"
                         aria-label="TA"
-                        aria-describedby="TA"
+                        aria-describedby="ta-input"
                         size="5">
                     <option disabled selected value>Select TAs</option>
                     {% for ta in tas %}

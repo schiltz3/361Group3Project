@@ -60,8 +60,6 @@ class EditCourse(View):
             # Add course to context
             course_obj = CourseUtil.getCourseByName(course)
             self.context["selected_course"] = course_obj
-            print(f"Course Name: {course_obj.name}")
-            print(f"Course Name type: {type(course_obj.name)}")
             # self.context["name"] = course_obj.name
             # self.context["instructor"] = course_obj.instructor
             # self.context["description"] = course_obj.description
@@ -150,8 +148,8 @@ class EditCourse(View):
         :post: rendered response
         """
         kwargs["courses"] = CourseUtil.getAllCourses()
-        #print(kwargs)
         self.context[msg_type] = msg
+        self.context["instructors"] = AccountUtil.getInstructors()
         self.context.update(**kwargs)
 
         # context = {
