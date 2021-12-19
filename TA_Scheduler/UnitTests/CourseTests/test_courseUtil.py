@@ -28,6 +28,25 @@ class SetUp:
             ta = AccountUtil.getAccountByID(ta_id)
             self.tas.append(ta)
 
+    def matches(self, course: Course, courseName: str=courseName, description: str=description, noneInstructor = False, noneTAs: bool = False):
+        if course.name != courseName:
+            return False
+
+        if course.description != description:
+            return False
+
+        if (not(noneInstructor and course.instructor == None or
+            not noneInstructor and course.instructor == self.instructor )):
+            return False
+
+        if (not(noneTAs and list(course.tas.all()) == None or
+            not noneTAs and list(course.tas.all()) == self.tas)):
+            return False
+
+        return True
+
+
+
     def setManyCourseNames(self, amount: int):
         self.courseNames = []
         for i in range(amount):
@@ -71,10 +90,8 @@ class CreateCourseUtilTest(TestCase):
         try:
             index = CourseUtil.createCourse(self.util.courseName, self.util.description, self.util.instructor, self.util.tas)
             course = Course.objects.filter(id=index)[0]
-            self.assertEquals(course.name, self.util.courseName, msg="Created course with a name that does not match the argument name during creation")
-            self.assertEquals(course.description, self.util.description, msg="Created course with a description that does not match the argument description during creation")
-            self.assertEquals(course.instructor.id, self.util.instructor.id, msg="Created course with an instructor id that does not match the argument instructor id")
-            self.assertListEqual(list(course.tas.all()), self.util.tas, msg="Created course with TAs that do not match argument TAs during creation")
+            self.assertTrue(self.util.matches(course), msg="The fields of the created course do not match the arguments provided during creation")
+
         except Exception as e:
             self.fail(msg= str(e) + " exception was thrown when trying to create and get a course from the Course database")
 
@@ -118,15 +135,66 @@ class GetAllCoursesTest(TestCase):
         self.amount = 15
         self.util = SetUp()
         self.util.setManyCourseNames(self.amount)
-        for i in range(self.amount):
-            Course.objects.create(name=self.util.courseName, description=self.util.description, instructor=self.util.instructor).tas.set(self.util.tas)
 
     def test_getAllCourses(self):
         try:
+            for i in range(self.amount):
+                Course.objects.create(name=self.util.courseName, description=self.util.description, instructor=self.util.instructor).tas.set(self.util.tas)
             courses = CourseUtil.getAllCourses()
             self.assertEquals(len(courses), self.amount, msg="Failed to retrieve all courses from database")
         except Exception as e:
             self.fail(msg= str(e) + " exception was thrown on attempt to retrieve all courses from database")
+
+    def test_emptyDatabase(self):
+        try:
+            courses = CourseUtil.getAllCourses()
+            self.assertIsNone(courses, msg="Failed to get None courses when Course database is empty")
+        except Exception as e:
+            self.fail(msg= str(e) + " exception was thrown on attempt to retrieve all courses from database")
+
+    def test_accurateFields(self):
+        try:
+            for i in range(self.amount):
+                Course.objects.create(name=self.util.courseName, description=self.util.description, instructor=self.util.instructor).tas.set(self.util.tas)
+
+            courses = CourseUtil.getAllCourses()
+            
+            for i in range(self.amount):
+                subject = courses[i]
+                self.assertEquals(subject.name, self.util.courseName, msg="Created course with a name that does not match the argument name given on creation")
+                self.assertEquals(subject.description, self.util.description, msg="Created course with a description that does not match the argument description given on creation")
+                self.assertEquals(subject.instructor.id, self.util.instructor.id, msg="Created course with an instructor id that does not match the argument instructor id")
+                self.assertListEqual(list(subject.tas.all()), self.util.tas, msg="Created course with TAs that do not match argument TAs given creation")
+        except Exception as e:
+            self.fail(msg= str(e) + " exception was thrown on attempt to retrieve all courses from database")
+
+class GetCourseByName(TestCase):
+    def setUp(self):
+        self.util = SetUp()
+
+    def test_getCourseByName(self):
+        try:
+            Course.objects.create(name=self.util.courseName, description=self.util.description, instructor=self.util.instructor)
+            self.assertIsNotNone(CourseUtil.getCourseByName(self.util.courseName), msg="Could not retrieve existing course by name from database")
+        except Exception as e:
+            self.fail(msg= str(e) + " exception was thrown on attempt to retrieve a course by name from database")
+
+    def test_nonexistentCourse(self):
+        try:
+            self.assertIsNone(CourseUtil.getCourseByName("course"), msg="Nonexistent course was returned as not None")
+        except Exception as e:
+            self.fail(msg= str(e) + " exception was thrown on attempt to retrieve a course by name from database")
+
+        
+
+            
+
+
+    
+
+
+
+        
 
 
 
