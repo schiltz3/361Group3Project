@@ -19,7 +19,7 @@ class EditCourse(View):
     ERROR = "error"
     WARNING = "warning"
     context = {
-        "selected_course": None,
+        "selected_course": None
     }
 
     def get(self, request: HttpRequest) -> Union[HttpResponse, HttpResponseRedirect]:
@@ -51,85 +51,67 @@ class EditCourse(View):
         description: Optional[str] = str(request.POST.get("description"))
         instructor: Optional[str] = str(request.POST.get("instructor"))
         tas: List[str] = request.POST.getlist("ta")
-        ta_accounts: List[Account] = []
 
-        #Selected course from list of current courses
+        # print(self.context)
+        # Selected course from list of current courses
         if course != "None":
             # Add course to context
             course_obj = CourseUtil.getCourseByName(course)
             self.context["selected_course"] = course_obj
             self.context["selected_tas"] = course_obj.tas.all()
             return self.respond(request)
-        else:
-            return self.respond(request, self.ERROR, "course is None")
+        elif name and self.context.get("selected_course"):
+            course_obj = self.context.get("selected_course")
+            name: Optional[str] = str(request.POST.get("name"))
+            description: Optional[str] = str(request.POST.get("description"))
+            instructor: Optional[str] = str(request.POST.get("instructors"))
+            tas: List[str] = request.POST.getlist("ta")
+            resp = self.validateCourseInput(request=request,
+                                            name=name,
+                                            description=description,
+                                            instructor=instructor,
+                                            tas=tas)
+            if resp is True:
+                ta_accounts: List[Account] = []
+                for ta in tas:
+                    ta_accounts.append(AccountUtil.getAccountByUsername(ta))
 
+                course_id = CourseUtil.editCourse(course_obj.id,
+                                                  name=name,
+                                                  description=description,
+                                                  instructor=AccountUtil.getAccountByUsername(instructor),
+                                                  tas=ta_accounts)
 
-    def validateCourseInput(self, course: dict[str:any]) -> bool:
-        ## Convert Incorrect strings to NoneType
-        # if instructor == "None":
-        #    instructor = None
-        # if name == "":
-        #    name = None
+                course_obj = CourseUtil.getCourseByID(course_id)
+                self.context["selected_course"] = course_obj
+                self.context["selected_tas"] = course_obj.tas.all()
+                return self.respond(request, self.MESSAGE, "Course Updated")
+            else:
+                return resp
 
-        # if name and instructor:
-        #    if all(x.isalpha() or x.isnumeric() or x.isspace() for x in name):
-        #        courses = CourseUtil.getAllCourses()
-        #        if courses:
-        #            for course in courses:
-        #                if (course.name.casefold() == name.casefold()) and (
-        #                        course.instructor.user.username.casefold()
-        #                        == instructor.casefold()
-        #                ):
-        #                    return self.respond(
-        #                        request,
-        #                        self.WARNING,
-        #                        "Class already exists with this instructor.",
-        #                    )
+    def validateCourseInput(self, request, name, description, instructor, tas) -> Union[bool, HttpResponse]:
+        # Convert Incorrect strings to NoneType
+        if instructor == "None":
+            instructor = None
+        if description is None:
+            return self.respond(request, self.WARNING, "Description must not be blank")
+        if name is None:
+            return self.respond(request, self.WARNING, "Class name must not be blank")
 
-        #    else:
-        #        return self.respond(
-        #            request, self.WARNING, "Name can only contain [A-z][0-9]"
-        #        )
-        # if name is None:
-        #    return self.respond(request, self.WARNING, "Name must not be blank")
-        ## check instructor
-        # if instructor:
-        #    instructor_account = AccountUtil.getAccountByUsername(instructor)
-        #    if instructor_account is None:
-        #        return self.respond(
-        #            request, self.ERROR, "Instructor could not be found."
-        #        )
-        # else:
-        #    instructor_account = None
+        # Verify instructor exists
+        if instructor:
+            instructor_account = AccountUtil.getAccountByUsername(instructor)
+            if instructor_account is None:
+                return self.respond(request, self.ERROR, "Instructor could not be found.")
 
-        ## check description
-        # if description:
-        #    if not all(
-        #            x.isalpha() or x.isnumeric() or x.isspace() for x in description
-        #    ):
-        #        return self.respond(
-        #            request, self.WARNING, "Description can only contain [A-z][0-9]"
-        #        )
+        # Verify tas exist
+        if tas:
+            for ta in tas:
+                ta_account = AccountUtil.getAccountByUsername(ta)
+                if not ta_account:
+                    return self.respond(request, self.ERROR, "TA '" + ta + "' does not exist.")
 
-        # else:
-        #    return self.respond(request, self.WARNING, "Description must not be blank.")
-
-        ## check tas
-        # if tas:
-        #    for ta in tas:
-        #        ta_account = AccountUtil.getAccountByUsername(ta)
-        #        if not ta_account:
-        #            return self.respond(
-        #                request, self.ERROR, "TA '" + ta + "' does not exist."
-        #            )
-        #        else:
-        #            ta_accounts.append(ta_account)
-
-        ## adds course to database if instructor, name and description are not none
-        # if name and description:
-        #    return self.respond(request)
-
-        return False
+        return True
 
     def respond(self, request: HttpRequest, msg_type: str = "NoMessage", msg: str = "", **kwargs):
         """Helper method that returns a response.

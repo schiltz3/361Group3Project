@@ -30,14 +30,12 @@ POST Vars:
                         aria-label="course"
                         aria-describedby="courses-input">
                     {% if selected_course %}
-                    <option selected disabled value="{{ selected_course }}">{{ selected_course.name }}
-                        {% if selected_course.instructor %} {{selected_course.instructor }} {%endif%}
-                    </option>
+                    <option selected disabled value="{{ selected_course }}">{{ selected_course.name }}</option>
                     {% else %}
                     <option selected value>None</option>
                     {% endif %}
                     {% for course in courses %}
-                    <option value="{{ course }}">{{course.name}} {% if course.instructor %} {{course.instructor }} {%endif%}</option>
+                    <option value="{{ course }}">{{course.name}}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -46,7 +44,8 @@ POST Vars:
             <div class="input-group mb-2">
                 <span class="input-group-text" id="name-input">Name:</span>
                 <input type="text" name="name" class="form-control"
-                       placeholder="{{selected_course}}"
+                       pattern="[A-Za-z0-9\ ]{1,}"
+                       value="{{selected_course}}"
                        required
                        aria-label="Name"
                        aria-describedby="name-input"/>
@@ -54,8 +53,11 @@ POST Vars:
             <!-- Course description -->
             <div class="input-group mb-2">
                 <span class="input-group-text" id="description-input">Description:</span>
+                <!-- swap to textbox -->
                 <input type="text" name="description" class="form-control"
-                       placeholder="{{selected_course.description}}"
+                       pattern="[A-Za-z0-9\ ]{1,}"
+                       value="{{selected_course.description}}"
+                       spellcheck
                        required
                        aria-label="description"
                        aria-describedby="description-inp;ut">
@@ -100,7 +102,7 @@ POST Vars:
                     {% endfor %}
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary" value="Submit">Submit</button>
             {% endif %}
             {% endautoescape %}
         </div>
