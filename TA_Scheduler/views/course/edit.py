@@ -49,10 +49,11 @@ class EditCourse(View):
         course: Optional[str] = str(request.POST.get("course"))
         name: Optional[str] = str(request.POST.get("name"))
         description: Optional[str] = str(request.POST.get("description"))
-        instructor: Optional[str] = str(request.POST.get("instructor"))
+        instructor: Optional[str] = str(request.POST.get("instructors"))
         tas: List[str] = request.POST.getlist("ta")
 
-        # print(self.context)
+        self.resetMessage()
+
         # Selected course from list of current courses
         if course != "None":
             # Add course to context
@@ -62,10 +63,6 @@ class EditCourse(View):
             return self.respond(request)
         elif name and self.context.get("selected_course"):
             course_obj = self.context.get("selected_course")
-            name: Optional[str] = str(request.POST.get("name"))
-            description: Optional[str] = str(request.POST.get("description"))
-            instructor: Optional[str] = str(request.POST.get("instructors"))
-            tas: List[str] = request.POST.getlist("ta")
             resp = self.validateCourseInput(request=request,
                                             name=name,
                                             description=description,
@@ -112,6 +109,11 @@ class EditCourse(View):
                     return self.respond(request, self.ERROR, "TA '" + ta + "' does not exist.")
 
         return True
+
+    def resetMessage(self):
+        self.context[self.MESSAGE] = None
+        self.context[self.WARNING] = None
+        self.context[self.ERROR] = None
 
     def respond(self, request: HttpRequest, msg_type: str = "NoMessage", msg: str = "", **kwargs):
         """Helper method that returns a response.
