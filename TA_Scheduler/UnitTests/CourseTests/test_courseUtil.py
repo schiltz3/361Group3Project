@@ -184,11 +184,24 @@ class GetCourseByNameTest(TestCase):
 class DeleteCourseByNameTest(TestCase):
     def setUp(self):
         self.util = SetUp()
-    
-    def test_deleteCourseByName(self):
+
+    def test_deleteCourse(self):
+        try:
+            Course.objects.create(name=self.util.courseName, description=self.util.description, instructor=self.util.instructor)
+            self.assertTrue(CourseUtil.deleteCourseByName(self.util.courseName), msg="Failed to delete course by name")
+        except Exception as e:
+            self.fail(msg= str(e) + " exception was thrown on attempt to delete a course by name")
+
+    def test_deletedIsNotPresent(self):
         try:
             Course.objects.create(name=self.util.courseName, description=self.util.description, instructor=self.util.instructor)
             CourseUtil.deleteCourseByName(self.util.courseName)
             self.assertFalse(list(Course.objects.filter(name=self.util.courseName)), msg="Failed to delete course by name.")
+        except Exception as e:
+            self.fail(msg= str(e) + " exception was thrown on attempt to delete a course by name")
+
+    def test_deleteNonexistent(self):
+        try:
+            self.assertFalse(CourseUtil.deleteCourseByName("course"), msg="Failed to return False when attempting to delete a nonexistent course")
         except Exception as e:
             self.fail(msg= str(e) + " exception was thrown on attempt to delete a course by name")
