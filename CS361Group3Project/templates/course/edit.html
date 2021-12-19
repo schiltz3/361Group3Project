@@ -20,24 +20,26 @@ POST Vars:
         {% csrf_token %}
         <div class="col-7">
             {% autoescape off %}
-            <h1>Edit Class</h1>
+            <h1>Edit Course</h1>
             <!-- Course selection -->
             <div class="input-group mb-2">
                 <span class="input-group-text" id="courses-input">Courses</span>
-                    <select name="course" class="form-select"
-                            required
-                            onchange="this.form.submit()"
-                            aria-label="course"
-                            aria-describedby="courses-input">
-                        {% if selected_course %}
-                        <option selected disabled value="{{ selected_course }}">{{ selected_course.name }} {{ selected_course.instructor }}</option>
-                        {% else %}
-                        <option selected value>None</option>
-                        {% endif %}
-                        {% for course in courses %}
-                        <option value="{{ course }}">{{course.name}} {{ course.instructor }}</option>
-                        {% endfor %}
-                    </select>
+                <select name="course" class="form-select"
+                        required
+                        onchange="this.form.submit()"
+                        aria-label="course"
+                        aria-describedby="courses-input">
+                    {% if selected_course %}
+                    <option selected disabled value="{{ selected_course }}">{{ selected_course.name }}
+                        {% if selected_course.instructor %} {{selected_course.instructor }} {%endif%}
+                    </option>
+                    {% else %}
+                    <option selected value>None</option>
+                    {% endif %}
+                    {% for course in courses %}
+                    <option value="{{ course }}">{{course.name}} {% if course.instructor %} {{course.instructor }} {%endif%}</option>
+                    {% endfor %}
+                </select>
             </div>
             {%if selected_course %}
             <!-- Course name -->
@@ -59,18 +61,22 @@ POST Vars:
                        aria-describedby="description-inp;ut">
             </div>
 
-            {% for i in instructors %}
-            {{ i.user.first_name }} {{ i.user.last_name }}
-            {% endfor %}
             <!-- Course Instructor selection -->
             <div class="input-group mb-2">
                 <span class="input-group-text" id="instructor-input">Instructor</span>
                 <select name="instructors" class="form-select"
                         aria-label="instructor"
                         aria-describedby="instructor-input">
-                    <option selected value="{{selected_course}}">{{selected_course.instructor}}</option>
+                    <option value=None> None</option>
+                    {% if selected_course.instructor %}
+                    <option selected value="{{selected_course.instructor}}">
+                        {{selected_course.instructor.user.first_name}} {{selected_course.instructor.user.last_name}}
+                    </option>
+                    {%endif%}
                     {% for i in instructors %}
-                    <option value="{{i}}">{{ i.user.first_name}}</option>
+                    {% if i != selected_course.instructor %}
+                    <option value="{{i}}">{{ i.user.first_name }} {{ i.user.last_name }}</option>
+                    {% endif %}
                     {% endfor %}
                 </select>
             </div>
@@ -83,9 +89,14 @@ POST Vars:
                         aria-label="TA"
                         aria-describedby="ta-input"
                         size="5">
-                    <option disabled selected value>Select TAs</option>
+                    <option disabled>Select TAs</option>
+                    {% for tai in selected_tas %}
+                    <option selected value="{{tai}}">{{tai.user.first_name}}</option>
+                    {% endfor %}
                     {% for ta in tas %}
+                    {% if ta not in selected_tas%}
                     <option value="{{ ta }}">{{ ta.user.first_name }} {{ ta.user.last_name }}</option>
+                    {% endif %}
                     {% endfor %}
                 </select>
             </div>

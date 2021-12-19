@@ -52,19 +52,13 @@ class EditCourse(View):
         instructor: Optional[str] = str(request.POST.get("instructor"))
         tas: List[str] = request.POST.getlist("ta")
         ta_accounts: List[Account] = []
-        #print(f"COURSE:{course}")
-        #print(f"COURSE type:{type(course)}")
 
         #Selected course from list of current courses
         if course != "None":
             # Add course to context
             course_obj = CourseUtil.getCourseByName(course)
             self.context["selected_course"] = course_obj
-            # self.context["name"] = course_obj.name
-            # self.context["instructor"] = course_obj.instructor
-            # self.context["description"] = course_obj.description
-            # self.context["ta"] = course_obj.tas
-            # print(self.context["ta"])
+            self.context["selected_tas"] = course_obj.tas.all()
             return self.respond(request)
         else:
             return self.respond(request, self.ERROR, "course is None")
@@ -150,10 +144,7 @@ class EditCourse(View):
         kwargs["courses"] = CourseUtil.getAllCourses()
         self.context[msg_type] = msg
         self.context["instructors"] = AccountUtil.getInstructors()
+        self.context["tas"] = AccountUtil.getTAs()
         self.context.update(**kwargs)
 
-        # context = {
-        #    msg_type: msg,
-        #    **kwargs
-        # }
         return render(request, self.TEMPLATE, self.context)
