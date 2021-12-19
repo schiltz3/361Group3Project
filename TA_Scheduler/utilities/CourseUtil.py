@@ -36,11 +36,11 @@ class CourseUtil:
 
     @staticmethod
     def editCourse(
-            id: int,
-            name: str,
-            description: str = None,
-            instructor: Account = None,
-            tas: List[Account] = None,
+        id: int,
+        name: str,
+        description: str = None,
+        instructor: Account = None,
+        tas: List[Account] = None,
     ) -> Union[int, TypeError]:
         """Edits a course and saves it in the Course database.
 

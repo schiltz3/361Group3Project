@@ -50,7 +50,9 @@ class EditCourseTest(TestCase):
 
             self.courses.append(
                 CourseUtil.getCourseByID(
-                    CourseUtil.createCourse("Course" + str(i), "Description", instructor, tas)
+                    CourseUtil.createCourse(
+                        "Course" + str(i), "Description", instructor, tas
+                    )
                 )
             )
 
@@ -95,30 +97,33 @@ class EditCourseTest(TestCase):
             username=self.admin_account.user.username, password=self.password
         )
         resp = self.client.get(self.TEMPLATE)
-        self.assertEquals(collections.Counter(resp.context.get("courses")), collections.Counter(self.courses),
-                          msg="Did not get all courses")
+        self.assertEquals(
+            collections.Counter(resp.context.get("courses")),
+            collections.Counter(self.courses),
+            msg="Did not get all courses",
+        )
 
     def test_noneCourse(self):
         self.client.login(
             username=self.admin_account.user.username, password=self.password
         )
-        ctx = {
-            "courses": self.courses,
-            "course": "None"
-        }
+        ctx = {"courses": self.courses, "course": "None"}
         print(ctx)
         resp = self.client.post(self.TEMPLATE)
         print(resp)
-        self.assertEquals("Please select course", resp.context.get(self.WARNING),
-                          msg="Failed to detect no course selected")
+        self.assertEquals(
+            "Please select course",
+            resp.context.get(self.WARNING),
+            msg="Failed to detect no course selected",
+        )
 
     @staticmethod
     def form(
-            courses: List[Course],
-            name: str = "",
-            description: str = "",
-            instructor: Account = None,
-            tas: List[Account] = None,
+        courses: List[Course],
+        name: str = "",
+        description: str = "",
+        instructor: Account = None,
+        tas: List[Account] = None,
     ):
         tas_strings = []
         if tas:
