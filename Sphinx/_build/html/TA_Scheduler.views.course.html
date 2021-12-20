@@ -1,20 +1,18 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TA_Scheduler.views.course package &mdash; TA Scheduler 0.10 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <title>TA_Scheduler.views.course package &mdash; TA Scheduler 0.10 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -37,7 +35,7 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+              <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">CS361Group3Project</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="TA_Scheduler.views.html">TA_Scheduler.views package</a><ul class="current">
@@ -88,40 +86,40 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="ta-scheduler-views-course-package">
-<h1>TA_Scheduler.views.course package<a class="headerlink" href="#ta-scheduler-views-course-package" title="Permalink to this headline"></a></h1>
-<section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
-</section>
-<section id="module-TA_Scheduler.views.course.create">
-<span id="ta-scheduler-views-course-create-module"></span><h2>TA_Scheduler.views.course.create module<a class="headerlink" href="#module-TA_Scheduler.views.course.create" title="Permalink to this headline"></a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="TA_Scheduler.views.course.create.CreateCourse">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CreateCourse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#TA_Scheduler.views.course.create.CreateCourse" title="Permalink to this definition"></a></dt>
+  <div class="section" id="ta-scheduler-views-course-package">
+<h1>TA_Scheduler.views.course package<a class="headerlink" href="#ta-scheduler-views-course-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-TA_Scheduler.views.course.create">
+<span id="ta-scheduler-views-course-create-module"></span><h2>TA_Scheduler.views.course.create module<a class="headerlink" href="#module-TA_Scheduler.views.course.create" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="TA_Scheduler.views.course.create.CreateCourse">
+<em class="property">class </em><code class="sig-name descname">CreateCourse</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#TA_Scheduler.views.course.create.CreateCourse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.views.generic.base.View</span></code></p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="TA_Scheduler.views.course.create.CreateCourse.ERROR">
-<span class="sig-name descname"><span class="pre">ERROR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'error'</span></em><a class="headerlink" href="#TA_Scheduler.views.course.create.CreateCourse.ERROR" title="Permalink to this definition"></a></dt>
+<dl class="attribute">
+<dt id="TA_Scheduler.views.course.create.CreateCourse.ERROR">
+<code class="sig-name descname">ERROR</code><em class="property"> = 'error'</em><a class="headerlink" href="#TA_Scheduler.views.course.create.CreateCourse.ERROR" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="TA_Scheduler.views.course.create.CreateCourse.MESSAGE">
-<span class="sig-name descname"><span class="pre">MESSAGE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'message'</span></em><a class="headerlink" href="#TA_Scheduler.views.course.create.CreateCourse.MESSAGE" title="Permalink to this definition"></a></dt>
+<dl class="attribute">
+<dt id="TA_Scheduler.views.course.create.CreateCourse.MESSAGE">
+<code class="sig-name descname">MESSAGE</code><em class="property"> = 'message'</em><a class="headerlink" href="#TA_Scheduler.views.course.create.CreateCourse.MESSAGE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="TA_Scheduler.views.course.create.CreateCourse.TEMPLATE">
-<span class="sig-name descname"><span class="pre">TEMPLATE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'course/create.html'</span></em><a class="headerlink" href="#TA_Scheduler.views.course.create.CreateCourse.TEMPLATE" title="Permalink to this definition"></a></dt>
+<dl class="attribute">
+<dt id="TA_Scheduler.views.course.create.CreateCourse.TEMPLATE">
+<code class="sig-name descname">TEMPLATE</code><em class="property"> = 'course/create.html'</em><a class="headerlink" href="#TA_Scheduler.views.course.create.CreateCourse.TEMPLATE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="TA_Scheduler.views.course.create.CreateCourse.WARNING">
-<span class="sig-name descname"><span class="pre">WARNING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'warning'</span></em><a class="headerlink" href="#TA_Scheduler.views.course.create.CreateCourse.WARNING" title="Permalink to this definition"></a></dt>
+<dl class="attribute">
+<dt id="TA_Scheduler.views.course.create.CreateCourse.WARNING">
+<code class="sig-name descname">WARNING</code><em class="property"> = 'warning'</em><a class="headerlink" href="#TA_Scheduler.views.course.create.CreateCourse.WARNING" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="TA_Scheduler.views.course.create.CreateCourse.get">
-<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">django.http.request.HttpRequest</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">django.http.response.HttpResponse</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">django.http.response.HttpResponseRedirect</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#TA_Scheduler.views.course.create.CreateCourse.get" title="Permalink to this definition"></a></dt>
+<dl class="method">
+<dt id="TA_Scheduler.views.course.create.CreateCourse.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">request: django.http.request.HttpRequest</em><span class="sig-paren">)</span> &#x2192; Union[django.http.response.HttpResponse, django.http.response.HttpResponseRedirect]<a class="headerlink" href="#TA_Scheduler.views.course.create.CreateCourse.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Called when the user opens the page, course/create.html</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -139,9 +137,9 @@
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="TA_Scheduler.views.course.create.CreateCourse.post">
-<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">django.http.request.HttpRequest</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">django.http.response.HttpResponse</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">django.http.response.HttpResponseRedirect</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#TA_Scheduler.views.course.create.CreateCourse.post" title="Permalink to this definition"></a></dt>
+<dl class="method">
+<dt id="TA_Scheduler.views.course.create.CreateCourse.post">
+<code class="sig-name descname">post</code><span class="sig-paren">(</span><em class="sig-param">request: django.http.request.HttpRequest</em><span class="sig-paren">)</span> &#x2192; Union[django.http.response.HttpResponse, django.http.response.HttpResponseRedirect]<a class="headerlink" href="#TA_Scheduler.views.course.create.CreateCourse.post" title="Permalink to this definition">¶</a></dt>
 <dd><p>Called when the user clicks submit.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -162,9 +160,9 @@
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="TA_Scheduler.views.course.create.CreateCourse.respond">
-<span class="sig-name descname"><span class="pre">respond</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">django.http.request.HttpRequest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#TA_Scheduler.views.course.create.CreateCourse.respond" title="Permalink to this definition"></a></dt>
+<dl class="method">
+<dt id="TA_Scheduler.views.course.create.CreateCourse.respond">
+<code class="sig-name descname">respond</code><span class="sig-paren">(</span><em class="sig-param">request: django.http.request.HttpRequest</em>, <em class="sig-param">msg_type: str</em>, <em class="sig-param">msg: str</em><span class="sig-paren">)</span><a class="headerlink" href="#TA_Scheduler.views.course.create.CreateCourse.respond" title="Permalink to this definition">¶</a></dt>
 <dd><p>Helper method that returns a response.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -185,36 +183,36 @@
 
 </dd></dl>
 
-</section>
-<section id="module-TA_Scheduler.views.course.delete">
-<span id="ta-scheduler-views-course-delete-module"></span><h2>TA_Scheduler.views.course.delete module<a class="headerlink" href="#module-TA_Scheduler.views.course.delete" title="Permalink to this headline"></a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="TA_Scheduler.views.course.delete.DeleteCourse">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DeleteCourse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#TA_Scheduler.views.course.delete.DeleteCourse" title="Permalink to this definition"></a></dt>
+</div>
+<div class="section" id="module-TA_Scheduler.views.course.delete">
+<span id="ta-scheduler-views-course-delete-module"></span><h2>TA_Scheduler.views.course.delete module<a class="headerlink" href="#module-TA_Scheduler.views.course.delete" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="TA_Scheduler.views.course.delete.DeleteCourse">
+<em class="property">class </em><code class="sig-name descname">DeleteCourse</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#TA_Scheduler.views.course.delete.DeleteCourse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.views.generic.base.View</span></code></p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="TA_Scheduler.views.course.delete.DeleteCourse.ERROR">
-<span class="sig-name descname"><span class="pre">ERROR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'error'</span></em><a class="headerlink" href="#TA_Scheduler.views.course.delete.DeleteCourse.ERROR" title="Permalink to this definition"></a></dt>
+<dl class="attribute">
+<dt id="TA_Scheduler.views.course.delete.DeleteCourse.ERROR">
+<code class="sig-name descname">ERROR</code><em class="property"> = 'error'</em><a class="headerlink" href="#TA_Scheduler.views.course.delete.DeleteCourse.ERROR" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="TA_Scheduler.views.course.delete.DeleteCourse.MESSAGE">
-<span class="sig-name descname"><span class="pre">MESSAGE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'message'</span></em><a class="headerlink" href="#TA_Scheduler.views.course.delete.DeleteCourse.MESSAGE" title="Permalink to this definition"></a></dt>
+<dl class="attribute">
+<dt id="TA_Scheduler.views.course.delete.DeleteCourse.MESSAGE">
+<code class="sig-name descname">MESSAGE</code><em class="property"> = 'message'</em><a class="headerlink" href="#TA_Scheduler.views.course.delete.DeleteCourse.MESSAGE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="TA_Scheduler.views.course.delete.DeleteCourse.TEMPLATE">
-<span class="sig-name descname"><span class="pre">TEMPLATE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'course/delete.html'</span></em><a class="headerlink" href="#TA_Scheduler.views.course.delete.DeleteCourse.TEMPLATE" title="Permalink to this definition"></a></dt>
+<dl class="attribute">
+<dt id="TA_Scheduler.views.course.delete.DeleteCourse.TEMPLATE">
+<code class="sig-name descname">TEMPLATE</code><em class="property"> = 'course/delete.html'</em><a class="headerlink" href="#TA_Scheduler.views.course.delete.DeleteCourse.TEMPLATE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="TA_Scheduler.views.course.delete.DeleteCourse.WARNING">
-<span class="sig-name descname"><span class="pre">WARNING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'warning'</span></em><a class="headerlink" href="#TA_Scheduler.views.course.delete.DeleteCourse.WARNING" title="Permalink to this definition"></a></dt>
+<dl class="attribute">
+<dt id="TA_Scheduler.views.course.delete.DeleteCourse.WARNING">
+<code class="sig-name descname">WARNING</code><em class="property"> = 'warning'</em><a class="headerlink" href="#TA_Scheduler.views.course.delete.DeleteCourse.WARNING" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="TA_Scheduler.views.course.delete.DeleteCourse.get">
-<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#TA_Scheduler.views.course.delete.DeleteCourse.get" title="Permalink to this definition"></a></dt>
+<dl class="method">
+<dt id="TA_Scheduler.views.course.delete.DeleteCourse.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="headerlink" href="#TA_Scheduler.views.course.delete.DeleteCourse.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Called when the user opens the Delete Course page.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -232,9 +230,9 @@
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="TA_Scheduler.views.course.delete.DeleteCourse.post">
-<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#TA_Scheduler.views.course.delete.DeleteCourse.post" title="Permalink to this definition"></a></dt>
+<dl class="method">
+<dt id="TA_Scheduler.views.course.delete.DeleteCourse.post">
+<code class="sig-name descname">post</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="headerlink" href="#TA_Scheduler.views.course.delete.DeleteCourse.post" title="Permalink to this definition">¶</a></dt>
 <dd><p>Called when the user clicks the action to delete selected courses.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -255,42 +253,42 @@ to inform about success or an error</p>
 
 </dd></dl>
 
-</section>
-<section id="module-TA_Scheduler.views.course.edit">
-<span id="ta-scheduler-views-course-edit-module"></span><h2>TA_Scheduler.views.course.edit module<a class="headerlink" href="#module-TA_Scheduler.views.course.edit" title="Permalink to this headline"></a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="TA_Scheduler.views.course.edit.EditCourse">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">EditCourse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#TA_Scheduler.views.course.edit.EditCourse" title="Permalink to this definition"></a></dt>
+</div>
+<div class="section" id="module-TA_Scheduler.views.course.edit">
+<span id="ta-scheduler-views-course-edit-module"></span><h2>TA_Scheduler.views.course.edit module<a class="headerlink" href="#module-TA_Scheduler.views.course.edit" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="TA_Scheduler.views.course.edit.EditCourse">
+<em class="property">class </em><code class="sig-name descname">EditCourse</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#TA_Scheduler.views.course.edit.EditCourse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.views.generic.base.View</span></code></p>
 <p>Edit Course View</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="TA_Scheduler.views.course.edit.EditCourse.ERROR">
-<span class="sig-name descname"><span class="pre">ERROR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'error'</span></em><a class="headerlink" href="#TA_Scheduler.views.course.edit.EditCourse.ERROR" title="Permalink to this definition"></a></dt>
+<dl class="attribute">
+<dt id="TA_Scheduler.views.course.edit.EditCourse.ERROR">
+<code class="sig-name descname">ERROR</code><em class="property"> = 'error'</em><a class="headerlink" href="#TA_Scheduler.views.course.edit.EditCourse.ERROR" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="TA_Scheduler.views.course.edit.EditCourse.MESSAGE">
-<span class="sig-name descname"><span class="pre">MESSAGE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'message'</span></em><a class="headerlink" href="#TA_Scheduler.views.course.edit.EditCourse.MESSAGE" title="Permalink to this definition"></a></dt>
+<dl class="attribute">
+<dt id="TA_Scheduler.views.course.edit.EditCourse.MESSAGE">
+<code class="sig-name descname">MESSAGE</code><em class="property"> = 'message'</em><a class="headerlink" href="#TA_Scheduler.views.course.edit.EditCourse.MESSAGE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="TA_Scheduler.views.course.edit.EditCourse.TEMPLATE">
-<span class="sig-name descname"><span class="pre">TEMPLATE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'course/edit.html'</span></em><a class="headerlink" href="#TA_Scheduler.views.course.edit.EditCourse.TEMPLATE" title="Permalink to this definition"></a></dt>
+<dl class="attribute">
+<dt id="TA_Scheduler.views.course.edit.EditCourse.TEMPLATE">
+<code class="sig-name descname">TEMPLATE</code><em class="property"> = 'course/edit.html'</em><a class="headerlink" href="#TA_Scheduler.views.course.edit.EditCourse.TEMPLATE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="TA_Scheduler.views.course.edit.EditCourse.WARNING">
-<span class="sig-name descname"><span class="pre">WARNING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'warning'</span></em><a class="headerlink" href="#TA_Scheduler.views.course.edit.EditCourse.WARNING" title="Permalink to this definition"></a></dt>
+<dl class="attribute">
+<dt id="TA_Scheduler.views.course.edit.EditCourse.WARNING">
+<code class="sig-name descname">WARNING</code><em class="property"> = 'warning'</em><a class="headerlink" href="#TA_Scheduler.views.course.edit.EditCourse.WARNING" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="TA_Scheduler.views.course.edit.EditCourse.context">
-<span class="sig-name descname"><span class="pre">context</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'selected_course':</span> <span class="pre">None}</span></em><a class="headerlink" href="#TA_Scheduler.views.course.edit.EditCourse.context" title="Permalink to this definition"></a></dt>
+<dl class="attribute">
+<dt id="TA_Scheduler.views.course.edit.EditCourse.context">
+<code class="sig-name descname">context</code><em class="property"> = {'selected_course': None}</em><a class="headerlink" href="#TA_Scheduler.views.course.edit.EditCourse.context" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="TA_Scheduler.views.course.edit.EditCourse.get">
-<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">django.http.request.HttpRequest</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">django.http.response.HttpResponse</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">django.http.response.HttpResponseRedirect</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#TA_Scheduler.views.course.edit.EditCourse.get" title="Permalink to this definition"></a></dt>
+<dl class="method">
+<dt id="TA_Scheduler.views.course.edit.EditCourse.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">request: django.http.request.HttpRequest</em><span class="sig-paren">)</span> &#x2192; Union[django.http.response.HttpResponse, django.http.response.HttpResponseRedirect]<a class="headerlink" href="#TA_Scheduler.views.course.edit.EditCourse.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Called when the user opens the page, course/edit.html</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -305,9 +303,9 @@ to inform about success or an error</p>
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="TA_Scheduler.views.course.edit.EditCourse.post">
-<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">django.http.request.HttpRequest</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">django.http.response.HttpResponse</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">django.http.response.HttpResponseRedirect</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#TA_Scheduler.views.course.edit.EditCourse.post" title="Permalink to this definition"></a></dt>
+<dl class="method">
+<dt id="TA_Scheduler.views.course.edit.EditCourse.post">
+<code class="sig-name descname">post</code><span class="sig-paren">(</span><em class="sig-param">request: django.http.request.HttpRequest</em><span class="sig-paren">)</span> &#x2192; Union[django.http.response.HttpResponse, django.http.response.HttpResponseRedirect]<a class="headerlink" href="#TA_Scheduler.views.course.edit.EditCourse.post" title="Permalink to this definition">¶</a></dt>
 <dd><p>Called when the user clicks submit.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -331,15 +329,15 @@ to inform about success or an error</p>
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="TA_Scheduler.views.course.edit.EditCourse.resetMessage">
-<span class="sig-name descname"><span class="pre">resetMessage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#TA_Scheduler.views.course.edit.EditCourse.resetMessage" title="Permalink to this definition"></a></dt>
+<dl class="method">
+<dt id="TA_Scheduler.views.course.edit.EditCourse.resetMessage">
+<code class="sig-name descname">resetMessage</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#TA_Scheduler.views.course.edit.EditCourse.resetMessage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Clear messages on the screen</p>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="TA_Scheduler.views.course.edit.EditCourse.respond">
-<span class="sig-name descname"><span class="pre">respond</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">django.http.request.HttpRequest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'NoMessage'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#TA_Scheduler.views.course.edit.EditCourse.respond" title="Permalink to this definition"></a></dt>
+<dl class="method">
+<dt id="TA_Scheduler.views.course.edit.EditCourse.respond">
+<code class="sig-name descname">respond</code><span class="sig-paren">(</span><em class="sig-param">request: django.http.request.HttpRequest</em>, <em class="sig-param">msg_type: str = 'NoMessage'</em>, <em class="sig-param">msg: str = ''</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#TA_Scheduler.views.course.edit.EditCourse.respond" title="Permalink to this definition">¶</a></dt>
 <dd><p>Helper method that returns a response.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -362,9 +360,9 @@ to inform about success or an error</p>
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="TA_Scheduler.views.course.edit.EditCourse.validateCourseInput">
-<span class="sig-name descname"><span class="pre">validateCourseInput</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">django.http.request.HttpRequest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instructor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tas</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">django.http.response.HttpResponse</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#TA_Scheduler.views.course.edit.EditCourse.validateCourseInput" title="Permalink to this definition"></a></dt>
+<dl class="method">
+<dt id="TA_Scheduler.views.course.edit.EditCourse.validateCourseInput">
+<code class="sig-name descname">validateCourseInput</code><span class="sig-paren">(</span><em class="sig-param">request: django.http.request.HttpRequest</em>, <em class="sig-param">name: str = None</em>, <em class="sig-param">description: str = None</em>, <em class="sig-param">instructor: str = None</em>, <em class="sig-param">tas: List[str] = None</em><span class="sig-paren">)</span> &#x2192; Union[bool, django.http.response.HttpResponse]<a class="headerlink" href="#TA_Scheduler.views.course.edit.EditCourse.validateCourseInput" title="Permalink to this definition">¶</a></dt>
 <dd><p>Validates that all the inputs are correct</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -396,25 +394,25 @@ to inform about success or an error</p>
 
 </dd></dl>
 
-</section>
-<section id="module-TA_Scheduler.views.course.list">
-<span id="ta-scheduler-views-course-list-module"></span><h2>TA_Scheduler.views.course.list module<a class="headerlink" href="#module-TA_Scheduler.views.course.list" title="Permalink to this headline"></a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="TA_Scheduler.views.course.list.ListCourse">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ListCourse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#TA_Scheduler.views.course.list.ListCourse" title="Permalink to this definition"></a></dt>
+</div>
+<div class="section" id="module-TA_Scheduler.views.course.list">
+<span id="ta-scheduler-views-course-list-module"></span><h2>TA_Scheduler.views.course.list module<a class="headerlink" href="#module-TA_Scheduler.views.course.list" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="TA_Scheduler.views.course.list.ListCourse">
+<em class="property">class </em><code class="sig-name descname">ListCourse</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#TA_Scheduler.views.course.list.ListCourse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.views.generic.base.View</span></code></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="TA_Scheduler.views.course.list.ListCourse.get">
-<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#TA_Scheduler.views.course.list.ListCourse.get" title="Permalink to this definition"></a></dt>
+<dl class="method">
+<dt id="TA_Scheduler.views.course.list.ListCourse.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="headerlink" href="#TA_Scheduler.views.course.list.ListCourse.get" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-</section>
-<section id="module-TA_Scheduler.views.course">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-TA_Scheduler.views.course" title="Permalink to this headline"></a></h2>
-</section>
-</section>
+</div>
+<div class="section" id="module-TA_Scheduler.views.course">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-TA_Scheduler.views.course" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
 
 
            </div>
