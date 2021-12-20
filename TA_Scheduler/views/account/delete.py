@@ -14,8 +14,12 @@ class DeleteAccount(View):
         """
 
         return render(
-            request, "account/delete.html", {"accounts": AccountUtil.getAllAccounts(),
-                                             "group": AccountUtil.getUserGroup(request.user)}
+            request,
+            "account/delete.html",
+            {
+                "accounts": AccountUtil.getAllAccounts(),
+                "group": AccountUtil.getUserGroup(request.user),
+            },
         )
 
     def post(self, request):
