@@ -94,10 +94,10 @@ class EditCourseTest(TestCase):
         self.client.login(
             username=self.admin_account.user.username, password=self.password
         )
-        ctx = {
-            "courses": self.courses,
-            "course": "None"
-        }
+        ctx = {"courses": self.courses, "course": "None"}
         resp = self.client.post(self.TEMPLATE)
-        self.assertEquals("Select a course", resp.context.get(self.WARNING),
-                          msg="Failed to detect no course selected")
+        self.assertEquals(
+            "Select a course",
+            resp.context.get(self.WARNING),
+            msg="Failed to detect no course selected",
+        )

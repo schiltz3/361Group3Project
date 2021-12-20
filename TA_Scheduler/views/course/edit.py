@@ -87,8 +87,15 @@ class EditCourse(View):
         else:
             return self.respond(request, self.WARNING, "Select a course")
 
-    def validateCourseInput(self, request: HttpRequest, name: str = None, description: str = None, instructor: str = None, tas: List[str] = None) -> Union[bool, HttpResponse]:
-        """ Validates that all the inputs are correct
+    def validateCourseInput(
+        self,
+        request: HttpRequest,
+        name: str = None,
+        description: str = None,
+        instructor: str = None,
+        tas: List[str] = None,
+    ) -> Union[bool, HttpResponse]:
+        """Validates that all the inputs are correct
 
         :param request: The http request
         :type request: HttpRequest
@@ -135,8 +142,7 @@ class EditCourse(View):
         return True
 
     def resetMessage(self) -> None:
-        """ Clear messages on the screen
-        """
+        """Clear messages on the screen"""
         self.context[self.MESSAGE] = None
         self.context[self.WARNING] = None
         self.context[self.ERROR] = None

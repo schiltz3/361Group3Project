@@ -37,23 +37,40 @@ class CreateCourseTest(TestCase):
             self.course.validateCourseInput()
 
     def testAllVars(self):
-        ret = self.course.validateCourseInput(HttpRequest(), name="Name", instructor="Instructor",
-                                              description="Description", tas=["Ta1"])
+        ret = self.course.validateCourseInput(
+            HttpRequest(),
+            name="Name",
+            instructor="Instructor",
+            description="Description",
+            tas=["Ta1"],
+        )
         self.assertTrue(ret, msg="Did not return true")
 
     def testNoName(self):
         ret = self.course.validateCourseInput(HttpRequest(), name=None)
-        self.assertTrue(isinstance(ret, HttpResponse), msg="Did not return error message")
+        self.assertTrue(
+            isinstance(ret, HttpResponse), msg="Did not return error message"
+        )
 
     def testNoDescription(self):
-        ret = self.course.validateCourseInput(HttpRequest(), name="Name", instructor="Instructor")
-        self.assertTrue(isinstance(ret, HttpResponse), msg="Did not return error message")
+        ret = self.course.validateCourseInput(
+            HttpRequest(), name="Name", instructor="Instructor"
+        )
+        self.assertTrue(
+            isinstance(ret, HttpResponse), msg="Did not return error message"
+        )
 
     def testNoInstructor(self):
-        ret = self.course.validateCourseInput(HttpRequest(), name="Name", description="Description")
+        ret = self.course.validateCourseInput(
+            HttpRequest(), name="Name", description="Description"
+        )
         self.assertTrue(ret, msg="Did not return true")
 
     def testNoTas(self):
-        ret = self.course.validateCourseInput(HttpRequest(), name="Name", description="Description",
-                                              instructor="Instructor")
+        ret = self.course.validateCourseInput(
+            HttpRequest(),
+            name="Name",
+            description="Description",
+            instructor="Instructor",
+        )
         self.assertTrue(ret, msg="Did not return true")
