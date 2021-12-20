@@ -25,10 +25,10 @@ class EditCourse(View):
     def get(self, request: HttpRequest) -> Union[HttpResponse, HttpResponseRedirect]:
         """Called when the user opens the page, course/edit.html
 
-        :param request: Request from course/edit.html
+        :param request: Request form course/edit.html
+        :type request: HttpRequest
         :return: Response with "Courses"
-        :pre: User is not anonymous, instructor, or ta
-        :post: None
+        :rtype: Union[HttpRespnse, HttpResponseRedirect]
         """
         return RedirectUtil.admin(
             request,
@@ -40,10 +40,12 @@ class EditCourse(View):
         """Called when the user clicks submit.
 
         :param request: Request from course/edit.html
-        :return: Response with "Courses", "course", "message", "warning" and "error" or redirect
+        :type request:
+        :par: Side effect: Edits a course object
         :pre: None
         :post: Correct return or edited course object
-        :par: Side effect: Edits a course object
+        :return: Response with "Courses", "course", "message", "warning" and "error" or redirect
+        :rtype:
         """
 
         course: Optional[str] = str(request.POST.get("course"))
@@ -85,8 +87,29 @@ class EditCourse(View):
                 return self.respond(request, self.MESSAGE, "Course Updated")
             else:
                 return resp
+        else:
+            return self.respond(request, self.WARNING, "Select a course")
 
-    def validateCourseInput(self, request, name, description, instructor, tas) -> Union[bool, HttpResponse]:
+    def validateCourseInput(self, request: HttpRequest, name: str = None, description: str = None, instructor: str = None, tas: List[str] = None) -> Union[bool, HttpResponse]:
+        """ Validates that all the inputs are correct
+
+        :param request: The http request
+        :type request: HttpRequest
+        :param name: Class name
+        :type name: str
+        :param description:  Class description
+        :type description: str
+        :param instructor: Class instructor
+        :type instructor: str
+        :param tas: List of tas for the class
+        :type tas: List[str]
+        :par: Side effect: None
+        :pre: Name and description not None
+        :post: Correct return
+        :return: Either true if it passed validation, or a http response with an error message
+        :rtype: Union[bool, HttpResponse]
+        """
+
         # Convert Incorrect strings to NoneType
         if instructor == "None":
             instructor = None
@@ -110,7 +133,9 @@ class EditCourse(View):
 
         return True
 
-    def resetMessage(self):
+    def resetMessage(self) -> None:
+        """ Clear messages on the screen
+        """
         self.context[self.MESSAGE] = None
         self.context[self.WARNING] = None
         self.context[self.ERROR] = None
@@ -122,6 +147,7 @@ class EditCourse(View):
         :param msg_type: the type of notification message
         :param msg: the message to show
         :param kwargs: a dict of elements to be passed to the template
+        :par: Side effect: adds instructors and tas to the request
         :pre: request must not be null
         :post: rendered response
         """
