@@ -259,15 +259,137 @@ to inform about success or an error</p>
 <dt id="TA_Scheduler.views.course.edit.EditCourse">
 <em class="property">class </em><code class="sig-name descname">EditCourse</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#TA_Scheduler.views.course.edit.EditCourse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.views.generic.base.View</span></code></p>
+<p>Edit Course View</p>
+<dl class="attribute">
+<dt id="TA_Scheduler.views.course.edit.EditCourse.ERROR">
+<code class="sig-name descname">ERROR</code><em class="property"> = 'error'</em><a class="headerlink" href="#TA_Scheduler.views.course.edit.EditCourse.ERROR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="TA_Scheduler.views.course.edit.EditCourse.MESSAGE">
+<code class="sig-name descname">MESSAGE</code><em class="property"> = 'message'</em><a class="headerlink" href="#TA_Scheduler.views.course.edit.EditCourse.MESSAGE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="TA_Scheduler.views.course.edit.EditCourse.TEMPLATE">
+<code class="sig-name descname">TEMPLATE</code><em class="property"> = 'course/edit.html'</em><a class="headerlink" href="#TA_Scheduler.views.course.edit.EditCourse.TEMPLATE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="TA_Scheduler.views.course.edit.EditCourse.WARNING">
+<code class="sig-name descname">WARNING</code><em class="property"> = 'warning'</em><a class="headerlink" href="#TA_Scheduler.views.course.edit.EditCourse.WARNING" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="TA_Scheduler.views.course.edit.EditCourse.context">
+<code class="sig-name descname">context</code><em class="property"> = {'selected_course': None}</em><a class="headerlink" href="#TA_Scheduler.views.course.edit.EditCourse.context" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="TA_Scheduler.views.course.edit.EditCourse.get">
 <code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">request: django.http.request.HttpRequest</em><span class="sig-paren">)</span> &#x2192; Union[django.http.response.HttpResponse, django.http.response.HttpResponseRedirect]<a class="headerlink" href="#TA_Scheduler.views.course.edit.EditCourse.get" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Called when the user opens the page, course/edit.html</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> (<em>HttpRequest</em>) – Request form course/edit.html</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Response with “Courses”</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Union[HttpRespnse, HttpResponseRedirect]</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="TA_Scheduler.views.course.edit.EditCourse.post">
 <code class="sig-name descname">post</code><span class="sig-paren">(</span><em class="sig-param">request: django.http.request.HttpRequest</em><span class="sig-paren">)</span> &#x2192; Union[django.http.response.HttpResponse, django.http.response.HttpResponseRedirect]<a class="headerlink" href="#TA_Scheduler.views.course.edit.EditCourse.post" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Called when the user clicks submit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> – Request from course/edit.html</p>
+</dd>
+<dt class="field-even">Par</dt>
+<dd class="field-even"><p>Side effect: Edits a course object</p>
+</dd>
+<dt class="field-odd">Pre</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Post</dt>
+<dd class="field-even"><p>Correct return or edited course object</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Response with “Courses”, “course”, “message”, “warning” and “error” or redirect</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="TA_Scheduler.views.course.edit.EditCourse.resetMessage">
+<code class="sig-name descname">resetMessage</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#TA_Scheduler.views.course.edit.EditCourse.resetMessage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clear messages on the screen</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="TA_Scheduler.views.course.edit.EditCourse.respond">
+<code class="sig-name descname">respond</code><span class="sig-paren">(</span><em class="sig-param">request: django.http.request.HttpRequest</em>, <em class="sig-param">msg_type: str = 'NoMessage'</em>, <em class="sig-param">msg: str = ''</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#TA_Scheduler.views.course.edit.EditCourse.respond" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper method that returns a response.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – the HTTP request object to use</p></li>
+<li><p><strong>msg_type</strong> – the type of notification message</p></li>
+<li><p><strong>msg</strong> – the message to show</p></li>
+<li><p><strong>kwargs</strong> – a dict of elements to be passed to the template</p></li>
+</ul>
+</dd>
+<dt class="field-even">Par</dt>
+<dd class="field-even"><p>Side effect: adds instructors and tas to the request</p>
+</dd>
+<dt class="field-odd">Pre</dt>
+<dd class="field-odd"><p>request must not be null</p>
+</dd>
+<dt class="field-even">Post</dt>
+<dd class="field-even"><p>rendered response</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="TA_Scheduler.views.course.edit.EditCourse.validateCourseInput">
+<code class="sig-name descname">validateCourseInput</code><span class="sig-paren">(</span><em class="sig-param">request: django.http.request.HttpRequest</em>, <em class="sig-param">name: str = None</em>, <em class="sig-param">description: str = None</em>, <em class="sig-param">instructor: str = None</em>, <em class="sig-param">tas: List[str] = None</em><span class="sig-paren">)</span> &#x2192; Union[bool, django.http.response.HttpResponse]<a class="headerlink" href="#TA_Scheduler.views.course.edit.EditCourse.validateCourseInput" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates that all the inputs are correct</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<em>HttpRequest</em>) – The http request</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – Class name</p></li>
+<li><p><strong>description</strong> (<em>str</em>) – Class description</p></li>
+<li><p><strong>instructor</strong> (<em>str</em>) – Class instructor</p></li>
+<li><p><strong>tas</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – List of tas for the class</p></li>
+</ul>
+</dd>
+<dt class="field-even">Par</dt>
+<dd class="field-even"><p>Side effect: None</p>
+</dd>
+<dt class="field-odd">Pre</dt>
+<dd class="field-odd"><p>Name and description not None</p>
+</dd>
+<dt class="field-even">Post</dt>
+<dd class="field-even"><p>Correct return</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Either true if it passed validation, or a http response with an error message</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Union[bool, HttpResponse]</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
