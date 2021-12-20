@@ -31,6 +31,8 @@ class CreateCourseTest(TestCase):
             tas.append(ta)
 
         self.course = EditCourse()
+        self.request = HttpRequest()
+        self.request.user = instructor.user
 
     def testNoVars(self):
         with self.assertRaises(TypeError, msg="Not catching empty args"):
@@ -38,7 +40,7 @@ class CreateCourseTest(TestCase):
 
     def testAllVars(self):
         ret = self.course.validateCourseInput(
-            HttpRequest(),
+            self.request,
             name="Name",
             instructor="Instructor",
             description="Description",
@@ -47,14 +49,14 @@ class CreateCourseTest(TestCase):
         self.assertTrue(ret, msg="Did not return true")
 
     def testNoName(self):
-        ret = self.course.validateCourseInput(HttpRequest(), name=None)
+        ret = self.course.validateCourseInput(self.request, name=None)
         self.assertTrue(
             isinstance(ret, HttpResponse), msg="Did not return error message"
         )
 
     def testNoDescription(self):
         ret = self.course.validateCourseInput(
-            HttpRequest(), name="Name", instructor="Instructor"
+            self.request, name="Name", instructor="Instructor"
         )
         self.assertTrue(
             isinstance(ret, HttpResponse), msg="Did not return error message"
@@ -62,13 +64,13 @@ class CreateCourseTest(TestCase):
 
     def testNoInstructor(self):
         ret = self.course.validateCourseInput(
-            HttpRequest(), name="Name", description="Description"
+            self.request, name="Name", description="Description"
         )
         self.assertTrue(ret, msg="Did not return true")
 
     def testNoTas(self):
         ret = self.course.validateCourseInput(
-            HttpRequest(),
+            self.request,
             name="Name",
             description="Description",
             instructor="Instructor",
