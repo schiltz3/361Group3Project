@@ -237,3 +237,12 @@ class AccountUtil:
             return True
         else:
             return False
+
+    def getUserGroup(user: User):
+        if user.groups.filter(name="admin").exists():
+            group = "admin"
+        elif user.groups.filter(name="instructor").exists():
+            group = "instructor"
+        else:
+            group = "ta"
+        return group

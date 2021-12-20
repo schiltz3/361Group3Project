@@ -36,6 +36,44 @@ class CourseUtil:
         return course.id
 
     @staticmethod
+    def editCourse(
+        id: int,
+        name: str,
+        description: str = None,
+        instructor: Account = None,
+        tas: List[Account] = None,
+    ) -> Union[int, TypeError]:
+        """Edits a course and saves it in the Course database.
+
+        :param id: The ID of the course to edit in the database.
+        :param name: The updated name of the course
+        :param description: The updated description of the course
+        :param instructor: The updated instructor of this course
+        :param tas: The updated list of TAs of this course
+        :return: On success, the ID of the course in the database, None otherwise
+        :pre: Name must not be blank
+        :post: TypeError is raised if required fields are not provided (id, name)
+        """
+
+        if name == "":
+            raise TypeError("Course name cannot be empty.")
+
+        course = CourseUtil.getCourseByID(id)
+        if course is None:
+            return None
+
+        course.name = name
+        course.description = description
+        course.instructor = instructor
+
+        for ta in tas:
+            course.tas.add(ta)
+
+        course.save()
+
+        return course.id
+
+    @staticmethod
     def getCourseByID(id: int) -> Optional[Course]:
         """Returns a course from the database, using it's ID.
 
