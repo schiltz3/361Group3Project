@@ -43,7 +43,6 @@ POST Vars:
                 <select name="instructor" class="form-select"
                         aria-label="Instructor"
                         aria-describedby="Instructor">
-                    required="True"
                     <option selected value>None</option>
                     {% for i in instructors %}
                     <option value="{{ i }}">{{ i.user.first_name }} {{ i.user.last_name }}</option>
