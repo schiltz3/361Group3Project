@@ -1,14 +1,11 @@
-from django.shortcuts import render, redirect
 from TA_Scheduler.models import Account
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.views import View
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render
 from TA_Scheduler.utilities.AccountUtil import AccountUtil
 from TA_Scheduler.utilities.CourseUtil import CourseUtil
 from TA_Scheduler.utilities.RedirectUtil import RedirectUtil
 from typing import List, Union, Optional
-
-from TA_Scheduler.utilities.RedirectUtil import RedirectUtil
 
 
 class CreateCourse(View):
@@ -121,10 +118,10 @@ class CreateCourse(View):
         :pre: request must not be null
         :post: rendered response
         """
-
         context = {
             msg_type: msg,
             "tas": AccountUtil.getTAs(),
             "instructors": AccountUtil.getInstructors(),
+            "group": AccountUtil.getUserGroup(user=request.user),
         }
         return render(request, self.TEMPLATE, context)

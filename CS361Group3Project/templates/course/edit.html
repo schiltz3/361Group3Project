@@ -1,14 +1,124 @@
-{% extends "bar_base.html" %}
+{% extends 'bar_base.html' %}
+
+{% comment %}
+Edit course objects
+
+Context:
+
+POST Vars:
+- message: String (should make message iterable type w/ color)
+- warning: String
+- error: String
+
+- instructors: Optional[Iterable[Account]]
+
+{% endcomment%}
 
 {% block application_pane %}
-
-<row>
-    <form action="/course/edit.html" method="post">
+<div class="row">
+    <form action="/course/edit/" method="post">
         {% csrf_token %}
         <div class="col-7">
-            <h1>Edit course</h1>
-        </div>
-    </form>
-</row>
+            {% autoescape off %}
+            <h1>Edit Course</h1>
+            <!-- Course selection -->
+            <div class="input-group mb-2">
+                <span class="input-group-text" id="courses-input">Courses</span>
+                <select name="course" class="form-select"
+                        required
+                        onchange="this.form.submit()"
+                        aria-label="course"
+                        aria-describedby="courses-input">
+                    {% if selected_course %}
+                    <option selected disabled value="{{ selected_course }}">{{ selected_course.name }}</option>
+                    {% else %}
+                    <option selected value>None</option>
+                    {% endif %}
+                    {% for course in courses %}
+                    <option value="{{ course }}">{{course.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            {%if selected_course %}
+            <!-- Course name -->
+            <div class="input-group mb-2">
+                <span class="input-group-text" id="name-input">Name:</span>
+                <input type="text" name="name" class="form-control"
+                       pattern="[A-Za-z0-9\ ]{1,}"
+                       value="{{selected_course}}"
+                       required
+                       aria-label="Name"
+                       aria-describedby="name-input"/>
+            </div>
+            <!-- Course description -->
+            <div class="input-group mb-2">
+                <span class="input-group-text" id="description-input">Description:</span>
+                <!-- swap to textbox -->
+                <input type="text" name="description" class="form-control"
+                       pattern="[A-Za-z0-9\ ]{1,}"
+                       value="{{selected_course.description}}"
+                       spellcheck
+                       required
+                       aria-label="description"
+                       aria-describedby="description-inp;ut">
+            </div>
 
-{% endblock application_pane %}
+            <!-- Course Instructor selection -->
+            <div class="input-group mb-2">
+                <span class="input-group-text" id="instructor-input">Instructor</span>
+                <select name="instructors" class="form-select"
+                        aria-label="instructor"
+                        aria-describedby="instructor-input">
+                    <option value=None> None</option>
+                    {% if selected_course.instructor %}
+                    <option selected value="{{selected_course.instructor}}">
+                        {{selected_course.instructor.user.first_name}} {{selected_course.instructor.user.last_name}}
+                    </option>
+                    {%endif%}
+                    {% for i in instructors %}
+                    {% if i != selected_course.instructor %}
+                    <option value="{{i}}">{{ i.user.first_name }} {{ i.user.last_name }}</option>
+                    {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- TA selection -->
+            <div class="input-group mb-2">
+                <span class="input-group-text" id="ta-input">TAs</span>
+                <select name="ta" class="form-select"
+                        multiple="multiple"
+                        aria-label="TA"
+                        aria-describedby="ta-input"
+                        size="5">
+                    <option disabled>Select TAs</option>
+                    {% for tai in selected_tas %}
+                    <option selected value="{{tai}}">{{tai.user.first_name}}</option>
+                    {% endfor %}
+                    {% for ta in tas %}
+                    {% if ta not in selected_tas%}
+                    <option value="{{ ta }}">{{ ta.user.first_name }} {{ ta.user.last_name }}</option>
+                    {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            {% endif %}
+            {% endautoescape %}
+        </div>
+
+        <div class="col-7">
+            {% if message %}
+            <div class="alert alert-primary mt-2" role="alert"> {{ message }}</div>
+            {% endif %}
+            {% if warning %}
+            <div class="alert alert-warning mt-2" role="alert"> {{ warning }}</div>
+            {% endif %}
+            {% if error %}
+            <div class="alert alert-danger mt-2" role="alert"> {{ error }}</div>
+            {% endif %}
+        </div>
+
+    </form>
+</div>
+{% endblock application_pane %}}

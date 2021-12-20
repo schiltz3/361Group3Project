@@ -1,7 +1,63 @@
 {% comment %}
 bar is a template which takes a list or iterator of BarItem objects and creates a bar from it.
 
+Uses group variable returned from get method to display options for NavBar.
+
 {% endcomment %}
 <div class="container-fluid px-0 py-2">
-  <div class="row"></div>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #6699ff; padding-left: 10px">
+     <a class="navbar-brand" href="">TA-Scheduler</a>
+
+    <div>
+     <ul class="navbar-nav mr-auto">
+
+         {% if group == "admin" %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'admin-dashboard' %}">Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'create-account' %}">Create Account</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'edit-account' %}">Edit Account</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'delete-account' %}">Delete Account</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'create-course' %}">Create Course</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'edit-course' %}">Edit Course</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'delete-course' %}">Delete Course</a>
+            </li>
+         {% elif group == "instructor" %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'instructor-dashboard' %}">Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'edit-account' %}">Edit Account</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'edit-lab' %}">Edit Labs</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'list-account' %}">List Account</a>
+            </li>
+         {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'ta-dashboard' %}">Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'edit-account' %}">Edit Account</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'list-account' %}">List Account</a>
+            </li>
+         {% endif %}
+     </ul>
+    </div>
+    </nav>
 </div>
