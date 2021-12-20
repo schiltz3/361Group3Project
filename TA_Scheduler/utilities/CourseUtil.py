@@ -66,6 +66,9 @@ class CourseUtil:
         course.description = description
         course.instructor = instructor
 
+        for tar in course.tas.all():
+            course.tas.remove(tar)
+
         for ta in tas:
             course.tas.add(ta)
 

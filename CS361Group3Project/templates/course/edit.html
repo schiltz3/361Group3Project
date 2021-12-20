@@ -93,7 +93,7 @@ POST Vars:
                         size="5">
                     <option disabled>Select TAs</option>
                     {% for tai in selected_tas %}
-                    <option selected value="{{tai}}">{{tai.user.first_name}}</option>
+                    <option selected value="{{tai}}">{{tai.user.first_name}} {{tai.user.last_name}}</option>
                     {% endfor %}
                     {% for ta in tas %}
                     {% if ta not in selected_tas%}
