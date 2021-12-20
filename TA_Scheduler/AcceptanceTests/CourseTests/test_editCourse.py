@@ -54,26 +54,13 @@ class EditCourseTest(TestCase):
                 )
             )
 
-            # self.courses.append(
-            #    self.form("Course" + str(i), "Description", instructor, tas)
-            # )
-
-    def test_print(self):
-        print("All local courses")
-        print(self.courses)
-
-        print("All db courses:")
-        courses = CourseUtil.getAllCourses()
-        for course in courses:
-            print(course)
-
     def test_adminCanAccess(self):
         self.client.login(
             username=self.admin_account.user.username, password=self.password
         )
         resp = self.client.get(self.TEMPLATE)
         self.assertEqual(
-            "", resp.context[self.MESSAGE], msg="Admin failed to access page."
+            None, resp.context.get(self.MESSAGE), msg="Admin failed to access page."
         )
 
     def test_redirectInstructor(self):
@@ -106,35 +93,6 @@ class EditCourseTest(TestCase):
             "courses": self.courses,
             "course": "None"
         }
-        print(ctx)
         resp = self.client.post(self.TEMPLATE)
-        print(resp)
-        self.assertEquals("Please select course", resp.context.get(self.WARNING),
+        self.assertEquals("Select a course", resp.context.get(self.WARNING),
                           msg="Failed to detect no course selected")
-
-    @staticmethod
-    def form(
-            courses: List[Course],
-            name: str = "",
-            description: str = "",
-            instructor: Account = None,
-            tas: List[Account] = None,
-    ):
-        tas_strings = []
-        if tas:
-            for ta in tas:
-                tas_strings.append(str(ta))
-        return {
-            "courses": [course.name for course in courses],
-            "name": name,
-            "description": description,
-            "instructor": instructor,
-            "ta": tas,
-            "form": {
-                "courses": [course.name for course in courses],
-                "name": name,
-                "description": description,
-                "instructor": str(instructor),
-                "ta": tas_strings,
-            },
-        }
