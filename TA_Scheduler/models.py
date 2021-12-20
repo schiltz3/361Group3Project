@@ -11,6 +11,7 @@ class Account(models.Model):
     account.user.password --> password
     account.user.first_name --> first name of user
     account.user.last_name --> last name of user
+    account.user.email --> email address
     account.address --> home address
     account.phone --> phone number
     """

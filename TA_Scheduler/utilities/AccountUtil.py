@@ -234,11 +234,17 @@ class AccountUtil:
             if phone is not None:
                 account.phone = phone
             account.save()
+            account.user.save()
             return True
         else:
             return False
 
     def getUserGroup(user: User):
+        """Gets group name of given User
+
+        :param user: the User whose group is being asked for
+        :return: group name (str), defaults to "ta"
+        """
         if user.groups.filter(name="admin").exists():
             group = "admin"
         elif user.groups.filter(name="instructor").exists():
