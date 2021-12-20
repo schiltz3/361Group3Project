@@ -5,4 +5,6 @@ from django.views import View
 
 class EditLab(View):
     def get(self, request):
-        return render(request, "lab/edit.html", {"group": AccountUtil.getUserGroup(request.user)})
+        return render(
+            request, "lab/edit.html", {"group": AccountUtil.getUserGroup(request.user)}
+        )

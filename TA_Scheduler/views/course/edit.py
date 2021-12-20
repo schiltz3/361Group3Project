@@ -7,7 +7,11 @@ from django.views import View
 
 class EditCourse(View):
     def get(self, request: HttpRequest) -> Union[HttpResponse, HttpResponseRedirect]:
-        return render(request, "course/edit.html", {"group": AccountUtil.getUserGroup(request.user)})
+        return render(
+            request,
+            "course/edit.html",
+            {"group": AccountUtil.getUserGroup(request.user)},
+        )
 
     def post(self, request: HttpRequest) -> Union[HttpResponse, HttpResponseRedirect]:
         return render(request, "course/edit.html")

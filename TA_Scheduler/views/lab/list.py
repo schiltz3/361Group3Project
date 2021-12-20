@@ -5,4 +5,6 @@ from django.views import View
 
 class ListLab(View):
     def get(self, request):
-        return render(request, "lab/list.html", {"group": AccountUtil.getUserGroup(request.user)})
+        return render(
+            request, "lab/list.html", {"group": AccountUtil.getUserGroup(request.user)}
+        )

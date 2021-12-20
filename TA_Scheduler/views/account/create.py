@@ -24,7 +24,11 @@ class CreateAccount(View):
         :pre: User is not anonymous, instructor, or ta
         :post: None
         """
-        return render(request, "account/create.html", {"message": " ", "group": AccountUtil.getUserGroup(request.user)})
+        return render(
+            request,
+            "account/create.html",
+            {"message": " ", "group": AccountUtil.getUserGroup(request.user)},
+        )
 
     def post(self, request):
         """Called when the user submits the form on the Create Accounts page.
