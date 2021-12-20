@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TA_Scheduler.utilities package &mdash; TA Scheduler 0.10 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> TA Scheduler
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">CS361Group3Project</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">TA Scheduler</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>TA_Scheduler.utilities package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/TA_Scheduler.utilities.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ta-scheduler-utilities-package">
+<h1>TA_Scheduler.utilities package<a class="headerlink" href="#ta-scheduler-utilities-package" title="Permalink to this headline"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-TA_Scheduler.utilities.AccountUtil">
+<span id="ta-scheduler-utilities-accountutil-module"></span><h2>TA_Scheduler.utilities.AccountUtil module<a class="headerlink" href="#module-TA_Scheduler.utilities.AccountUtil" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="TA_Scheduler.utilities.AccountUtil.AccountUtil">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AccountUtil</span></span><a class="headerlink" href="#TA_Scheduler.utilities.AccountUtil.AccountUtil" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="TA_Scheduler.utilities.AccountUtil.AccountUtil.createAdminAccount">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">createAdminAccount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">TypeError</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#TA_Scheduler.utilities.AccountUtil.AccountUtil.createAdminAccount" title="Permalink to this definition"></a></dt>
+<dd><p>Create an account in the Admin group.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> – The username of the account to create</p></li>
+<li><p><strong>password</strong> – The password of the account to create</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>ID of the account if it was successfully created,
+TypeError if username or password are blank</p>
+</dd>
+<dt class="field-odd">Pre</dt>
+<dd class="field-odd"><p>Username and password must not be blank</p>
+</dd>
+<dt class="field-even">Post</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="TA_Scheduler.utilities.AccountUtil.AccountUtil.createInstructorAccount">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">createInstructorAccount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">TypeError</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#TA_Scheduler.utilities.AccountUtil.AccountUtil.createInstructorAccount" title="Permalink to this definition"></a></dt>
+<dd><p>Create an account in the Instructor group.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> – The username of the account to create</p></li>
+<li><p><strong>password</strong> – The password of the account to create</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>ID of the account if it was successfully created,
+TypeError if username or password are blank</p>
+</dd>
+<dt class="field-odd">Pre</dt>
+<dd class="field-odd"><p>Username and password must not be blank</p>
+</dd>
+<dt class="field-even">Post</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="TA_Scheduler.utilities.AccountUtil.AccountUtil.createTAAccount">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">createTAAccount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">TypeError</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#TA_Scheduler.utilities.AccountUtil.AccountUtil.createTAAccount" title="Permalink to this definition"></a></dt>
+<dd><p>Create an account in the TA group.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> – The username of the account to create</p></li>
+<li><p><strong>password</strong> – The password of the account to create</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>ID of the account if it was successfully created,
+TypeError if username or password are blank</p>
+</dd>
+<dt class="field-odd">Pre</dt>
+<dd class="field-odd"><p>Username and password must not be blank</p>
+</dd>
+<dt class="field-even">Post</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="TA_Scheduler.utilities.AccountUtil.AccountUtil.getAccountByCredentials">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getAccountByCredentials</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="TA_Scheduler.html#TA_Scheduler.models.Account" title="TA_Scheduler.models.Account"><span class="pre">TA_Scheduler.models.Account</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#TA_Scheduler.utilities.AccountUtil.AccountUtil.getAccountByCredentials" title="Permalink to this definition"></a></dt>
+<dd><p>Returns an account that matches the argument credentials.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> – the username to find in the Account database</p></li>
+<li><p><strong>password</strong> – the password to find in the Account database</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>if found, and account with a username and password
+that match the arguments, None otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="TA_Scheduler.utilities.AccountUtil.AccountUtil.getAccountByID">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getAccountByID</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="TA_Scheduler.html#TA_Scheduler.models.Account" title="TA_Scheduler.models.Account"><span class="pre">TA_Scheduler.models.Account</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#TA_Scheduler.utilities.AccountUtil.AccountUtil.getAccountByID" title="Permalink to this definition"></a></dt>
+<dd><p>Looks in the Account database for an account that matches the argument ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>id</strong> – The id to look for in the Account database</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>If successful, an account with an ID that matches the
+argument, None otherwise</p>
+</dd>
+<dt class="field-odd">Pre</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Post</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="TA_Scheduler.utilities.AccountUtil.AccountUtil.getAccountByUsername">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getAccountByUsername</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="TA_Scheduler.html#TA_Scheduler.models.Account" title="TA_Scheduler.models.Account"><span class="pre">TA_Scheduler.models.Account</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#TA_Scheduler.utilities.AccountUtil.AccountUtil.getAccountByUsername" title="Permalink to this definition"></a></dt>
+<dd><p>Looks in the Account database for an account that matches the argument username.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>username</strong> – The username to look for in the Account database</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>If successful, an account with a username that matches the
+argument, None otherwise</p>
+</dd>
+<dt class="field-odd">Pre</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Post</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="TA_Scheduler.utilities.AccountUtil.AccountUtil.getAllAccounts">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getAllAccounts</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="TA_Scheduler.html#TA_Scheduler.models.Account" title="TA_Scheduler.models.Account"><span class="pre">TA_Scheduler.models.Account</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#TA_Scheduler.utilities.AccountUtil.AccountUtil.getAllAccounts" title="Permalink to this definition"></a></dt>
+<dd><p>Returns all of the accounts that are stored in the Account database.
+:return: a list of all existing accounts, or</p>
+<blockquote>
+<div><p>None if there are none</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Pre</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Post</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="TA_Scheduler.utilities.AccountUtil.AccountUtil.getInstructors">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getInstructors</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="TA_Scheduler.html#TA_Scheduler.models.Account" title="TA_Scheduler.models.Account"><span class="pre">TA_Scheduler.models.Account</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#TA_Scheduler.utilities.AccountUtil.AccountUtil.getInstructors" title="Permalink to this definition"></a></dt>
+<dd><p>Returns all of the accounts in the Instructor group that are stored in the Account database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a list of all existing Instructor accounts, or None if
+there are none.</p>
+</dd>
+<dt class="field-even">Pre</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Post</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="TA_Scheduler.utilities.AccountUtil.AccountUtil.getTAs">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getTAs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="TA_Scheduler.html#TA_Scheduler.models.Account" title="TA_Scheduler.models.Account"><span class="pre">TA_Scheduler.models.Account</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#TA_Scheduler.utilities.AccountUtil.AccountUtil.getTAs" title="Permalink to this definition"></a></dt>
+<dd><p>Returns all of the accounts in the TA group that are stored in the Account database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a list of all existing TA accounts, or None if
+there are none.</p>
+</dd>
+<dt class="field-even">Pre</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Post</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="TA_Scheduler.utilities.AccountUtil.AccountUtil.getUserGroup">
+<span class="sig-name descname"><span class="pre">getUserGroup</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#TA_Scheduler.utilities.AccountUtil.AccountUtil.getUserGroup" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="TA_Scheduler.utilities.AccountUtil.AccountUtil.updateAccountInfo">
+<span class="sig-name descname"><span class="pre">updateAccountInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">first</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phone</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#TA_Scheduler.utilities.AccountUtil.AccountUtil.updateAccountInfo" title="Permalink to this definition"></a></dt>
+<dd><p>Changes the entered fields for the given account</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – id number of account to be changed</p></li>
+<li><p><strong>first</strong> – new first name</p></li>
+<li><p><strong>last</strong> – new last name</p></li>
+<li><p><strong>email</strong> – new email address</p></li>
+<li><p><strong>address</strong> – new address</p></li>
+<li><p><strong>phone</strong> – new phone number</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>TypeError if no id given, ValidationError if email or phone is of invalid format,
+otherwise bool of whether id is in Account database</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-TA_Scheduler.utilities.CourseUtil">
+<span id="ta-scheduler-utilities-courseutil-module"></span><h2>TA_Scheduler.utilities.CourseUtil module<a class="headerlink" href="#module-TA_Scheduler.utilities.CourseUtil" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="TA_Scheduler.utilities.CourseUtil.CourseUtil">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CourseUtil</span></span><a class="headerlink" href="#TA_Scheduler.utilities.CourseUtil.CourseUtil" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="TA_Scheduler.utilities.CourseUtil.CourseUtil.createCourse">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">createCourse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instructor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="TA_Scheduler.html#TA_Scheduler.models.Account" title="TA_Scheduler.models.Account"><span class="pre">TA_Scheduler.models.Account</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tas</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="TA_Scheduler.html#TA_Scheduler.models.Account" title="TA_Scheduler.models.Account"><span class="pre">TA_Scheduler.models.Account</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">TypeError</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#TA_Scheduler.utilities.CourseUtil.CourseUtil.createCourse" title="Permalink to this definition"></a></dt>
+<dd><p>Creates a course and saves it in the Course database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – The name of the course to create</p></li>
+<li><p><strong>description</strong> – The description of the course to create</p></li>
+<li><p><strong>instructor</strong> – The instructor of this course</p></li>
+<li><p><strong>tas</strong> – The list of TAs of this course</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>On success, the ID of the new course in the database, None otherwise</p>
+</dd>
+<dt class="field-odd">Pre</dt>
+<dd class="field-odd"><p>Name must not be blank</p>
+</dd>
+<dt class="field-even">Post</dt>
+<dd class="field-even"><p>TypeError is raised if required fields are not provided (name)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="TA_Scheduler.utilities.CourseUtil.CourseUtil.deleteCourseByName">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">deleteCourseByName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#TA_Scheduler.utilities.CourseUtil.CourseUtil.deleteCourseByName" title="Permalink to this definition"></a></dt>
+<dd><p>Looks for a course that matches the argument name, deletes it if it exists.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> – the name of the course to delete</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if course was found and deleted, False otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="TA_Scheduler.utilities.CourseUtil.CourseUtil.editCourse">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">editCourse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instructor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="TA_Scheduler.html#TA_Scheduler.models.Account" title="TA_Scheduler.models.Account"><span class="pre">TA_Scheduler.models.Account</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tas</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="TA_Scheduler.html#TA_Scheduler.models.Account" title="TA_Scheduler.models.Account"><span class="pre">TA_Scheduler.models.Account</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">TypeError</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#TA_Scheduler.utilities.CourseUtil.CourseUtil.editCourse" title="Permalink to this definition"></a></dt>
+<dd><p>Edits a course and saves it in the Course database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – The ID of the course to edit in the database.</p></li>
+<li><p><strong>name</strong> – The updated name of the course</p></li>
+<li><p><strong>description</strong> – The updated description of the course</p></li>
+<li><p><strong>instructor</strong> – The updated instructor of this course</p></li>
+<li><p><strong>tas</strong> – The updated list of TAs of this course</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>On success, the ID of the course in the database, None otherwise</p>
+</dd>
+<dt class="field-odd">Pre</dt>
+<dd class="field-odd"><p>Name must not be blank</p>
+</dd>
+<dt class="field-even">Post</dt>
+<dd class="field-even"><p>TypeError is raised if required fields are not provided (id, name)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="TA_Scheduler.utilities.CourseUtil.CourseUtil.getAllCourses">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getAllCourses</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="TA_Scheduler.html#TA_Scheduler.models.Course" title="TA_Scheduler.models.Course"><span class="pre">TA_Scheduler.models.Course</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#TA_Scheduler.utilities.CourseUtil.CourseUtil.getAllCourses" title="Permalink to this definition"></a></dt>
+<dd><p>Gets all courses from database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>All the courses in the Course database, None if it is empty</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="TA_Scheduler.utilities.CourseUtil.CourseUtil.getCourseByID">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getCourseByID</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="TA_Scheduler.html#TA_Scheduler.models.Course" title="TA_Scheduler.models.Course"><span class="pre">TA_Scheduler.models.Course</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#TA_Scheduler.utilities.CourseUtil.CourseUtil.getCourseByID" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a course from the database, using it’s ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>id</strong> – The ID of the course to find in the database.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>On success, the course with an ID that matches the agument, None otherwise</p>
+</dd>
+<dt class="field-odd">Pre</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Post</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="TA_Scheduler.utilities.CourseUtil.CourseUtil.getCourseByName">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getCourseByName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="TA_Scheduler.html#TA_Scheduler.models.Course" title="TA_Scheduler.models.Course"><span class="pre">TA_Scheduler.models.Course</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#TA_Scheduler.utilities.CourseUtil.CourseUtil.getCourseByName" title="Permalink to this definition"></a></dt>
+<dd><p>Gets a course from the database, by it’s name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> – The name of the course to find in the database</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>On success, the course with a name that matches the argument, None otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-TA_Scheduler.utilities.RedirectUtil">
+<span id="ta-scheduler-utilities-redirectutil-module"></span><h2>TA_Scheduler.utilities.RedirectUtil module<a class="headerlink" href="#module-TA_Scheduler.utilities.RedirectUtil" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="TA_Scheduler.utilities.RedirectUtil.RedirectUtil">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RedirectUtil</span></span><a class="headerlink" href="#TA_Scheduler.utilities.RedirectUtil.RedirectUtil" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="TA_Scheduler.utilities.RedirectUtil.RedirectUtil.admin">
+<span class="sig-name descname"><span class="pre">admin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">action</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fallback</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#TA_Scheduler.utilities.RedirectUtil.RedirectUtil.admin" title="Permalink to this definition"></a></dt>
+<dd><p>Redirects all users that are not admins to their dashboards.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – The request that contains the logged in user</p></li>
+<li><p><strong>action</strong> – A string that describes the admin action that the user anticipated to make</p></li>
+<li><p><strong>fallback</strong> – The object to return if the logged in user is admin</p></li>
+</ul>
+</dd>
+<dt class="field-even">Pre</dt>
+<dd class="field-even"><p>Request must not be null</p>
+</dd>
+<dt class="field-odd">Post</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Par</dt>
+<dd class="field-even"><p>Side effect: Redirects you to login or dashboard depending on your group</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="TA_Scheduler.utilities.RedirectUtil.RedirectUtil.instructor">
+<span class="sig-name descname"><span class="pre">instructor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">action</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fallback</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#TA_Scheduler.utilities.RedirectUtil.RedirectUtil.instructor" title="Permalink to this definition"></a></dt>
+<dd><p>Redirects TAs to the TA dashboard, anounymous users to the login screen.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – the request that contains the logged in user</p></li>
+<li><p><strong>action</strong> – a string that describes the instructor action that the user anticipated to make</p></li>
+<li><p><strong>fallback</strong> – the object to return if the logged in user is an instructor or admin</p></li>
+</ul>
+</dd>
+<dt class="field-even">Pre</dt>
+<dd class="field-even"><p>request must not be null</p>
+</dd>
+<dt class="field-odd">Post</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Par</dt>
+<dd class="field-even"><p>Side effect: Redirects TAs to the TA dashboard, and anonymous users to the login screen</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="TA_Scheduler.utilities.RedirectUtil.RedirectUtil.ta">
+<span class="sig-name descname"><span class="pre">ta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">action</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fallback</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#TA_Scheduler.utilities.RedirectUtil.RedirectUtil.ta" title="Permalink to this definition"></a></dt>
+<dd><p>Redirects anonymous users to the login screen.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – the request that contains the logged in user</p></li>
+<li><p><strong>action</strong> – a string that describes the action that the user anticipated to make</p></li>
+<li><p><strong>fallback</strong> – the object to return if the logged in as an autorized user</p></li>
+</ul>
+</dd>
+<dt class="field-even">Pre</dt>
+<dd class="field-even"><p>request must not be null</p>
+</dd>
+<dt class="field-odd">Post</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Par</dt>
+<dd class="field-even"><p>Side effect: Redirects anonymous users to the login screen</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-TA_Scheduler.utilities">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-TA_Scheduler.utilities" title="Permalink to this headline"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

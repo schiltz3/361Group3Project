@@ -119,8 +119,7 @@ class AccountUtil:
     @staticmethod
     def getAllAccounts() -> Optional[Iterable[Account]]:
         """Returns all of the accounts that are stored in the Account database.
-        :return: a list of all existing accounts, or
-            None if there are none
+        :return: a list of all existing accounts, or None if there are none
         :pre: None
         :post: None
         """
@@ -131,8 +130,7 @@ class AccountUtil:
     def getTAs() -> Optional[Iterable[Account]]:
         """Returns all of the accounts in the TA group that are stored in the Account database.
 
-        :return: a list of all existing TA accounts, or None if
-            there are none.
+        :return: a list of all existing TA accounts, or None if there are none.
         :pre: None
         :post: None
         """
