@@ -60,7 +60,7 @@ urlpatterns = [
     path("account/create/", CreateAccount.as_view(), name="create-account"),
     path("account/edit/", EditAccount.as_view(), name="edit-account"),
     path("account/list/", ListAccount.as_view(), name="list-account"),
-    path("account/edit/", DeleteAccount.as_view(), name="delete-account"),
+    path("account/delete/", DeleteAccount.as_view(), name="delete-account"),
     # dashboards
     path("dashboard/admin/", AdminDashboard.as_view(), name="admin-dashboard"),
     path(
@@ -73,7 +73,7 @@ urlpatterns = [
     path("lab/create/", CreateLab.as_view(), name="create-lab"),
     path("lab/edit/", EditLab.as_view(), name="edit-lab"),
     path("lab/list/", ListLab.as_view(), name="list-lab"),
-    path("lab/edit/", DeleteLab.as_view(), name="delete-lab"),
+    path("lab/delete/", DeleteLab.as_view(), name="delete-lab"),
     path("bootstrapTest/", BootstrapTest.as_view(), name="bootstrap-test"),
     path("testhome/", TestHomePage.as_view(), name="test-home"),
 ]

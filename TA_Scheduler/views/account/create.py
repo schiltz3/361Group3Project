@@ -1,16 +1,39 @@
 from django.shortcuts import render
 from django.views import View
-from TA_Scheduler.models import Account
 from TA_Scheduler.utilities.AccountUtil import AccountUtil
+from django.core.exceptions import ValidationError
+
+
+def unvalidated(request):
+    """Called when an invalid email address or phone number is detected
+
+    :param request: request from account/create.html
+    :return: rendering of account/create.html with invalid entry message
+    """
+    return render(
+        request, "account/create.html", {"message": "invalid email or phone number"}
+    )
 
 
 class CreateAccount(View):
     def get(self, request):
+        """Called when the user opens the Create Account page.
+
+        :param request: request from account/create.html
+        :return: rendering of account/create.html with blank form
+        :pre: User is not anonymous, instructor, or ta
+        :post: None
+        """
         return render(request, "account/create.html", {"message": " "})
 
     def post(self, request):
+        """Called when the user submits the form on the Create Accounts page.
 
-        # Not correctly checking authority for null. Can't convert NoneType to int
+        :param request: request from account/create.html
+        :return: rendering of account/create.html with message
+        :pre: User is not anonymous, instructor, or ta
+        :post: None
+        """
         usertype = request.POST.get("authority")
         if usertype is not None:
             try:
@@ -42,7 +65,7 @@ class CreateAccount(View):
                 "account/create.html",
                 {"message": "Please fill out all required fields"},
             )
-        # getAccountByUsername return None if user does not exist
+        # getAccountByUsername returns None if user does not exist
         if AccountUtil.getAccountByUsername(username) is not None:
             return render(
                 request,
@@ -52,14 +75,17 @@ class CreateAccount(View):
         else:
             if authority == 1:
                 id = AccountUtil.createAdminAccount(username, password)
-                AccountUtil.updateAccountInfo(
-                    id,
-                    firstname,
-                    lastname,
-                    email,
-                    request.POST.get("address"),
-                    request.POST.get("phone"),
-                )
+                try:
+                    AccountUtil.updateAccountInfo(
+                        id,
+                        firstname,
+                        lastname,
+                        email,
+                        request.POST.get("address"),
+                        request.POST.get("phone"),
+                    )
+                except ValidationError:
+                    unvalidated(request)
                 return render(
                     request,
                     "account/create.html",
@@ -67,14 +93,17 @@ class CreateAccount(View):
                 )
             elif authority == 2:
                 id = AccountUtil.createInstructorAccount(username, password)
-                AccountUtil.updateAccountInfo(
-                    id,
-                    firstname,
-                    lastname,
-                    email,
-                    request.POST.get("address"),
-                    request.POST.get("phone"),
-                )
+                try:
+                    AccountUtil.updateAccountInfo(
+                        id,
+                        firstname,
+                        lastname,
+                        email,
+                        request.POST.get("address"),
+                        request.POST.get("phone"),
+                    )
+                except ValidationError:
+                    unvalidated(request)
                 return render(
                     request,
                     "account/create.html",
@@ -82,14 +111,17 @@ class CreateAccount(View):
                 )
             elif authority == 3:
                 id = AccountUtil.createTAAccount(username, password)
-                AccountUtil.updateAccountInfo(
-                    id,
-                    firstname,
-                    lastname,
-                    email,
-                    request.POST.get("address"),
-                    request.POST.get("phone"),
-                )
+                try:
+                    AccountUtil.updateAccountInfo(
+                        id,
+                        firstname,
+                        lastname,
+                        email,
+                        request.POST.get("address"),
+                        request.POST.get("phone"),
+                    )
+                except ValidationError:
+                    unvalidated(request)
                 return render(
                     request,
                     "account/create.html",
