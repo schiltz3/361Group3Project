@@ -7,6 +7,7 @@ from TA_Scheduler.utilities.CourseUtil import CourseUtil
 from TA_Scheduler.utilities.RedirectUtil import RedirectUtil
 from typing import List, Union, Optional
 
+
 class CreateCourse(View):
     TEMPLATE = "course/create.html"
     MESSAGE = "message"

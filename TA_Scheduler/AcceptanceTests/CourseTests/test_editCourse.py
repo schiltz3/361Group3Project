@@ -50,7 +50,9 @@ class EditCourseTest(TestCase):
 
             self.courses.append(
                 CourseUtil.getCourseByID(
-                    CourseUtil.createCourse("Course" + str(i), "Description", instructor, tas)
+                    CourseUtil.createCourse(
+                        "Course" + str(i), "Description", instructor, tas
+                    )
                 )
             )
 
@@ -82,8 +84,11 @@ class EditCourseTest(TestCase):
             username=self.admin_account.user.username, password=self.password
         )
         resp = self.client.get(self.TEMPLATE)
-        self.assertEquals(collections.Counter(resp.context.get("courses")), collections.Counter(self.courses),
-                          msg="Did not get all courses")
+        self.assertEquals(
+            collections.Counter(resp.context.get("courses")),
+            collections.Counter(self.courses),
+            msg="Did not get all courses",
+        )
 
     def test_noneCourse(self):
         self.client.login(

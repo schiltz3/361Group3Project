@@ -11,16 +11,13 @@ from TA_Scheduler.utilities.RedirectUtil import RedirectUtil
 
 
 class EditCourse(View):
-    """ Edit Course View
-    """
+    """Edit Course View"""
 
     TEMPLATE = "course/edit.html"
     MESSAGE = "message"
     ERROR = "error"
     WARNING = "warning"
-    context = {
-        "selected_course": None
-    }
+    context = {"selected_course": None}
 
     def get(self, request: HttpRequest) -> Union[HttpResponse, HttpResponseRedirect]:
         """Called when the user opens the page, course/edit.html
@@ -30,11 +27,7 @@ class EditCourse(View):
         :return: Response with "Courses"
         :rtype: Union[HttpRespnse, HttpResponseRedirect]
         """
-        return RedirectUtil.admin(
-            request,
-            "edit courses",
-            self.respond(request)
-        )
+        return RedirectUtil.admin(request, "edit courses", self.respond(request))
 
     def post(self, request: HttpRequest) -> Union[HttpResponse, HttpResponseRedirect]:
         """Called when the user clicks submit.
@@ -65,21 +58,25 @@ class EditCourse(View):
             return self.respond(request)
         elif name and self.context.get("selected_course"):
             course_obj = self.context.get("selected_course")
-            resp = self.validateCourseInput(request=request,
-                                            name=name,
-                                            description=description,
-                                            instructor=instructor,
-                                            tas=tas)
+            resp = self.validateCourseInput(
+                request=request,
+                name=name,
+                description=description,
+                instructor=instructor,
+                tas=tas,
+            )
             if resp is True:
                 ta_accounts: List[Account] = []
                 for ta in tas:
                     ta_accounts.append(AccountUtil.getAccountByUsername(ta))
 
-                course_id = CourseUtil.editCourse(course_obj.id,
-                                                  name=name,
-                                                  description=description,
-                                                  instructor=AccountUtil.getAccountByUsername(instructor),
-                                                  tas=ta_accounts)
+                course_id = CourseUtil.editCourse(
+                    course_obj.id,
+                    name=name,
+                    description=description,
+                    instructor=AccountUtil.getAccountByUsername(instructor),
+                    tas=ta_accounts,
+                )
 
                 course_obj = CourseUtil.getCourseByID(course_id)
                 self.context["selected_course"] = course_obj
@@ -122,14 +119,18 @@ class EditCourse(View):
         if instructor:
             instructor_account = AccountUtil.getAccountByUsername(instructor)
             if instructor_account is None:
-                return self.respond(request, self.ERROR, "Instructor could not be found.")
+                return self.respond(
+                    request, self.ERROR, "Instructor could not be found."
+                )
 
         # Verify tas exist
         if tas:
             for ta in tas:
                 ta_account = AccountUtil.getAccountByUsername(ta)
                 if not ta_account:
-                    return self.respond(request, self.ERROR, "TA '" + ta + "' does not exist.")
+                    return self.respond(
+                        request, self.ERROR, "TA '" + ta + "' does not exist."
+                    )
 
         return True
 
@@ -140,7 +141,9 @@ class EditCourse(View):
         self.context[self.WARNING] = None
         self.context[self.ERROR] = None
 
-    def respond(self, request: HttpRequest, msg_type: str = "NoMessage", msg: str = "", **kwargs):
+    def respond(
+        self, request: HttpRequest, msg_type: str = "NoMessage", msg: str = "", **kwargs
+    ):
         """Helper method that returns a response.
 
         :param request: the HTTP request object to use
