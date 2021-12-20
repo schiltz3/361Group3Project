@@ -10,23 +10,35 @@ class CreateTaTest(TestCase):
         Group.objects.create(name="ta")
 
     def test_noParam(self):
-        with self.assertRaises(TypeError, msg="fails to raise error with no parameters entered"):
+        with self.assertRaises(
+            TypeError, msg="fails to raise error with no parameters entered"
+        ):
             AccountUtil.createTAAccount()
 
     def test_oneParam(self):
-        with self.assertRaises(TypeError, msg="fails to raise error with one parameter entered"):
+        with self.assertRaises(
+            TypeError, msg="fails to raise error with one parameter entered"
+        ):
             AccountUtil.createTAAccount("one")
 
     def test_passwordOnly(self):
-        with self.assertRaises(TypeError, msg="fails to raise error with only password entered"):
+        with self.assertRaises(
+            TypeError, msg="fails to raise error with only password entered"
+        ):
             AccountUtil.createTAAccount(password="two")
 
     def test_twoParam(self):
         acct = AccountUtil.createTAAccount("one", "two")
-        self.assertEqual(Account.objects.get(id=acct).user.username, "one", msg="account not properly created")
+        self.assertEqual(
+            Account.objects.get(id=acct).user.username,
+            "one",
+            msg="account not properly created",
+        )
 
     def test_threeParam(self):
-        with self.assertRaises(TypeError, msg="fails to raise error with too many parameters"):
+        with self.assertRaises(
+            TypeError, msg="fails to raise error with too many parameters"
+        ):
             AccountUtil.createTAAccount("one", "two", "three")
 
 
@@ -35,23 +47,35 @@ class CreateInstructorTest(TestCase):
         Group.objects.create(name="instructor")
 
     def test_noParam(self):
-        with self.assertRaises(TypeError, msg="fails to raise error with no parameters entered"):
+        with self.assertRaises(
+            TypeError, msg="fails to raise error with no parameters entered"
+        ):
             AccountUtil.createInstructorAccount()
 
     def test_oneParam(self):
-        with self.assertRaises(TypeError, msg="fails to raise error with one parameter entered"):
+        with self.assertRaises(
+            TypeError, msg="fails to raise error with one parameter entered"
+        ):
             AccountUtil.createInstructorAccount("one")
 
     def test_passwordOnly(self):
-        with self.assertRaises(TypeError, msg="fails to raise error with only password entered"):
+        with self.assertRaises(
+            TypeError, msg="fails to raise error with only password entered"
+        ):
             AccountUtil.createInstructorAccount(password="two")
 
     def test_twoParam(self):
         acct = AccountUtil.createInstructorAccount("one", "two")
-        self.assertEqual(Account.objects.get(id=acct).user.username, "one", msg="account not properly created")
+        self.assertEqual(
+            Account.objects.get(id=acct).user.username,
+            "one",
+            msg="account not properly created",
+        )
 
     def test_threeParam(self):
-        with self.assertRaises(TypeError, msg="fails to raise error with too many parameters"):
+        with self.assertRaises(
+            TypeError, msg="fails to raise error with too many parameters"
+        ):
             AccountUtil.createInstructorAccount("one", "two", "three")
 
 
@@ -60,23 +84,35 @@ class CreateAdminTest(TestCase):
         Group.objects.create(name="admin")
 
     def test_noParam(self):
-        with self.assertRaises(TypeError, msg="fails to raise error with no parameters entered"):
+        with self.assertRaises(
+            TypeError, msg="fails to raise error with no parameters entered"
+        ):
             AccountUtil.createAdminAccount()
 
     def test_oneParam(self):
-        with self.assertRaises(TypeError, msg="fails to raise error with one parameter entered"):
+        with self.assertRaises(
+            TypeError, msg="fails to raise error with one parameter entered"
+        ):
             AccountUtil.createAdminAccount("one")
 
     def test_passwordOnly(self):
-        with self.assertRaises(TypeError, msg="fails to raise error with only password entered"):
+        with self.assertRaises(
+            TypeError, msg="fails to raise error with only password entered"
+        ):
             AccountUtil.createAdminAccount(password="two")
 
     def test_twoParam(self):
         acct = AccountUtil.createAdminAccount("one", "two")
-        self.assertEqual(Account.objects.get(id=acct).user.username, "one", msg="account not properly created")
+        self.assertEqual(
+            Account.objects.get(id=acct).user.username,
+            "one",
+            msg="account not properly created",
+        )
 
     def test_threeParam(self):
-        with self.assertRaises(TypeError, msg="fails to raise error with too many parameters"):
+        with self.assertRaises(
+            TypeError, msg="fails to raise error with too many parameters"
+        ):
             AccountUtil.createAdminAccount("one", "two", "three")
 
 
@@ -86,15 +122,21 @@ class GetByIdTest(TestCase):
         self.aID = AccountUtil.createAdminAccount("user", "pass")
 
     def test_noParam(self):
-        with self.assertRaises(TypeError, msg="fails to raise error with no parameters entered"):
+        with self.assertRaises(
+            TypeError, msg="fails to raise error with no parameters entered"
+        ):
             AccountUtil.getAccountByID()
 
     def test_oneParam(self):
         acct = AccountUtil.getAccountByID(self.aID)
-        self.assertEqual(acct, Account.objects.get(id=self.aID), msg="account not found")
+        self.assertEqual(
+            acct, Account.objects.get(id=self.aID), msg="account not found"
+        )
 
     def test_twoParam(self):
-        with self.assertRaises(TypeError, msg="fails to raise error with too many parameters"):
+        with self.assertRaises(
+            TypeError, msg="fails to raise error with too many parameters"
+        ):
             AccountUtil.getAccountByID(1, 2)
 
     def test_wrongParam(self):
@@ -102,7 +144,7 @@ class GetByIdTest(TestCase):
             AccountUtil.getAccountByID("one")
 
     def test_doesNotExist(self):
-        acct = AccountUtil.getAccountByID(self.aID+1)
+        acct = AccountUtil.getAccountByID(self.aID + 1)
         self.assertEqual(None, acct, msg="account found given non-existent id")
 
 
@@ -112,15 +154,23 @@ class GetByUsernameTest(TestCase):
         self.aID = AccountUtil.createAdminAccount("user", "pass")
 
     def test_noParam(self):
-        with self.assertRaises(TypeError, msg="fails to raise error with no parameters entered"):
+        with self.assertRaises(
+            TypeError, msg="fails to raise error with no parameters entered"
+        ):
             AccountUtil.getAccountByUsername()
 
     def test_oneParam(self):
         acct = AccountUtil.getAccountByUsername("user")
-        self.assertEqual(acct, Account.objects.get(user=User.objects.get(username="user")), msg="account not found")
+        self.assertEqual(
+            acct,
+            Account.objects.get(user=User.objects.get(username="user")),
+            msg="account not found",
+        )
 
     def test_twoParam(self):
-        with self.assertRaises(TypeError, msg="fails to raise error with too many parameters"):
+        with self.assertRaises(
+            TypeError, msg="fails to raise error with too many parameters"
+        ):
             AccountUtil.getAccountByUsername("user", "pass")
 
     def test_doesNotExist(self):
@@ -135,11 +185,17 @@ class GetAllTest(TestCase):
     def test_exists(self):
         Group.objects.create(name="admin")
         AccountUtil.createAdminAccount("test", "test")
-        self.assertQuerysetEqual(AccountUtil.getAllAccounts(), Account.objects.all(),
-                                 transform=lambda x: x, msg="query sets do not match")
+        self.assertQuerysetEqual(
+            AccountUtil.getAllAccounts(),
+            Account.objects.all(),
+            transform=lambda x: x,
+            msg="query sets do not match",
+        )
 
     def test_withParam(self):
-        with self.assertRaises(TypeError, msg="fails to raise error with too many parameters"):
+        with self.assertRaises(
+            TypeError, msg="fails to raise error with too many parameters"
+        ):
             AccountUtil.getAllAccounts("test")
 
 
@@ -161,7 +217,9 @@ class GetTAsTest(TestCase):
         self.assertEqual(list(AccountUtil.getTAs()), accts, msg="lists do not match")
 
     def test_withParam(self):
-        with self.assertRaises(TypeError, msg="fails to raise error with too many parameters"):
+        with self.assertRaises(
+            TypeError, msg="fails to raise error with too many parameters"
+        ):
             AccountUtil.getTAs("test")
 
 
@@ -180,10 +238,14 @@ class GetInstructorsTest(TestCase):
                 accts.append(acct)
             except Account.DoesNotExist:
                 pass
-        self.assertEqual(list(AccountUtil.getInstructors()), accts, msg="lists do not match")
+        self.assertEqual(
+            list(AccountUtil.getInstructors()), accts, msg="lists do not match"
+        )
 
     def test_withParam(self):
-        with self.assertRaises(TypeError, msg="fails to raise error with too many parameters"):
+        with self.assertRaises(
+            TypeError, msg="fails to raise error with too many parameters"
+        ):
             AccountUtil.getInstructors("test")
 
 
@@ -193,19 +255,29 @@ class GetByCredentialsTest(TestCase):
         self.aID = AccountUtil.createAdminAccount("user", "pass")
 
     def test_noParam(self):
-        with self.assertRaises(TypeError, msg="fails to raise error with no parameters entered"):
+        with self.assertRaises(
+            TypeError, msg="fails to raise error with no parameters entered"
+        ):
             AccountUtil.getAccountByCredentials()
 
     def test_oneParam(self):
-        with self.assertRaises(TypeError, msg="fails to raise error with only one parameter"):
+        with self.assertRaises(
+            TypeError, msg="fails to raise error with only one parameter"
+        ):
             AccountUtil.getAccountByCredentials("user")
 
     def test_twoParam(self):
         acct = AccountUtil.getAccountByCredentials("user", "pass")
-        self.assertEqual(acct, Account.objects.get(user=User.objects.get(username="user")), msg="account not found")
+        self.assertEqual(
+            acct,
+            Account.objects.get(user=User.objects.get(username="user")),
+            msg="account not found",
+        )
 
     def test_threeParam(self):
-        with self.assertRaises(TypeError, msg="fails to raise error with too many parameters"):
+        with self.assertRaises(
+            TypeError, msg="fails to raise error with too many parameters"
+        ):
             AccountUtil.getAccountByCredentials("user", "pass", "extra")
 
     def test_wrongUsername(self):
@@ -228,21 +300,33 @@ class UpdateInfoTest(TestCase):
             AccountUtil.updateAccountInfo()
 
     def test_idOnly(self):
-        self.assertEqual(AccountUtil.updateAccountInfo(self.aID), True, "account not found with used id")
+        self.assertEqual(
+            AccountUtil.updateAccountInfo(self.aID),
+            True,
+            "account not found with used id",
+        )
 
     def test_unusedID(self):
-        self.assertEqual(AccountUtil.updateAccountInfo(self.aID+1), False, "account found with unused id")
+        self.assertEqual(
+            AccountUtil.updateAccountInfo(self.aID + 1),
+            False,
+            "account found with unused id",
+        )
 
     def test_invalidID(self):
         with self.assertRaises(ValueError, msg="fails to raise error given invalid id"):
             AccountUtil.updateAccountInfo("wrong")
 
     def test_invalidEmail(self):
-        with self.assertRaises(ValidationError, msg="fails to raise error given invalid email"):
+        with self.assertRaises(
+            ValidationError, msg="fails to raise error given invalid email"
+        ):
             AccountUtil.updateAccountInfo(self.aID, email="wrong")
 
     def test_invalidPhone(self):
-        with self.assertRaises(ValidationError, msg="fails to raise error given invalid phone number"):
+        with self.assertRaises(
+            ValidationError, msg="fails to raise error given invalid phone number"
+        ):
             AccountUtil.updateAccountInfo(self.aID, phone="wrong")
 
     def test_firstChanged(self):
@@ -291,12 +375,16 @@ class GetUserGroupTest(TestCase):
         self.assertEqual("ta", AccountUtil.getUserGroup(user))
 
     def test_noParam(self):
-        with self.assertRaises(TypeError, msg="fails to raise error with no parameters"):
+        with self.assertRaises(
+            TypeError, msg="fails to raise error with no parameters"
+        ):
             AccountUtil.getUserGroup()
 
     def test_twoParam(self):
         Group.objects.create(name="admin")
         aID = AccountUtil.createAdminAccount("one", "two")
         user = AccountUtil.getAccountByID(aID).user
-        with self.assertRaises(TypeError, msg="fails to raise error with too many parameters"):
+        with self.assertRaises(
+            TypeError, msg="fails to raise error with too many parameters"
+        ):
             AccountUtil.getUserGroup(user, "extra")
