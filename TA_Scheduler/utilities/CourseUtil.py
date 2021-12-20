@@ -29,8 +29,9 @@ class CourseUtil:
             name=name, description=description, instructor=instructor
         )
 
-        for ta in tas:
-            course.tas.add(ta)
+        if tas:
+            for ta in tas:
+                course.tas.add(ta)
 
         return course.id
 

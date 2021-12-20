@@ -11,9 +11,6 @@ class NewAccountTest(TestCase):
         Group.objects.create(name="ta")
         Group.objects.create(name="admin")
         AccountUtil.createAdminAccount(username="user", password="pass")
-        # do I have to navigate to createaccounts page or can I just start there??
-        # self.client.post("/login.html", {"name": "user", "password": "pass"})
-        # self.client.post("/testhome.html", select button? to go to createaccounts)
 
     def test_admin(self):
         response = self.client.post(
@@ -304,10 +301,38 @@ class NewAccountTest(TestCase):
         )
 
     def test_invalidEmail(self):
-        pass
+        response = self.client.post(
+            "/account/create/",
+            {
+                "username": "new",
+                "password": "password",
+                "authority": "1",
+                "firstname": "First",
+                "lastname": "Last",
+                "email": "invalid",
+            },
+        )
+        self.assertEqual(
+            "invalid email or phone number",
+            response.context.get("message"),
+            "invalid message not given",
+        )
 
     def test_invalidPhone(self):
-        pass
-
-    def test_addressTooLong(self):
-        pass
+        response = self.client.post(
+            "/account/create/",
+            {
+                "username": "new",
+                "password": "password",
+                "authority": "1",
+                "firstname": "First",
+                "lastname": "Last",
+                "email": "fake@test.com",
+                "phone": "1",
+            },
+        )
+        self.assertEqual(
+            "invalid email or phone number",
+            response.context.get("message"),
+            "invalid message not given",
+        )
