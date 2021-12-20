@@ -19,7 +19,16 @@ Uses group variable returned from get method to display options for NavBar.
                 <a class="nav-link" href="{% url 'create-account' %}">Create Account</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="{% url 'edit-account' %}">Edit Account</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'delete-account' %}">Delete Account</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="{% url 'create-course' %}">Create Course</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'edit-course' %}">Edit Course</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'delete-course' %}">Delete Course</a>
