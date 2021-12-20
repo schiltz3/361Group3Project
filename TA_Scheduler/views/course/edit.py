@@ -164,6 +164,7 @@ class EditCourse(View):
         self.context[msg_type] = msg
         self.context["instructors"] = AccountUtil.getInstructors()
         self.context["tas"] = AccountUtil.getTAs()
+        self.context["group"] = AccountUtil.getUserGroup(request.user)
         self.context.update(**kwargs)
 
         return render(request, self.TEMPLATE, self.context)
