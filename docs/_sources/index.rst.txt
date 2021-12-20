@@ -7,13 +7,10 @@ Welcome TA Scheduler's documentation!
 ====================================================
 
 .. toctree::
-   :maxdepth: 10
+   :maxdepth: 3
+   :caption: Contents:
 
-   TA_Scheduler.views
-   TA_Scheduler.utilities
-   TA_Scheduler.AcceptanceTests
-   TA_Scheduler.UnitTests
-   TA_Scheduler.models
+   modules
 
 Indices and tables
 ==================
